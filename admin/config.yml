@@ -1,0 +1,138 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "src/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "home"
+        label: "Home Page"
+        file: "src/_data/home.json"
+        fields:
+          - { label: "Hero — Eyebrow", name: "hero_eyebrow", widget: "string" }
+          - { label: "Hero — Lead paragraph", name: "hero_lead", widget: "text" }
+          - { label: "Hero — Image", name: "hero_image", widget: "image", required: false, hint: "Leave blank to keep the placeholder graphic." }
+          - { label: "Hero — Image alt text", name: "hero_image_alt", widget: "string", required: false }
+          - label: "What We Do — 3 service cards"
+            name: "services"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "body", widget: "text" }
+          - { label: "About teaser — Heading", name: "about_heading", widget: "string" }
+          - { label: "About teaser — Body", name: "about_body", widget: "text" }
+          - { label: "About teaser — Image", name: "about_image", widget: "image", required: false }
+          - { label: "About teaser — Image alt text", name: "about_image_alt", widget: "string", required: false }
+          - { label: "Closing banner — Heading", name: "cta_heading", widget: "string" }
+          - { label: "Closing banner — Body", name: "cta_body", widget: "text" }
+
+      - name: "about"
+        label: "About Page"
+        file: "src/_data/about_page.json"
+        fields:
+          - { label: "Hero — Eyebrow", name: "hero_eyebrow", widget: "string" }
+          - { label: "Hero — Heading", name: "hero_heading", widget: "string" }
+          - { label: "Hero — Body", name: "hero_body", widget: "text" }
+          - { label: "Our Story — Heading", name: "story_heading", widget: "string" }
+          - { label: "Our Story — Paragraph 1", name: "story_body_1", widget: "text" }
+          - { label: "Our Story — Paragraph 2", name: "story_body_2", widget: "text" }
+          - { label: "Our Story — Image", name: "story_image", widget: "image", required: false }
+          - { label: "Our Story — Image alt text", name: "story_image_alt", widget: "string", required: false }
+          - label: "Our Values — 3 cards"
+            name: "values"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "body", widget: "text" }
+          - label: "Meet the Team — 4 people"
+            name: "team"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Role", name: "role", widget: "string" }
+              - { label: "Photo", name: "photo", widget: "image", required: false }
+              - { label: "Photo alt text", name: "photo_alt", widget: "string", required: false }
+          - label: "Stats row — 4 numbers"
+            name: "stats"
+            widget: "list"
+            summary: "{{fields.number}} — {{fields.label}}"
+            fields:
+              - { label: "Number", name: "number", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+          - { label: "Closing banner — Heading", name: "cta_heading", widget: "string" }
+          - { label: "Closing banner — Body", name: "cta_body", widget: "text" }
+
+      - name: "contact"
+        label: "Contact Page"
+        file: "src/_data/contact_page.json"
+        fields:
+          - { label: "Hero — Eyebrow", name: "hero_eyebrow", widget: "string" }
+          - { label: "Hero — Heading", name: "hero_heading", widget: "string" }
+          - { label: "Hero — Body", name: "hero_body", widget: "text" }
+
+      - name: "blog_intro"
+        label: "Blog Page Intro"
+        file: "src/_data/blog_page.json"
+        fields:
+          - { label: "Hero — Eyebrow", name: "hero_eyebrow", widget: "string" }
+          - { label: "Hero — Heading", name: "hero_heading", widget: "string" }
+          - { label: "Hero — Body", name: "hero_body", widget: "text" }
+
+      - name: "privacy"
+        label: "Privacy Policy"
+        file: "src/privacy.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Last updated", name: "updated_date", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+          - { name: "layout", widget: "hidden", default: "legal.njk" }
+          - { name: "permalink", widget: "hidden", default: "/privacy/" }
+
+      - name: "terms"
+        label: "Terms & Conditions"
+        file: "src/terms.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Last updated", name: "updated_date", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+          - { name: "layout", widget: "hidden", default: "legal.njk" }
+          - { name: "permalink", widget: "hidden", default: "/terms/" }
+
+      - name: "settings"
+        label: "Site Settings (footer & contact info)"
+        file: "src/_data/site.json"
+        fields:
+          - { label: "Footer tagline", name: "tagline", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Phone (displayed, e.g. +91 00000 00000)", name: "phone", widget: "string" }
+          - { label: "Phone (link — digits only, e.g. +910000000000)", name: "phone_link", widget: "string" }
+          - { label: "Studio address", name: "address", widget: "string" }
+          - { label: "Hours", name: "hours", widget: "string" }
+          - { label: "Instagram URL", name: "instagram", widget: "string" }
+          - { label: "Pinterest URL", name: "pinterest", widget: "string" }
+          - { label: "Facebook URL", name: "facebook", widget: "string" }
+
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish date", name: "date", widget: "datetime" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["Wedding", "Corporate", "Planning", "Birthdays", "Florals", "Behind the Scenes"]
+      - { label: "Excerpt (shown on the Blog page)", name: "excerpt", widget: "text" }
+      - { label: "Cover image", name: "cover_image", widget: "image", required: false }
+      - { label: "Cover image alt text", name: "cover_image_alt", widget: "string", required: false }
+      - { label: "Post body", name: "body", widget: "markdown" }

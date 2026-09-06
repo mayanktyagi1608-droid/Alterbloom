@@ -1,0 +1,82 @@
+---
+layout: base.njk
+title: Alterbloom — Events Planning & Decor
+permalink: /
+---
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">{{ home.hero_eyebrow }}</span>
+      <h1 class="wordmark">Alterbloom<span class="dot">.</span></h1>
+      <p class="lead">{{ home.hero_lead }}</p>
+      <div class="btn-row">
+        <a href="/contact/" class="btn btn-primary">Get a Quote</a>
+        <a href="/about/" class="btn">About Us</a>
+      </div>
+    </div>
+    {% if home.hero_image %}
+      <img class="img-placeholder hero" src="{{ home.hero_image }}" alt="{{ home.hero_image_alt }}" style="object-fit:cover;">
+    {% else %}
+      <div class="img-placeholder hero">
+        <svg class="motif" aria-hidden="true" viewBox="0 0 120 150" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <path d="M60 140 C 58 100, 66 80, 60 55"/>
+          <path d="M60 90 C 45 84, 38 92, 34 84"/>
+          <path d="M62 100 C 76 96, 80 106, 88 100"/>
+          <ellipse cx="60" cy="40" rx="10" ry="16" transform="rotate(-18 60 40)"/>
+          <ellipse cx="60" cy="40" rx="10" ry="16" transform="rotate(18 60 40)"/>
+          <ellipse cx="60" cy="34" rx="10" ry="16"/>
+          <ellipse cx="60" cy="42" rx="9" ry="15" transform="rotate(-42 60 42)"/>
+          <ellipse cx="60" cy="42" rx="9" ry="15" transform="rotate(42 60 42)"/>
+        </svg>
+        <span>Hero Image — 1200×900</span>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">What We Do</span>
+      <h2>Planning &amp; decor, start to finish</h2>
+      <p>From concept to teardown, we handle the details so you can enjoy the event.</p>
+    </div>
+    <div class="grid grid-3">
+      {% for service in home.services %}
+      <div class="card">
+        <span class="num">{{ loop.index }}</span>
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.body }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid-2" style="align-items:center;">
+      {% if home.about_image %}
+        <img class="img-placeholder tall" src="{{ home.about_image }}" alt="{{ home.about_image_alt }}" style="object-fit:cover;">
+      {% else %}
+        <div class="img-placeholder tall"><span>Studio / Team Photo</span></div>
+      {% endif %}
+      <div>
+        <span class="eyebrow">About Alterbloom</span>
+        <h2>{{ home.about_heading }}</h2>
+        <p>{{ home.about_body }}</p>
+        <a href="/about/" class="link-more">More about us →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>{{ home.cta_heading }}</h2>
+      <p>{{ home.cta_body }}</p>
+      <a href="/contact/" class="btn btn-primary">Start a Conversation</a>
+    </div>
+  </div>
+</section>

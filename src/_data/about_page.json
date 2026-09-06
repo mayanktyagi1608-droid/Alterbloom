@@ -1,0 +1,29 @@
+{
+  "hero_eyebrow": "About Us",
+  "hero_heading": "The studio behind Alterbloom",
+  "hero_body": "We're a small team of planners, stylists, and florists who believe good events are 90% preparation and 10% magic.",
+  "story_heading": "How Alterbloom started",
+  "story_body_1": "Placeholder copy: a short paragraph on how the business began, what problem it set out to solve for clients, and what makes the founding team's approach different from a typical event planner.",
+  "story_body_2": "Placeholder copy: a second paragraph on growth so far — number of events run, cities covered, or notable milestones.",
+  "story_image": "",
+  "story_image_alt": "",
+  "values": [
+    { "title": "Detail-obsessed", "body": "Placeholder: description of how the team sweats the small stuff, from table settings to timing." },
+    { "title": "Client-first", "body": "Placeholder: description of the collaborative planning process and communication style." },
+    { "title": "Sustainably styled", "body": "Placeholder: description of sourcing, reusable decor, or eco-conscious practices, if applicable." }
+  ],
+  "team": [
+    { "name": "Name Surname", "role": "Founder & Lead Planner", "photo": "", "photo_alt": "" },
+    { "name": "Name Surname", "role": "Creative Director", "photo": "", "photo_alt": "" },
+    { "name": "Name Surname", "role": "Floral Designer", "photo": "", "photo_alt": "" },
+    { "name": "Name Surname", "role": "Event Coordinator", "photo": "", "photo_alt": "" }
+  ],
+  "stats": [
+    { "number": "150+", "label": "Events Delivered" },
+    { "number": "8", "label": "Years Experience" },
+    { "number": "40+", "label": "Venue Partners" },
+    { "number": "98%", "label": "Client Satisfaction" }
+  ],
+  "cta_heading": "Want to work with us?",
+  "cta_body": "Get in touch and tell us about your event."
+}

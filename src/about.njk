@@ -1,0 +1,89 @@
+---
+layout: base.njk
+title: About — Alterbloom
+permalink: /about/
+---
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">{{ about_page.hero_eyebrow }}</span>
+    <h1>{{ about_page.hero_heading }}</h1>
+    <p>{{ about_page.hero_body }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid-2" style="align-items:center;">
+      <div>
+        <span class="eyebrow">Our Story</span>
+        <h2>{{ about_page.story_heading }}</h2>
+        <p>{{ about_page.story_body_1 }}</p>
+        <p>{{ about_page.story_body_2 }}</p>
+      </div>
+      {% if about_page.story_image %}
+        <img class="img-placeholder tall" src="{{ about_page.story_image }}" alt="{{ about_page.story_image_alt }}" style="object-fit:cover;">
+      {% else %}
+        <div class="img-placeholder tall"><span>Founder / Origin Photo</span></div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">What Drives Us</span>
+      <h2>Our Values</h2>
+    </div>
+    <div class="grid grid-3">
+      {% for value in about_page.values %}
+      <div class="card">
+        <h3>{{ value.title }}</h3>
+        <p>{{ value.body }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Meet the Team</span>
+      <h2>The people you'll work with</h2>
+    </div>
+    <div class="grid grid-4">
+      {% for member in about_page.team %}
+      <div>
+        {% if member.photo %}
+          <img class="img-placeholder square" src="{{ member.photo }}" alt="{{ member.photo_alt }}" style="object-fit:cover;">
+        {% else %}
+          <div class="img-placeholder square"><span>Photo</span></div>
+        {% endif %}
+        <h3 style="margin-top:16px;">{{ member.name }}</h3>
+        <p>{{ member.role }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="stats-row">
+      {% for stat in about_page.stats %}
+      <div class="stat"><strong>{{ stat.number }}</strong><span>{{ stat.label }}</span></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>{{ about_page.cta_heading }}</h2>
+      <p>{{ about_page.cta_body }}</p>
+      <a href="/contact/" class="btn btn-primary">Contact Alterbloom</a>
+    </div>
+  </div>
+</section>

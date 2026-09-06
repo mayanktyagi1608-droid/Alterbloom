@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  var form = document.querySelector(".contact-form");
+  // Only the legacy (pre-Netlify-Forms) contact form needs this — the
+  // Eleventy version has data-netlify="true" and submits for real.
+  var form = document.querySelector(".contact-form:not([data-netlify])");
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();

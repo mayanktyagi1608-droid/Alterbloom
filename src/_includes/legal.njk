@@ -1,0 +1,18 @@
+---
+layout: base.njk
+---
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Legal</span>
+    <h1>{{ title }}</h1>
+    <p>Last updated: {{ updated_date }} — this page is a placeholder and should be reviewed with a legal professional before launch.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div style="max-width:70ch; margin:0 auto;">
+      {{ content | safe }}
+    </div>
+  </div>
+</section>

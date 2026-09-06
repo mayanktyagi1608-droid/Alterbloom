@@ -1,0 +1,32 @@
+---
+layout: base.njk
+title: Blog — Alterbloom
+permalink: /blog/
+---
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">{{ blog_page.hero_eyebrow }}</span>
+    <h1>{{ blog_page.hero_heading }}</h1>
+    <p>{{ blog_page.hero_body }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid-3">
+      {% for post in collections.posts | reverse %}
+      <div class="card">
+        {% if post.data.cover_image %}
+          <img class="img-placeholder wide" src="{{ post.data.cover_image }}" alt="{{ post.data.cover_image_alt }}" style="object-fit:cover;">
+        {% else %}
+          <div class="img-placeholder wide"><span>Post Image</span></div>
+        {% endif %}
+        <span class="eyebrow" style="margin-top:20px;">{{ post.data.category }}</span>
+        <h3>{{ post.data.title }}</h3>
+        <p>{{ post.data.excerpt }}</p>
+        <a href="{{ post.url }}" class="link-more">Read more →</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

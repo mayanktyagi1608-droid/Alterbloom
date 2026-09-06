@@ -15,8 +15,8 @@ root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$root"
 
 files=$(find . \
-  -type d \( -name .git -o -name node_modules \) -prune -o \
-  -type f \( -name "*.html" -o -name "*.css" \) -not -name "tokens.css" -print)
+  -type d \( -name .git -o -name node_modules -o -name _site \) -prune -o \
+  -type f \( -name "*.html" -o -name "*.css" -o -name "*.njk" \) -not -name "tokens.css" -print)
 
 found=0
 

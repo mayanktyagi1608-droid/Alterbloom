@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }} — Alterbloom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-row">
+    <a href="/" class="logo wordmark">Alterbloom<span class="dot">.</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="/" {% if page.url == "/" %}aria-current="page"{% endif %}>Home</a></li>
+        <li><a href="/about/" {% if page.url == "/about/" %}aria-current="page"{% endif %}>About</a></li>
+        <li><a href="/blog/" {% if "/blog/" in page.url %}aria-current="page"{% endif %}>Blog</a></li>
+        <li><a href="/contact/" {% if page.url == "/contact/" %}aria-current="page"{% endif %}>Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+{{ content | safe }}
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4 class="wordmark">Alterbloom<span class="dot">.</span></h4>
+        <p>{{ site.tagline }}</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy/" {% if page.url == "/privacy/" %}aria-current="page"{% endif %}>Privacy Policy</a></li>
+          <li><a href="/terms/" {% if page.url == "/terms/" %}aria-current="page"{% endif %}>Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+          <li><a href="tel:{{ site.phone_link }}">{{ site.phone }}</a></li>
+          <li><a href="{{ site.instagram }}">Instagram</a> · <a href="{{ site.pinterest }}">Pinterest</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© {{ currentYear }} Alterbloom. All rights reserved.</span>
+      <span><a href="/admin/">Site admin</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

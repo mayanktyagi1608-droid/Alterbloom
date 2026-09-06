@@ -1,0 +1,33 @@
+[build]
+  command = "npm run build"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Old flat-file URLs from the pre-CMS site, kept working during the
+# transition and safe to leave in place afterward too.
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/about.html"
+  to = "/about/"
+  status = 301
+[[redirects]]
+  from = "/blog.html"
+  to = "/blog/"
+  status = 301
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact/"
+  status = 301
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy/"
+  status = 301
+[[redirects]]
+  from = "/terms.html"
+  to = "/terms/"
+  status = 301
