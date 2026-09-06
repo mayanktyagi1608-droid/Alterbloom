@@ -31,7 +31,7 @@ fi
 
 echo
 echo "== font-family declarations outside css/tokens.css =="
-font_hits=$(grep -nE 'font-family\s*:' $files 2>/dev/null | grep -v 'var(--font-')
+font_hits=$(grep -nE 'font-family\s*:' $files 2>/dev/null | grep -v 'var(--font-' | grep -v 'font-family:\s*inherit')
 if [ -n "$font_hits" ]; then
   echo "$font_hits"
   found=1
