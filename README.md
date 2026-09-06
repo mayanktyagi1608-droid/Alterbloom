@@ -2,37 +2,43 @@
 
 Website for Alterbloom, an events planning &amp; decor business.
 
-## Status
+## Stack
 
-This is a **black-and-white wireframe** — plain HTML/CSS/JS focused on layout and
-structure only. No color, imagery, or brand design has been applied yet. Once the
-structure is approved, a design system (colors, type, imagery) will replace this
-wireframe styling.
+- **[Eleventy](https://www.11ty.dev/)** — static site generator. Templates
+  and content live in `src/`, built to `_site/`.
+- **[Decap CMS](https://decapcms.org/)** — content editor at `/admin/`,
+  authenticated via Netlify Identity + Git Gateway. Commits go straight to
+  this repo's `main` branch.
+- **[Netlify](https://www.netlify.com/)** — hosting. Builds and deploys
+  automatically on every push to `main`.
 
-## Pages
+GitHub remains the permanent home of the code and all its history — Netlify
+just builds and serves whatever's on `main`; it doesn't store anything on
+its own.
 
-- `index.html` — Home
-- `about.html` — About
-- `blog.html` — Blog listing
-- `blog-post.html` — Blog post template
-- `contact.html` — Contact form + info
-- `privacy.html` — Privacy Policy
-- `terms.html` — Terms &amp; Conditions (stub — have this reviewed by a lawyer before launch)
+## Structure
 
-## Local preview
+See `CLAUDE.md` for the full content/CMS architecture (how editable content
+is split from templates so the CMS can never corrupt page layout) and
+`DESIGN_SYSTEM.md` for the approved colors/type/spacing system.
 
-No build step — just open `index.html` in a browser, or serve the folder:
+- `src/*.njk`, `src/_includes/` — page templates and shared layout.
+- `src/posts/*.md` — blog posts.
+- `src/_data/*.json` — editable page content, edited through the CMS.
+- `css/`, `js/` — stylesheets and scripts, passthrough-copied into the build.
+- `admin/` — Decap CMS config and custom preview templates.
+
+## Local development
+
+Requires [Node.js](https://nodejs.org/).
 
 ```bash
-python3 -m http.server 8000
+npm install
+npm run build      # outputs to _site/
+npm start          # local preview with live reload
 ```
 
-Then visit `http://localhost:8000`.
+## Deployment
 
-## Deploying to GitHub Pages
-
-1. Push this repo to GitHub.
-2. In the repo settings, go to **Pages**.
-3. Under **Build and deployment**, set **Source** to `Deploy from a branch`.
-4. Choose the `main` branch and `/ (root)` folder, then save.
-5. The site will be published at `https://<username>.github.io/<repo-name>/`.
+Push to `main` — Netlify builds and deploys automatically (config in
+`netlify.toml`). No manual deploy step.

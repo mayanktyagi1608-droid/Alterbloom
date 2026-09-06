@@ -3,11 +3,8 @@
 Events planning & decor business site. Built with **Eleventy** (static site
 generator) and edited through **Decap CMS** at `/admin/`, hosted on
 **Netlify** (build command `npm run build`, publish dir `_site`, config in
-`netlify.toml`). The pre-CMS flat HTML files (`index.html`, `about.html`,
-etc.) still exist at the repo root for the original GitHub Pages deployment —
-they're superseded by `src/` but left in place until the Netlify site is
-confirmed working and GitHub Pages is decommissioned; don't bother keeping
-them in sync with `src/`.
+`netlify.toml`). GitHub Pages is no longer used — GitHub is still where the
+code and its history live, but Netlify builds and serves the actual site.
 
 ## CMS architecture — read before touching anything in `src/`
 
@@ -107,9 +104,6 @@ What this means in practice:
 - `src/posts/*.md` — blog posts (Eleventy collection, tag `posts`).
 - `src/_data/` — editable page content (see CMS architecture above) plus
   `site.json` (global contact/social info).
-- `css/tokens.css`, `css/style.css`, `js/main.js` — unchanged from before the
-  CMS; still root-level, passthrough-copied into the Eleventy build. Same
-  design-token rules as above apply regardless of the templating layer.
-- Legacy flat HTML files at the repo root (`index.html`, `about.html`, ...) —
-  the pre-Eleventy GitHub Pages site; superseded, kept only until GitHub
-  Pages is turned off.
+- `css/tokens.css`, `css/style.css`, `js/main.js` — still root-level,
+  passthrough-copied into the Eleventy build. Same design-token rules as
+  above apply regardless of the templating layer.
