@@ -13,11 +13,11 @@ wireframe styling.
 
 - `index.html` — Home
 - `about.html` — About
-- `services.html` — Services
-- `gallery.html` — Portfolio / Gallery
-- `testimonials.html` — Testimonials
-- `pricing.html` — Pricing / Packages
+- `blog.html` — Blog listing
+- `blog-post.html` — Blog post template
 - `contact.html` — Contact form + info
+- `privacy.html` — Privacy Policy
+- `terms.html` — Terms &amp; Conditions (stub — have this reviewed by a lawyer before launch)
 
 ## Local preview
 
