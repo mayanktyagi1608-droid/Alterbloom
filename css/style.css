@@ -15,6 +15,7 @@ body {
   color: var(--text);
   background: var(--bg);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 a { color: var(--text); }
@@ -177,8 +178,13 @@ p { margin: 0 0 var(--space-2); }
   gap: var(--space-5);
   align-items: center;
 }
+.hero-grid > * { min-width: 0; }
 
-.hero .wordmark { font-size: clamp(2.75rem, 2rem + 3vw, 4.25rem); display: block; }
+.hero .wordmark {
+  font-size: clamp(2.75rem, 2rem + 3vw, 4.25rem);
+  display: block;
+  overflow-wrap: break-word;
+}
 .hero p.lead { font-size: var(--fs-body-lg); max-width: 46ch; color: var(--text-muted); }
 
 .page-hero {
@@ -190,6 +196,7 @@ p { margin: 0 0 var(--space-2); }
 
 /* ---- Grids ---- */
 .grid { display: grid; gap: var(--space-4); }
+.grid > * { min-width: 0; }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
