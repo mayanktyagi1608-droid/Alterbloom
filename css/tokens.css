@@ -1,0 +1,119 @@
+/* ==========================================================================
+   Alterbloom — Design tokens
+   Source of truth for color, type, spacing, and shape. Approved via the
+   "Alterbloom Design System" artifact (business-card-derived palette).
+
+   DO NOT edit values in this file, or introduce colors/fonts/spacing
+   outside it, without an explicit design discussion first. See
+   DESIGN_SYSTEM.md and CLAUDE.md for the rules this file enforces.
+   ========================================================================== */
+
+:root{
+  /* ---- Raw brand swatches (fixed — do not theme-swap) ---- */
+  --swatch-teal:#1E4B54;
+  --swatch-teal-deep:#123138;
+  --swatch-sky:#A9D3DA;
+  --swatch-linen:#FAF6EF;
+  --swatch-bloom:#E2795F;
+
+  /* ---- Semantic tokens — light (default) ---- */
+  --bg:#FAF6EF;
+  --bg-alt:#EFF4F2;
+  --surface:#FFFEFB;
+  --text:#1E4B54;
+  --text-on-surface:#1E4B54;
+  --text-muted:#5C7D83;
+  --text-on-surface-muted:#5C7D83;
+  --border:#D8E2E0;
+  --border-on-surface:#D8E2E0;
+  --cta-bg:#1E4B54;
+  --cta-text:#FBF8F2;
+  --cta-bg-on-surface:#1E4B54;
+  --cta-text-on-surface:#FBF8F2;
+  --accent:#E2795F;
+  --accent-contrast:#FFFEFB;
+  --field-text:#1E4B54;
+
+  /* ---- Typography ---- */
+  --font-logo:"Montserrat", sans-serif;      /* wordmark only — never body copy */
+  --font-body:"Work Sans", "Segoe UI", sans-serif; /* everything else */
+
+  --fs-display:clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  --fs-h1:clamp(1.9rem, 1.6rem + 1.2vw, 2.5rem);
+  --fs-h2:clamp(1.4rem, 1.2rem + .8vw, 1.9rem);
+  --fs-h3:1.15rem;
+  --fs-body-lg:1.1rem;
+  --fs-body:1rem;
+  --fs-small:0.875rem;
+  --fs-label:0.8rem;
+
+  /* ---- Spacing scale (8px base) ---- */
+  --space-1:8px;
+  --space-2:16px;
+  --space-3:24px;
+  --space-4:32px;
+  --space-5:48px;
+  --space-6:64px;
+  --space-7:96px;
+
+  /* ---- Shape ---- */
+  --radius:0;              /* sharp corners everywhere, matches cardstock */
+  --border-width:1px;      /* hairlines only — never drop shadows on UI */
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#17383F;
+    --bg-alt:#1F454D;
+    --surface:#A9D3DA;
+    --text:#F4EFE4;
+    --text-on-surface:#123138;
+    --text-muted:#9FC7CE;
+    --text-on-surface-muted:#3C6871;
+    --border:rgba(244,239,228,.18);
+    --border-on-surface:rgba(18,49,56,.18);
+    --cta-bg:#A9D3DA;
+    --cta-text:#123138;
+    --cta-bg-on-surface:#1E4B54;
+    --cta-text-on-surface:#F4EFE4;
+    --accent:#F0916F;
+    --accent-contrast:#17383F;
+    --field-text:#F4EFE4;
+  }
+}
+
+:root[data-theme="dark"]{
+  --bg:#17383F;
+  --bg-alt:#1F454D;
+  --surface:#A9D3DA;
+  --text:#F4EFE4;
+  --text-on-surface:#123138;
+  --text-muted:#9FC7CE;
+  --text-on-surface-muted:#3C6871;
+  --border:rgba(244,239,228,.18);
+  --border-on-surface:rgba(18,49,56,.18);
+  --cta-bg:#A9D3DA;
+  --cta-text:#123138;
+  --cta-bg-on-surface:#1E4B54;
+  --cta-text-on-surface:#F4EFE4;
+  --accent:#F0916F;
+  --accent-contrast:#17383F;
+  --field-text:#F4EFE4;
+}
+
+/*
+ * Any component whose background is var(--surface) MUST locally redefine
+ * --text, --text-muted, --border, --cta-bg, --cta-text to their
+ * "-on-surface" counterparts (see DESIGN_SYSTEM.md → "Surface panels").
+ * Example:
+ *   .card{
+ *     background:var(--surface);
+ *     color:var(--text-on-surface);
+ *     --text:var(--text-on-surface);
+ *     --text-muted:var(--text-on-surface-muted);
+ *     --border:var(--border-on-surface);
+ *     --cta-bg:var(--cta-bg-on-surface);
+ *     --cta-text:var(--cta-text-on-surface);
+ *   }
+ * Skipping this causes low-contrast text in dark mode (sky-on-sky).
+ */
