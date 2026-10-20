@@ -34,4 +34,4 @@ Placeholder text naming the jurisdiction under which these terms are governed.
 
 ### 8. Contact Us
 
-Questions about these terms can be sent to [hello@alterbloom.example](mailto:hello@alterbloom.example).
+Questions about these terms can be sent to [info@alterbloom.co.uk](mailto:info@alterbloom.co.uk).

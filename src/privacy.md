@@ -34,4 +34,4 @@ Placeholder text on how visitors or clients can request access to, correction of
 
 ### 8. Contact Us
 
-Questions about this policy can be sent to [hello@alterbloom.example](mailto:hello@alterbloom.example).
+Questions about this policy can be sent to [info@alterbloom.co.uk](mailto:info@alterbloom.co.uk).
