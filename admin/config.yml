@@ -13,6 +13,8 @@ collections:
         label: "Home Page"
         file: "src/_data/home.json"
         fields:
+          - { label: "SEO — Page title (search results). Leave blank to use the default.", name: "seo_title", widget: "string", required: false, hint: "About 50 to 60 characters. Say what you do and where." }
+          - { label: "SEO — Description (search results)", name: "meta_description", widget: "text", required: false, hint: "About 150 characters. A plain sentence that makes someone want to click." }
           - { label: "Hero — Eyebrow", name: "hero_eyebrow", widget: "string" }
           - { label: "Hero — Lead paragraph", name: "hero_lead", widget: "text" }
           - { label: "Hero — Image", name: "hero_image", widget: "image", required: false, hint: "Leave blank to keep the placeholder graphic." }
@@ -35,6 +37,8 @@ collections:
         label: "About Page"
         file: "src/_data/about_page.json"
         fields:
+          - { label: "SEO — Page title (search results). Leave blank to use the default.", name: "seo_title", widget: "string", required: false, hint: "About 50 to 60 characters. Say what you do and where." }
+          - { label: "SEO — Description (search results)", name: "meta_description", widget: "text", required: false, hint: "About 150 characters. A plain sentence that makes someone want to click." }
           - { label: "Hero — Eyebrow", name: "hero_eyebrow", widget: "string" }
           - { label: "Hero — Heading", name: "hero_heading", widget: "string" }
           - { label: "Hero — Body", name: "hero_body", widget: "text" }
@@ -73,6 +77,8 @@ collections:
         label: "Contact Page"
         file: "src/_data/contact_page.json"
         fields:
+          - { label: "SEO — Page title (search results). Leave blank to use the default.", name: "seo_title", widget: "string", required: false, hint: "About 50 to 60 characters. Say what you do and where." }
+          - { label: "SEO — Description (search results)", name: "meta_description", widget: "text", required: false, hint: "About 150 characters. A plain sentence that makes someone want to click." }
           - { label: "Hero — Eyebrow", name: "hero_eyebrow", widget: "string" }
           - { label: "Hero — Heading", name: "hero_heading", widget: "string" }
           - { label: "Hero — Body", name: "hero_body", widget: "text" }
@@ -81,6 +87,8 @@ collections:
         label: "Blog Page Intro"
         file: "src/_data/blog_page.json"
         fields:
+          - { label: "SEO — Page title (search results). Leave blank to use the default.", name: "seo_title", widget: "string", required: false, hint: "About 50 to 60 characters. Say what you do and where." }
+          - { label: "SEO — Description (search results)", name: "meta_description", widget: "text", required: false, hint: "About 150 characters. A plain sentence that makes someone want to click." }
           - { label: "Hero — Eyebrow", name: "hero_eyebrow", widget: "string" }
           - { label: "Hero — Heading", name: "hero_heading", widget: "string" }
           - { label: "Hero — Body", name: "hero_body", widget: "text" }
@@ -109,10 +117,15 @@ collections:
         label: "Site Settings (footer & contact info)"
         file: "src/_data/site.json"
         fields:
-          - { label: "Footer tagline", name: "tagline", widget: "string" }
+          - { label: "Footer statement (who you are, what you do, where)", name: "tagline", widget: "text" }
+          - { label: "Default search description", name: "default_description", widget: "text", hint: "Used on any page without its own SEO description." }
+          - { label: "Website address (no trailing slash, e.g. https://alterbloom.co.uk)", name: "url", widget: "string", required: false }
+          - { label: "Social sharing image", name: "og_image", widget: "image", required: false, hint: "Shown when the site is shared. 1200 x 630 works best." }
           - { label: "Email", name: "email", widget: "string" }
           - { label: "Phone (displayed, e.g. 07752 082523)", name: "phone", widget: "string" }
           - { label: "Phone (link — international format, no spaces, e.g. +447752082523)", name: "phone_link", widget: "string" }
+          - { label: "WhatsApp number (digits only, international, e.g. 447752082523)", name: "whatsapp_number", widget: "string", required: false, hint: "Leave blank to hide the WhatsApp buttons." }
+          - { label: "WhatsApp opening message", name: "whatsapp_message", widget: "string", required: false }
           - { label: "Instagram URL", name: "instagram", widget: "string" }
 
   - name: "blog"
@@ -129,6 +142,8 @@ collections:
         widget: "select"
         options: ["Wedding", "Corporate", "Planning", "Birthdays", "Florals", "Behind the Scenes"]
       - { label: "Excerpt (shown on the Blog page)", name: "excerpt", widget: "text" }
+      - { label: "SEO — Page title (leave blank to use the post title)", name: "seo_title", widget: "string", required: false }
+      - { label: "SEO — Description (leave blank to use the excerpt)", name: "meta_description", widget: "text", required: false }
       - { label: "Cover image", name: "cover_image", widget: "image", required: false }
       - { label: "Cover image alt text", name: "cover_image_alt", widget: "string", required: false }
       - { label: "Post body", name: "body", widget: "markdown" }

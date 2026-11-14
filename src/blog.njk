@@ -2,6 +2,9 @@
 layout: base.njk
 title: Blog
 permalink: /blog/
+eleventyComputed:
+  seo_title: "{{ blog_page.seo_title | safe }}"
+  meta_description: "{{ blog_page.meta_description | safe }}"
 ---
 <section class="page-hero">
   <div class="container">

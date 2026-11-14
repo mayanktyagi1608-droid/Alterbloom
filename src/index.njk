@@ -2,6 +2,9 @@
 layout: base.njk
 title: Events Planning & Decor
 permalink: /
+eleventyComputed:
+  seo_title: "{{ home.seo_title | safe }}"
+  meta_description: "{{ home.meta_description | safe }}"
 ---
 <section class="hero">
   <div class="container hero-grid">

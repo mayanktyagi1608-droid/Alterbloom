@@ -11,9 +11,6 @@
 (function () {
   var h = window.h;
 
-  CMS.registerPreviewStyle(
-    "https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap"
-  );
   CMS.registerPreviewStyle("/css/tokens.css");
   CMS.registerPreviewStyle("/css/style.css");
 

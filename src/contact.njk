@@ -2,6 +2,9 @@
 layout: base.njk
 title: Contact
 permalink: /contact/
+eleventyComputed:
+  seo_title: "{{ contact_page.seo_title | safe }}"
+  meta_description: "{{ contact_page.meta_description | safe }}"
 ---
 <section class="page-hero">
   <div class="container">

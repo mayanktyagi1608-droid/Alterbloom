@@ -51,17 +51,22 @@ empty, so the site looks right before any real photos are uploaded.
 
 ## Local development
 
-No Node is installed in this environment (do not download/install one
-yourself — ask the user). If Node is available:
+Node 20 is installed in the user's home folder (not system-wide) at
+`~/.local/node`. Put it on the PATH for a command with
+`export PATH="$HOME/.local/node/bin:$PATH"` (it is not on the default PATH,
+so a bare `node`/`npm` will say "not found"). Do not install anything else
+system-wide without asking.
 
 ```bash
 npm install
 npm run build      # outputs to _site/
 npm start          # eleventy --serve, local preview with live reload
+scripts/check-design-tokens.sh
 ```
 
-Netlify runs `npm run build` on every push to `main`; that's the real
-verification path when local Node isn't available.
+Netlify runs `npm run build` on every push to `main`, so main must always
+build. Do larger changes on a branch and check the Netlify deploy preview
+before merging, because Decap CMS commits straight to `main`.
 
 ## Design system — read before touching any HTML or CSS
 

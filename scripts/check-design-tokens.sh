@@ -21,7 +21,8 @@ files=$(find . \
 found=0
 
 echo "== Raw hex colors outside css/tokens.css =="
-hex_hits=$(grep -nE '#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]{3}\b' $files 2>/dev/null | grep -v '^\s*$')
+# The <meta name="theme-color"> tag can't read a CSS variable, so it's the one allowed exception.
+hex_hits=$(grep -nE '#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]{3}\b' $files 2>/dev/null | grep -v '^\s*$' | grep -v 'name="theme-color"')
 if [ -n "$hex_hits" ]; then
   echo "$hex_hits"
   found=1

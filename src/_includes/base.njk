@@ -1,11 +1,26 @@
+{%- set pageTitle = seo_title or (title + " — Alterbloom") -%}
+{%- set pageDescription = meta_description or excerpt or site.default_description -%}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ title }} — Alterbloom</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>{{ pageTitle }}</title>
+<meta name="description" content="{{ pageDescription }}">
+{% if site.url %}<link rel="canonical" href="{{ site.url }}{{ page.url }}">{% endif %}
+<meta name="theme-color" content="#123138">
+
+<meta property="og:site_name" content="Alterbloom">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="{{ pageTitle }}">
+<meta property="og:description" content="{{ pageDescription }}">
+{% if site.url %}<meta property="og:url" content="{{ site.url }}{{ page.url }}">{% endif %}
+{% if site.url and site.og_image %}<meta property="og:image" content="{{ site.url }}{{ site.og_image }}">{% endif %}
+<meta name="twitter:card" content="{% if site.url and site.og_image %}summary_large_image{% else %}summary{% endif %}">
+
+<link rel="preload" href="/css/fonts/work-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/css/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/tokens.css">
 <link rel="stylesheet" href="/css/style.css">
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -23,22 +38,24 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to content</a>
+
 <header class="site-header">
   <div class="container nav-row">
     <a href="/" class="logo wordmark">Alterbloom<span class="dot">.</span></a>
-    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
-    <nav class="site-nav">
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul>
-        <li><a href="/" {% if page.url == "/" %}aria-current="page"{% endif %}>Home</a></li>
-        <li><a href="/about/" {% if page.url == "/about/" %}aria-current="page"{% endif %}>About</a></li>
-        <li><a href="/blog/" {% if "/blog/" in page.url %}aria-current="page"{% endif %}>Blog</a></li>
-        <li><a href="/contact/" {% if page.url == "/contact/" %}aria-current="page"{% endif %}>Contact</a></li>
+        {%- for item in navigation.main %}
+        <li><a href="{{ item.url }}" {% if page.url == item.url or (item.url != "/" and item.url in page.url) %}aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {%- endfor %}
+        <li class="nav-cta"><a href="{{ navigation.enquire_url }}">{{ navigation.enquire_label }}</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
-<main>
+<main id="main">
 {{ content | safe }}
 </main>
 
@@ -52,10 +69,9 @@
       <div>
         <h4>Site</h4>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about/">About</a></li>
-          <li><a href="/blog/">Blog</a></li>
-          <li><a href="/contact/">Contact</a></li>
+          {%- for item in navigation.footer %}
+          <li><a href="{{ item.url }}">{{ item.label }}</a></li>
+          {%- endfor %}
         </ul>
       </div>
       <div>
@@ -69,6 +85,9 @@
         <h4>Contact</h4>
         <ul>
           <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+          {%- if site.whatsapp_number %}
+          <li><a href="https://wa.me/{{ site.whatsapp_number }}">WhatsApp</a></li>
+          {%- endif %}
           <li><a href="tel:{{ site.phone_link }}">{{ site.phone }}</a></li>
           <li><a href="{{ site.instagram }}">Instagram</a></li>
         </ul>
@@ -80,6 +99,13 @@
     </div>
   </div>
 </footer>
+
+<div class="thumb-bar">
+  <a class="btn btn-primary" href="{{ navigation.enquire_url }}">{{ navigation.enquire_label }}</a>
+  {%- if site.whatsapp_number %}
+  <a class="btn" href="https://wa.me/{{ site.whatsapp_number }}?text={{ site.whatsapp_message | urlencode }}">WhatsApp</a>
+  {%- endif %}
+</div>
 
 <script src="/js/main.js"></script>
 </body>

@@ -1,0 +1,15 @@
+{
+  "enquire_label": "Enquire",
+  "enquire_url": "/contact/",
+  "main": [
+    { "label": "Our story", "url": "/about/" },
+    { "label": "Journal", "url": "/blog/" },
+    { "label": "Contact", "url": "/contact/" }
+  ],
+  "footer": [
+    { "label": "Home", "url": "/" },
+    { "label": "Our story", "url": "/about/" },
+    { "label": "Journal", "url": "/blog/" },
+    { "label": "Contact", "url": "/contact/" }
+  ]
+}
