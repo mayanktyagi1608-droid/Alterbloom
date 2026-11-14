@@ -6,80 +6,248 @@ eleventyComputed:
   seo_title: "{{ home.seo_title | safe }}"
   meta_description: "{{ home.meta_description | safe }}"
 ---
-<section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <span class="eyebrow">{{ home.hero_eyebrow }}</span>
-      <h1 class="wordmark">Alterbloom<span class="dot">.</span></h1>
-      <p class="lead">{{ home.hero_lead }}</p>
-      <div class="btn-row">
-        <a href="/contact/" class="btn btn-primary">Get a Quote</a>
-        <a href="/about/" class="btn">About Us</a>
+{% from "macros.njk" import photo, thumb %}
+
+{# 1. THE INVITATION. The <h1> is real text inside the card. With no JavaScript, or with
+   reduced motion, the envelope is skipped and the card is simply shown. #}
+<section class="invite" data-invite aria-label="Welcome">
+  <div class="invite-track">
+    <div class="invite-stage">
+      <a class="invite-skip" href="#services">Skip the intro</a>
+      <div class="env">
+        <div class="env-inner">
+          <div class="env-back"></div>
+          <div class="env-card">
+            <h1>
+              <span class="env-eyebrow">{{ home.invitation.eyebrow }}</span>
+              <span class="env-title">{{ home.invitation.title }} <em>{{ home.invitation.title_accent }}</em></span>
+            </h1>
+            <p class="env-lead">{{ home.invitation.lead }}</p>
+            <div class="note env-note">{{ home.invitation.note }}</div>
+            <div class="env-actions">
+              <a class="btn btn-primary" href="#services">{{ home.invitation.open_label }}</a>
+              <a class="env-link" href="#enquire">{{ navigation.enquire_label }}</a>
+            </div>
+          </div>
+          <div class="env-front"></div>
+          <div class="env-flap"></div>
+          <button class="env-seal" type="button" aria-label="Open the invitation">A.</button>
+        </div>
+        <div class="env-hint note" aria-hidden="true">{{ home.invitation.scroll_hint }}<span class="env-arrow">&darr;</span></div>
       </div>
     </div>
-    {% if home.hero_image %}
-      <img class="img-placeholder hero" src="{{ home.hero_image }}" alt="{{ home.hero_image_alt }}" style="object-fit:cover;">
-    {% else %}
-      <div class="img-placeholder hero">
-        <svg class="motif" aria-hidden="true" viewBox="0 0 120 150" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
-          <path d="M60 140 C 58 100, 66 80, 60 55"/>
-          <path d="M60 90 C 45 84, 38 92, 34 84"/>
-          <path d="M62 100 C 76 96, 80 106, 88 100"/>
-          <ellipse cx="60" cy="40" rx="10" ry="16" transform="rotate(-18 60 40)"/>
-          <ellipse cx="60" cy="40" rx="10" ry="16" transform="rotate(18 60 40)"/>
-          <ellipse cx="60" cy="34" rx="10" ry="16"/>
-          <ellipse cx="60" cy="42" rx="9" ry="15" transform="rotate(-42 60 42)"/>
-          <ellipse cx="60" cy="42" rx="9" ry="15" transform="rotate(42 60 42)"/>
-        </svg>
-        <span>Hero Image — 1200×900</span>
-      </div>
-    {% endif %}
   </div>
 </section>
 
-<section class="section">
+{# 2. Hero photograph, with a way in #}
+<section class="band band-hero" aria-label="Photograph">
+  {{ photo(home.hero, true, "Hero photo") }}
+  <div class="band-fade"></div>
+  <div class="band-foot">
+    <p class="note">{{ home.hero.caption }}</p>
+    <a class="btn btn-primary" href="#enquire">{{ navigation.enquire_label }}</a>
+  </div>
+</section>
+
+{# 3. Services: the menu, and the links to the service pages #}
+<section class="section services" id="services" aria-labelledby="svcH">
   <div class="container">
     <div class="section-head center">
-      <span class="eyebrow">What We Do</span>
-      <h2>Planning &amp; decor, start to finish</h2>
-      <p>From concept to teardown, we handle the details so you can enjoy the event.</p>
+      <span class="eyebrow">{{ home.services.eyebrow }}</span>
+      <h2 id="svcH">{{ home.services.heading }}</h2>
     </div>
-    <div class="grid grid-3">
-      {% for service in home.services %}
-      <div class="card">
-        <span class="num">{{ loop.index }}</span>
-        <h3>{{ service.title }}</h3>
-        <p>{{ service.body }}</p>
-      </div>
-      {% endfor %}
+
+    <svg class="plate" viewBox="0 0 600 420" aria-hidden="true" focusable="false">
+      <rect class="plate-napkin" x="20" y="96" width="100" height="250" transform="rotate(-4 70 220)"/>
+      <svg x="122" y="90" width="34" height="260" viewBox="0 0 30 260" class="plate-metal" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 8V58Q6 78 15 84Q24 78 24 58V8M15 8V84" stroke-width="3"/><path d="M15 84V250" stroke-width="8"/></svg>
+      <circle class="plate-rim" cx="356" cy="210" r="180"/>
+      <circle class="plate-well" cx="356" cy="210" r="118"/>
+      <svg x="325" y="140" width="62" height="78" viewBox="0 0 120 150" class="plate-motif" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M60 140 C 58 100, 66 80, 60 55"/>
+        <path d="M60 90 C 45 84, 38 92, 34 84"/>
+        <path d="M62 100 C 76 96, 80 106, 88 100"/>
+        <ellipse cx="60" cy="40" rx="10" ry="16" transform="rotate(-18 60 40)"/>
+        <ellipse cx="60" cy="40" rx="10" ry="16" transform="rotate(18 60 40)"/>
+        <ellipse cx="60" cy="34" rx="10" ry="16"/>
+        <ellipse cx="60" cy="42" rx="9" ry="15" transform="rotate(-42 60 42)"/>
+        <ellipse cx="60" cy="42" rx="9" ry="15" transform="rotate(42 60 42)"/>
+      </svg>
+      <text class="plate-word" x="356" y="258" text-anchor="middle">Alterbloom.</text>
+      <svg x="548" y="90" width="34" height="260" viewBox="0 0 30 260" class="plate-metal" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M8 10Q24 40 24 120H8Z" fill="currentColor" stroke-width="2"/><path d="M12 120V250" stroke-width="8"/></svg>
+    </svg>
+
+    <div class="paper menu-card">
+      <div class="menu-label">{{ home.services.menu_label }}</div>
+      <ul class="svc-list">
+        {%- for item in home.services.items %}
+        <li>
+          {%- if item.url %}<a class="svc" href="{{ item.url }}">{% else %}<div class="svc">{% endif %}
+            {{ thumb(item) }}
+            <span class="svc-text">
+              <span class="svc-title">{{ item.title }}</span>
+              <span class="svc-body">{{ item.body }}</span>
+              {%- if item.url %}<span class="svc-more">{{ item.link_label }}</span>{% endif %}
+            </span>
+          {%- if item.url %}</a>{% else %}</div>{% endif %}
+        </li>
+        {%- endfor %}
+      </ul>
+      <div class="note menu-note">{{ home.services.note }}</div>
     </div>
   </div>
 </section>
 
-<section class="section">
+{# 4. The show: two photographs, stacked on a phone #}
+<section class="duo" aria-label="Photographs of the entertainment">
+  {%- for p in home.show.photos %}
+  <div class="band">
+    {{ photo(p, false, "Entertainment photo") }}
+    {%- if p.caption %}<div class="band-caption note">{{ p.caption }}</div>{% endif %}
+  </div>
+  {%- endfor %}
+</section>
+
+{# 5. Proof: why couples choose us #}
+<section class="section proof" aria-labelledby="proofH">
   <div class="container">
-    <div class="grid grid-2" style="align-items:center;">
-      {% if home.about_image %}
-        <img class="img-placeholder tall" src="{{ home.about_image }}" alt="{{ home.about_image_alt }}" style="object-fit:cover;">
-      {% else %}
-        <div class="img-placeholder tall"><span>Studio / Team Photo</span></div>
-      {% endif %}
-      <div>
-        <span class="eyebrow">About Alterbloom</span>
-        <h2>{{ home.about_heading }}</h2>
-        <p>{{ home.about_body }}</p>
-        <a href="/about/" class="link-more">More about us →</a>
+    <div class="section-head">
+      <span class="eyebrow">{{ home.proof.eyebrow }}</span>
+      <h2 id="proofH">{{ home.proof.heading }}</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="letter tilt-a">
+        <span class="tape" aria-hidden="true"></span>
+        <p class="letter-text note">{{ home.proof.story }}</p>
+        <p class="letter-sign note">{{ home.proof.signature }}</p>
+      </div>
+      <div class="proof-side">
+        <div class="paper review-card">
+          <div class="menu-label">{{ home.proof.review_label }}</div>
+          <div class="review-headline">{{ home.proof.review_headline }}</div>
+          <p class="review-note">{{ home.proof.review_note }}</p>
+        </div>
+        <figure class="paper quote-card tilt-b">
+          <blockquote>&ldquo;{{ home.proof.quote }}&rdquo;</blockquote>
+          <figcaption>{{ home.proof.quote_by }}</figcaption>
+        </figure>
+        <div class="directories">
+          <span class="directories-label">{{ home.proof.directories_label }}</span>
+          {%- for d in home.proof.directories %}<span class="tag">{{ d }}</span>{% endfor %}
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+{# 6. Poppies #}
+<section class="band" aria-label="Photograph">
+  {{ photo(home.poppies, false, "Poppy photo") }}
+  {%- if home.poppies.caption %}<div class="band-caption band-caption-top note">{{ home.poppies.caption }}</div>{% endif %}
+</section>
+
+{# 7. How it works: a real sequence #}
+<section class="section" aria-labelledby="howH">
   <div class="container">
-    <div class="cta-banner">
-      <h2>{{ home.cta_heading }}</h2>
-      <p>{{ home.cta_body }}</p>
-      <a href="/contact/" class="btn btn-primary">Start a Conversation</a>
+    <div class="section-head">
+      <h2 id="howH">{{ home.how.heading }}</h2>
+      <p>{{ home.how.intro }}</p>
+    </div>
+    <ol class="steps">
+      {%- for s in home.how.steps %}
+      <li class="paper step {{ 'tilt-a' if loop.index is odd else 'tilt-b' }}">
+        <span class="note step-num" aria-hidden="true">{{ loop.index }}</span>
+        <h3>{{ s.title }}</h3>
+        <p>{{ s.body }}</p>
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+{# 8. Full-bleed with the line #}
+<section class="band band-statement" aria-label="Photograph">
+  {{ photo(home.statement, false, "Statement photo") }}
+  <div class="band-dim"></div>
+  <p class="statement">{{ home.statement.text }} <em>{{ home.statement.accent }}</em></p>
+</section>
+
+{# 9. Gallery: swipe on a phone, columns on desktop #}
+<section class="gallery" role="region" aria-label="Photo gallery" tabindex="0">
+  {%- for p in home.gallery.photos %}
+  <div class="band">
+    {{ photo(p, false, "Gallery photo") }}
+    {%- if p.caption %}<div class="band-caption note">{{ p.caption }}</div>{% endif %}
+    {%- if loop.first %}<div class="gallery-swipe note" aria-hidden="true">swipe &rarr;</div>{% endif %}
+  </div>
+  {%- endfor %}
+</section>
+
+{# 10. FAQ: plain questions, plain answers #}
+<section class="section" aria-labelledby="faqH">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="faqH">{{ home.faq.heading }}</h2>
+      <p>{{ home.faq.intro }}</p>
+    </div>
+    <div class="faq">
+      {%- for f in home.faq.items %}
+      <details class="faq-item">
+        <summary><span>{{ f.question }}</span><span class="faq-plus" aria-hidden="true">+</span></summary>
+        <p>{{ f.answer }}</p>
+      </details>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{# 11. Journal: the latest three posts, automatically #}
+<section class="section" aria-labelledby="jH">
+  <div class="container">
+    <div class="journal-head">
+      <h2 id="jH">{{ home.journal.heading }}</h2>
+      <a class="link-more" href="/blog/">{{ home.journal.link_label }}</a>
+    </div>
+    <div class="jcards">
+      {%- for post in collections.posts | reverse %}
+      {%- if loop.index <= 3 %}
+      <a class="paper jcard {{ 'tilt-a' if loop.index is odd else 'tilt-b' }}" href="{{ post.url }}">
+        <span class="jcard-cat">{{ post.data.category }}</span>
+        <span class="jcard-title">{{ post.data.title }}</span>
+      </a>
+      {%- endif %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{# 12. Enquiry: the RSVP card, built for thumbs #}
+<section class="section" id="enquire" aria-labelledby="enqH">
+  <div class="container">
+    <div class="paper rsvp tilt-a">
+      <div class="rsvp-inner">
+        <div class="menu-label center">{{ home.enquiry.kicker }}</div>
+        <h2 id="enqH">{{ home.enquiry.heading }}</h2>
+        <p class="rsvp-intro">{{ home.enquiry.intro }}</p>
+        <form class="rsvp-form" name="home-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="home-enquiry">
+          <p class="hp"><label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <div class="rsvp-field"><label for="fNames">Your names</label><input id="fNames" name="names" type="text" autocomplete="name" required></div>
+          <div class="rsvp-field"><label for="fContact">Email or phone</label><input id="fContact" name="contact" type="text" autocomplete="email" required></div>
+          <div class="rsvp-field"><label for="fType">What's the occasion?</label>
+            <select id="fType" name="occasion">
+              <option>Wedding</option>
+              <option>Corporate event</option>
+              <option>Birthday or celebration</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="rsvp-field"><label for="fDate">Date and place</label><input id="fDate" name="date-and-place" type="text" placeholder="e.g. 14 June, London"></div>
+          <div class="rsvp-field"><label for="fThing">The one thing guests must remember</label><input id="fThing" name="one-thing" type="text"></div>
+          <button class="btn btn-primary rsvp-send" type="submit">{{ home.enquiry.button }}</button>
+          <p class="rsvp-small">{{ home.enquiry.privacy_note }} <a href="/privacy/">Privacy</a>.
+            {%- if site.whatsapp_number %} Prefer to chat? <a href="https://wa.me/{{ site.whatsapp_number }}?text={{ site.whatsapp_message | urlencode }}">Message us on WhatsApp</a>.{% endif %}</p>
+        </form>
+      </div>
     </div>
   </div>
 </section>

@@ -1,0 +1,411 @@
+/* ==========================================================================
+   Alterbloom — Home page sections
+   Mobile first. Tokens only (css/tokens.css) — see DESIGN_SYSTEM.md.
+   Order follows the page: invitation, hero, services, show, proof,
+   poppies, how it works, statement, gallery, FAQ, journal, RSVP.
+   ========================================================================== */
+
+/* Paper pieces share the surface-panel remap (see DESIGN_SYSTEM.md). */
+.env-card,
+.letter,
+.band-caption,
+.rsvp {
+  background: var(--surface);
+  color: var(--text-on-surface);
+  --text: var(--text-on-surface);
+  --text-muted: var(--text-on-surface-muted);
+  --border: var(--border-on-surface);
+  --cta-bg: var(--cta-bg-on-surface);
+  --cta-text: var(--cta-text-on-surface);
+  --accent: var(--accent-on-surface);
+}
+
+.center { text-align: center; }
+.hp { position: absolute; left: -9999px; }   /* spam-trap field, never shown */
+
+.menu-label {
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-1);
+}
+
+/* ==========================================================================
+   1. The invitation
+   Base rules = the static card (no JavaScript, or reduced motion).
+   The envelope is drawn on a fixed 560 x 440 canvas that js/invite.js scales
+   to fit, and scroll position drives the CSS variables --flap, --rise,
+   --seal-*, --hint-o and --skip-o.
+   ========================================================================== */
+.invite-stage { position: relative; padding: var(--space-5) var(--space-2); }
+.env { width: 100%; max-width: 440px; margin: 0 auto; }
+.env-inner { position: relative; }
+.env-back, .env-front, .env-flap, .env-seal, .env-hint, .invite-skip { display: none; }
+
+.env-card {
+  padding: var(--space-4) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+  box-shadow: var(--shadow-paper);
+}
+.env-card h1 { display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 0; }
+.env-eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.env-title { display: block; font-size: 3.5rem; line-height: 0.95; letter-spacing: -0.035em; color: var(--text); }
+.env-title em { font-weight: 400; }
+.env-lead { margin: 0; font-size: 1rem; line-height: 1.45; max-width: 20em; }
+.env-note { transform: rotate(var(--tilt-a)); }
+.env-actions { display: flex; gap: 12px; align-items: center; margin-top: 2px; }
+.env-link {
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: var(--border-width) solid var(--text);
+  padding-bottom: 2px;
+}
+.env-card .btn { min-height: var(--tap); }
+
+@keyframes alter-beat { 0%, 100% { scale: 1; } 50% { scale: 1.07; } }
+@keyframes alter-bob  { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* "html.js" is set by a tiny inline script in <head>, so the live layout
+     applies from first paint and nothing jumps when invite.js loads. */
+  html.js .invite { --invite-bar: var(--bar-h); }   /* space the mobile bar takes at the bottom */
+  html.js .invite-track { height: calc((var(--rng, 2.2) + 1) * (100vh - var(--header-h))); height: calc((var(--rng, 2.2) + 1) * (100svh - var(--header-h))); }
+  html.js .invite-stage { position: sticky; top: var(--header-h); height: calc(100vh - var(--header-h)); height: calc(100svh - var(--header-h)); overflow: hidden; padding: 0; }
+
+  html.js .invite-skip {
+    display: inline-block;
+    position: absolute;
+    left: var(--space-3);
+    top: var(--space-1);
+    z-index: 5;
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: var(--border-width) solid currentColor;
+    padding: 12px 0 2px;
+    opacity: var(--skip-o, 1);
+  }
+
+  html.js .env {
+    position: absolute;
+    left: 50%;
+    top: calc((100% - var(--invite-bar)) * 0.42);
+    width: 560px;
+    max-width: none;
+    height: 440px;
+    margin: 0 0 0 -280px;
+    transform: scale(var(--ss, 0.6));
+    transform-origin: 50% 0;
+  }
+  html.js .env-inner { height: 440px; perspective: 1600px; }
+
+  html.js .env-back,
+  html.js .env-front,
+  html.js .env-flap { display: block; position: absolute; left: 0; width: 100%; background: var(--surface); }
+
+  html.js .env-back { top: 0; height: 100%; z-index: 1; filter: brightness(0.86); box-shadow: var(--shadow-paper); }
+  html.js .env-front { top: 0; height: 100%; z-index: 3; filter: brightness(0.97); clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%); }
+  html.js .env-flap {
+    top: 0;
+    height: 54%;
+    z-index: 4;
+    filter: brightness(0.9);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: 50% 0;
+    transform: rotateX(calc(var(--flap, 0) * 1deg));
+  }
+  html.js .invite.is-rising .env-flap { z-index: 1; }
+
+  html.js .env-card {
+    position: absolute;
+    left: 70px;
+    top: 34px;
+    width: 420px;
+    height: 396px;
+    padding: 26px 28px;
+    z-index: 2;
+    box-shadow: var(--shadow-note);
+    transform-origin: 50% 100%;
+    transform: translateY(calc(var(--rise, 0) * -340px)) scale(calc(1 + (var(--cs, 1.3) - 1) * var(--rise, 0)));
+  }
+  html.js .env-actions { visibility: hidden; }
+  html.js .invite.is-open .env-actions { visibility: visible; }
+
+  html.js .env-seal {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 54%;
+    width: 96px;
+    height: 96px;
+    border: 0;
+    border-radius: 50%;           /* the one round thing on the site: a wax seal */
+    z-index: 6;
+    cursor: pointer;
+    background: var(--cta-bg);
+    color: var(--cta-text);
+    font-family: var(--font-logo);
+    font-weight: 600;
+    font-size: 2rem;
+    box-shadow: var(--shadow-note);
+    opacity: var(--seal-o, 1);
+    transform: translate(-50%, -50%) scale(var(--seal-s, 1)) rotate(calc(var(--seal-r, 0) * 1deg));
+    animation: alter-beat 1.8s ease-in-out infinite;
+  }
+  html.js .invite.is-opening .env-seal { animation: none; pointer-events: none; }
+
+  html.js .env-hint {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 100%;
+    margin-top: 34px;
+    text-align: center;
+    font-size: 2.25rem;
+    color: var(--text);
+    opacity: var(--hint-o, 1);
+  }
+  html.js .env-arrow { display: block; font-family: var(--font-body); font-size: 1.6rem; animation: alter-bob 1.6s ease-in-out infinite; }
+}
+
+/* ==========================================================================
+   Photo bands (hero, poppies, statement, gallery, show pair)
+   ========================================================================== */
+.band-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  background: var(--bg-alt);
+  color: var(--accent);
+}
+.band-placeholder .motif { width: 96px; opacity: 0.8; }
+.band-placeholder span { font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+
+.band-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 45%; background: linear-gradient(transparent, var(--bg-deep)); opacity: 0.85; }
+.band-dim { position: absolute; inset: 0; background: var(--bg-deep); opacity: 0.5; }
+.band-foot { position: absolute; left: 0; right: 0; bottom: 0; padding: var(--space-5) var(--space-3) calc(var(--space-3) + var(--bar-h)); }
+.band-foot .note { margin: 0 0 var(--space-2); color: var(--text); }
+.band-caption { box-shadow: var(--shadow-note); font-size: 1.45rem; }
+.band-caption-top { left: auto; right: var(--space-2); top: 84px; bottom: auto; transform: rotate(var(--tilt-b)); }
+
+.statement {
+  position: absolute;
+  left: var(--space-3);
+  right: var(--space-3);
+  bottom: calc(var(--space-4) + var(--bar-h));
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--text);
+}
+.statement em { font-weight: 300; }
+
+/* The show pair: stacked on a phone */
+.duo { display: flex; flex-direction: column; gap: 6px; background: var(--bg-deep); }
+.duo .band { min-height: 50vh; min-height: 50svh; }
+
+/* Gallery: swipe on a phone */
+.gallery {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  background: var(--bg-deep);
+}
+.gallery .band { flex: 0 0 86%; scroll-snap-align: center; }
+.gallery-swipe { position: absolute; right: var(--space-2); top: 84px; font-size: 1.6rem; color: var(--text); }
+
+/* ==========================================================================
+   3. Services: the plate and the menu card
+   ========================================================================== */
+.plate { display: block; width: 100%; max-width: 600px; height: auto; margin: 0 auto var(--space-3); }
+.plate-napkin { fill: var(--surface); stroke: var(--border-on-surface); }
+.plate-metal { color: var(--text-muted); }
+.plate-rim { fill: var(--surface); stroke: var(--border-on-surface); }
+.plate-well { fill: var(--bg-alt); stroke: none; opacity: 0.18; }
+.plate-motif { color: var(--accent); }
+.plate-word { font-family: var(--font-logo); font-weight: 600; font-size: 17px; fill: var(--text-on-surface); }
+
+.menu-card { max-width: 520px; margin: 0 auto; padding: var(--space-3) var(--space-3) var(--space-2); }
+.menu-card .menu-label { text-align: center; }
+.svc-list { list-style: none; margin: 0; padding: 0; }
+.svc-list li { border-top: var(--border-width) solid var(--border); }
+.svc-list li:first-child { border-top: 0; }
+.svc { display: flex; gap: var(--space-2); align-items: center; padding: var(--space-2) 0; text-decoration: none; color: var(--text); }
+.svc-thumb { width: 72px; height: 88px; object-fit: cover; flex: 0 0 auto; }
+.svc-thumb-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--bg-alt);
+  color: var(--swatch-sky);
+  font-weight: 700;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.svc-text { display: block; }
+.svc-title { display: block; font-family: var(--font-display); font-weight: 500; font-size: 1.7rem; line-height: 1; letter-spacing: -0.03em; }
+.svc-body { display: block; margin-top: 4px; font-size: 0.95rem; line-height: 1.4; }
+.svc-more {
+  display: inline-block;
+  margin-top: 6px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-bottom: var(--border-width) solid var(--text);
+}
+.menu-note { margin-top: var(--space-2); text-align: right; transform: rotate(var(--tilt-a)); }
+
+/* ==========================================================================
+   5. Proof
+   ========================================================================== */
+.proof-grid { display: grid; gap: var(--space-4); grid-template-columns: 1fr; }
+.proof-side { display: flex; flex-direction: column; gap: var(--space-2); }
+.letter {
+  position: relative;
+  padding: 42px var(--space-3) var(--space-3);
+  background-image: repeating-linear-gradient(transparent 0 31px, var(--border) 31px 32px);
+  box-shadow: var(--shadow-paper);
+}
+.tape { position: absolute; left: 40%; top: -13px; width: 110px; height: 28px; background: var(--swatch-bloom); opacity: 0.75; transform: rotate(-3deg); }
+.letter-text { margin: 0; color: var(--text); font-size: 1.6rem; line-height: 32px; }
+.letter-sign { margin: var(--space-2) 0 0; text-align: right; font-size: 1.75rem; }
+.review-card { border-top: 6px double var(--accent); padding: 22px; }
+.review-headline { font-family: var(--font-display); font-weight: 500; font-size: 1.9rem; line-height: 1; letter-spacing: -0.02em; }
+.review-note { margin: 4px 0 0; font-size: 0.9rem; color: var(--text-muted); }
+.quote-card { margin: 0; padding: 22px; }
+.quote-card blockquote { margin: 0; font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 1.35rem; line-height: 1.25; }
+.quote-card figcaption { margin-top: 10px; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+.directories { display: flex; flex-wrap: wrap; gap: var(--space-1); align-items: center; }
+.directories-label { font-weight: 700; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-right: 4px; }
+
+/* ==========================================================================
+   7. How it works
+   ========================================================================== */
+.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+.step { padding: 22px; }
+.step-num { display: block; font-size: 2.1rem; line-height: 1; }
+.step h3 { margin: 0; }
+.step p { margin: 4px 0 0; font-size: 0.95rem; }
+
+/* ==========================================================================
+   10. FAQ
+   ========================================================================== */
+.faq { max-width: 760px; display: flex; flex-direction: column; }
+.faq-item { border-top: var(--border-width) solid var(--border); padding: 6px 0; }
+.faq-item:last-child { border-bottom: var(--border-width) solid var(--border); }
+.faq-item summary {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  align-items: center;
+  min-height: 56px;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 1.15;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-plus { font-size: 1.75rem; transition: transform 0.2s; }
+.faq-item[open] .faq-plus { transform: rotate(45deg); }
+.faq-item p { margin: 0 0 var(--space-2); max-width: 36em; }
+@media (prefers-reduced-motion: reduce) { .faq-plus { transition: none; } }
+
+/* ==========================================================================
+   11. Journal
+   ========================================================================== */
+.journal-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-2); margin-bottom: var(--space-4); flex-wrap: wrap; }
+.journal-head h2 { margin: 0; }
+.jcards { display: flex; flex-direction: column; gap: var(--space-3); }
+.jcard { display: block; text-decoration: none; border-top: 12px solid var(--border-on-surface); padding: 22px 24px 26px; }
+.jcard-cat { display: block; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+.jcard-title { display: block; margin-top: 10px; font-family: var(--font-display); font-weight: 500; font-size: 1.65rem; line-height: 1.08; letter-spacing: -0.025em; }
+
+/* ==========================================================================
+   12. RSVP card
+   ========================================================================== */
+.rsvp { max-width: 620px; margin: 0 auto; padding: 12px; }
+.rsvp-inner { border: var(--border-width) dashed var(--text-muted); padding: var(--space-3) var(--space-2); }
+.rsvp h2 { margin: 8px 0 0; text-align: center; font-size: var(--fs-h1); font-weight: 500; color: var(--text); }
+.rsvp-intro { margin: 14px auto 22px; text-align: center; max-width: 24em; }
+.rsvp-form { display: flex; flex-direction: column; gap: var(--space-2); }
+.rsvp-field { display: flex; flex-direction: column; gap: 2px; }
+.rsvp-field label { color: var(--text-muted); }
+/* Underline-style fields sit directly on the paper; answers are typed in the handwriting face. */
+.rsvp-field input,
+.rsvp-field select {
+  min-height: var(--tap);
+  padding: 0;
+  border: 0;
+  border-bottom: var(--border-width) solid var(--text);
+  background: transparent;
+  color: var(--text);
+  outline-offset: 4px;
+}
+.rsvp-field input { font-family: var(--font-hand); font-weight: 600; font-size: var(--fs-hand); }
+.rsvp-field select { font-family: var(--font-body); font-size: 1.05rem; }
+.rsvp-send { margin-top: 6px; min-height: 56px; }
+.rsvp-small { margin: 0; font-size: 0.8rem; color: var(--text-muted); text-align: center; }
+.rsvp-small a { color: var(--text); }
+
+/* ==========================================================================
+   Tablet and up (860px+)
+   ========================================================================== */
+@media (min-width: 861px) {
+  html.js .invite { --invite-bar: 0px; }
+  .env-title { font-size: 4rem; }
+
+  .duo { flex-direction: row; }
+  .duo .band { flex: 1 1 0; min-height: 80vh; }
+
+  .gallery { overflow: visible; }
+  .gallery .band { flex: 1 1 0; min-height: 80vh; }
+  .band-foot { max-width: 1100px; margin: 0 auto; padding: var(--space-5) var(--space-4) var(--space-4); }
+  .band-caption { font-size: 1.75rem; }
+  .statement { left: var(--space-7); right: var(--space-7); bottom: var(--space-6); max-width: 14em; }
+  .band-caption-top { top: var(--space-4); }
+  .gallery-swipe { display: none; }
+
+  .proof-grid { grid-template-columns: 1fr 1fr; align-items: start; }
+  .steps { flex-direction: row; }
+  .steps .step { flex: 1 1 0; }
+  .jcards { flex-direction: row; }
+  .jcards .jcard { flex: 1 1 0; }
+  .rsvp { padding: var(--space-2); }
+  .rsvp-inner { padding: var(--space-4); }
+}

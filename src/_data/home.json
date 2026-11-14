@@ -1,28 +1,195 @@
 {
   "seo_title": "Wedding decor & entertainment in London and the South East | Alterbloom",
   "meta_description": "Alterbloom designs wedding and event decor and entertainment in London and the South East: hand-made flowers, drag hosts, bhangra and more. Tell us your date.",
-  "hero_eyebrow": "Events Planning & Decor",
-  "hero_lead": "We design and style weddings, corporate events, and celebrations — turning empty venues into spaces people remember.",
-  "hero_image": "",
-  "hero_image_alt": "",
-  "services": [
-    {
-      "title": "Wedding Planning & Decor",
-      "body": "Full-service planning, styling, and on-the-day coordination."
-    },
-    {
-      "title": "Corporate Events",
-      "body": "Conferences, launches, and offsites styled to match your brand."
-    },
-    {
-      "title": "Private Celebrations",
-      "body": "Birthdays, anniversaries, and milestone parties, big or small."
-    }
-  ],
-  "about_heading": "Every event tells a story. We help you tell yours.",
-  "about_body": "Alterbloom is an events planning and decor studio. From intimate gatherings to large-scale celebrations, we handle concept, styling, and setup so you can be a guest at your own event.",
-  "about_image": "",
-  "about_image_alt": "",
-  "cta_heading": "Let's plan your next event.",
-  "cta_body": "Tell us the date, the vibe, and the guest list — we'll take it from there."
+  "invitation": {
+    "eyebrow": "Wedding decor & entertainment in London & the South East.",
+    "title": "Refusing",
+    "title_accent": "Ordinary.",
+    "lead": "Decor and entertainment for couples who skipped the rulebook.",
+    "note": "come in, you two.",
+    "open_label": "Come in.",
+    "scroll_hint": "scroll to open it."
+  },
+  "hero": {
+    "image": "/uploads/hero-grooms-poppies.jpg",
+    "alt": "Two grooms in flower garlands beside a performer in a red hat, with giant coral paper poppies behind them",
+    "caption": "Refusing ordinary, one garland at a time.",
+    "focus_x": 40,
+    "focus_y": 40
+  },
+  "services": {
+    "eyebrow": "Wedding & event decor, London and the South East",
+    "heading": "Pull up a chair.",
+    "menu_label": "On the menu",
+    "note": "pairs well with a disco.",
+    "items": [
+      {
+        "title": "Weddings.",
+        "body": "Decor and styling for weddings in London and the South East. Your way, your day.",
+        "link_label": "See weddings",
+        "url": "",
+        "image": "/uploads/grooms-behind-cake.jpg",
+        "alt": "The two grooms in flower garlands behind their cake, a huge coral paper poppy beside them"
+      },
+      {
+        "title": "Corporate.",
+        "body": "Launches and offsites that look like your brand and feel like a party.",
+        "link_label": "See corporate",
+        "url": "",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "title": "Celebrations.",
+        "body": "Birthdays, anniversaries and milestone parties. Loud is welcome.",
+        "link_label": "See celebrations",
+        "url": "",
+        "image": "/uploads/bhangra-crowd.jpg",
+        "alt": "A crowd dancing bhangra with hands raised in a warmly lit room"
+      },
+      {
+        "title": "The show.",
+        "body": "Drag hosts, bhangra, performers. We plan the entertainment too.",
+        "link_label": "See the show",
+        "url": "",
+        "image": "/uploads/performer-closeup.jpg",
+        "alt": "Close-up of a performer with bold eye make-up singing into a microphone"
+      }
+    ]
+  },
+  "show": {
+    "photos": [
+      {
+        "image": "/uploads/performer-pink-skirt.jpg",
+        "alt": "A performer in a pink skirt singing into a microphone beside a seated guest",
+        "caption": "hosted by a drag queen. obviously.",
+        "focus_x": 35,
+        "focus_y": 45
+      },
+      {
+        "image": "/uploads/performer-closeup.jpg",
+        "alt": "Close-up of a performer with bold eye make-up singing into a microphone",
+        "caption": "",
+        "focus_x": 50,
+        "focus_y": 25
+      }
+    ]
+  },
+  "proof": {
+    "eyebrow": "Why couples choose Alterbloom",
+    "heading": "People noticed. People talked. About the decor.",
+    "story": "We didn't want our wedding to be ordinary. Or forgettable. So decor picked off a shelf was never on the cards. People noticed. People talked. So now we want to do it for everyone.",
+    "signature": "Mayank & Christophe, May 2026",
+    "review_label": "Reviews",
+    "review_headline": "[5.0 stars] on Google",
+    "review_note": "[Number] reviews. Show the real figure once you have it.",
+    "quote": "[A guest or client quote, one or two sentences about what they remember.]",
+    "quote_by": "[Name], [guest at / client of]",
+    "directories_label": "Find us on",
+    "directories": ["[Directory]", "[Directory]", "Instagram"]
+  },
+  "poppies": {
+    "image": "/uploads/poppy-table.jpg",
+    "alt": "Guests at a table beneath giant peach and coral paper poppies",
+    "caption": "every one of these poppies, made by hand.",
+    "focus_x": 28,
+    "focus_y": 40
+  },
+  "how": {
+    "heading": "How it works.",
+    "intro": "Three steps from first message to the last dance.",
+    "steps": [
+      { "title": "Tell us.", "body": "Send the date, the place and the one thing guests must remember." },
+      { "title": "We dream it up.", "body": "You get a look, a plan and a clear quote within [timeframe]." },
+      { "title": "The show.", "body": "We style it, run it and take it down. You enjoy your own event." }
+    ]
+  },
+  "statement": {
+    "image": "/uploads/bhangra-crowd.jpg",
+    "alt": "A crowd dancing bhangra with hands raised in a warmly lit room",
+    "text": "The lights dim. The doors open. Your guests",
+    "accent": "gasp.",
+    "focus_x": 46,
+    "focus_y": 50
+  },
+  "gallery": {
+    "photos": [
+      {
+        "image": "/uploads/grooms-behind-cake.jpg",
+        "alt": "The two grooms in flower garlands behind their cake, a huge coral paper poppy beside them",
+        "caption": "flowers we made ourselves, by hand.",
+        "focus_x": 50,
+        "focus_y": 40
+      },
+      {
+        "image": "/uploads/grooms-dancing.jpg",
+        "alt": "The two grooms dancing close, one hand decorated with henna",
+        "caption": "",
+        "focus_x": 50,
+        "focus_y": 35
+      },
+      {
+        "image": "/uploads/cake-with-poppy.jpg",
+        "alt": "A cake topped with a coral flower, held by two people in white shirts",
+        "caption": "",
+        "focus_x": 42,
+        "focus_y": 50
+      },
+      {
+        "image": "/uploads/necklaces-detail.jpg",
+        "alt": "Detail of layered gold and pearl necklaces on a white shirt",
+        "caption": "",
+        "focus_x": 50,
+        "focus_y": 40
+      },
+      {
+        "image": "/uploads/groom-garland.jpg",
+        "alt": "A groom in a pearl necklace adjusting a garland of peach and white flowers",
+        "caption": "",
+        "focus_x": 28,
+        "focus_y": 40
+      }
+    ]
+  },
+  "faq": {
+    "heading": "Good questions.",
+    "intro": "Straight answers, no sales voice.",
+    "items": [
+      {
+        "question": "Where do you work?",
+        "answer": "Alterbloom is based in London and works across London and the wider South East. Planning something further afield? Message us. [Travel policy.]"
+      },
+      {
+        "question": "Do you work with queer couples and non-traditional weddings?",
+        "answer": "Yes, that's who we started this for. Elopements, courthouse parties, mixed-culture weddings, no-tradition weddings. Your way, your day."
+      },
+      {
+        "question": "Can you help if we want to DIY some of it?",
+        "answer": "Yes. We made our own wedding flowers by hand. We can give you ideas and a hand, not a full-service takeover."
+      },
+      {
+        "question": "Do you plan the entertainment too?",
+        "answer": "Yes. Hosts, drag performers, bhangra and Bollywood dancers, first dances with a plot twist. Decor and entertainment, planned as one show."
+      },
+      {
+        "question": "How much does it cost?",
+        "answer": "[An honest range or a way to think about it. Imagination matters more than budget, and we say so up front.]"
+      },
+      {
+        "question": "How far ahead should we book?",
+        "answer": "[Typical lead time, and what happens if your date is close.]"
+      }
+    ]
+  },
+  "journal": {
+    "heading": "From the journal.",
+    "link_label": "All articles"
+  },
+  "enquiry": {
+    "kicker": "Kindly reply",
+    "heading": "RSVP, you two.",
+    "intro": "Tell us the one thing guests must remember, and we'll build the night around it. We reply within [one working day].",
+    "button": "Send it.",
+    "privacy_note": "We only use your details to reply."
+  }
 }

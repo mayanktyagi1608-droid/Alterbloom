@@ -1,6 +1,6 @@
 # Alterbloom: homepage and site build plan
 
-Status: **design decisions approved. Phase 1 (foundations) built on branch `redesign/foundations`; Phases 2 onward not started.** WhatsApp number deliberately left blank for now (the buttons stay hidden until it is set).
+Status: **design decisions approved. Phase 1 (foundations) and Phase 2 (home page) built on branch `redesign/foundations`; Phase 3 (service pages) onward not started.** WhatsApp number deliberately left blank for now (the buttons stay hidden until it is set).
 Reference design: board **F, Mobile first** in the "Alterbloom Homepage Directions" artifact.
 
 Goals, in order: **(1) more enquiries, (2) found by search and AI tools, (3) fast on a phone, (4) still easy for the CMS editor to maintain.**
@@ -101,7 +101,7 @@ Sizes: S = under a day, M = 1 to 2 days, L = 3 or more. Work happens on one bran
 3. New `base.njk`: skip link, sticky header, mobile menu (native `<details>` or a small toggle), thumb bar (**Enquire** and **WhatsApp**, hidden on desktop), per-page `<title>`, meta description, canonical, Open Graph and Twitter tags, and a JSON-LD slot.
 4. Layout primitives in `style.css`: section, full-height band (using `100svh`, not the JS-measured height used in the prototype), paper card, tilt modifier, tag, button styles per the new tokens.
 
-### Phase 2: Home page (L)
+### Phase 2: Home page (L) — built
 Sections, in order, as on board F:
 1. **Invitation** (`<h1>` is real text inside the card: "Wedding decor & entertainment in London. Refusing Ordinary.")
 2. Hero photo with an **Enquire** button
@@ -230,3 +230,14 @@ Originals live in `~/Downloads/Reception Photos` (1,220 untouched files). Web co
 | `cake-with-poppy.jpg` | `IMG_1680.JPG` | Gallery |
 
 Photo rights and consent: confirm everyone recognisable in these photos is happy for them to appear on the public site.
+
+---
+
+## 8. Phase 2 notes (home page)
+
+- All home content lives in `src/_data/home.json`, grouped in the CMS under numbered sections that follow the page top to bottom. Every photo has a description and two focus sliders, so wide photos can be re-aimed for phones.
+- **Placeholders still on the page** (need your real facts): review rating, review count, one client quote and attribution, directory names, travel policy, price guidance, lead time, "how it works" timeframe, reply time. A build warning for leftover `[brackets]` is planned before launch.
+- **Services links are blank** until the service pages exist (Phase 3). Cards render as plain rows until a link is set.
+- **Enquiry form** posts to Netlify Forms under the name `home-enquiry`; it uses Netlify's default confirmation page until a thank-you page is added (Phase 4). Netlify only detects the form after the branch is deployed once.
+- The opening envelope needs a check on a real iPhone and a mid-range Android before launch.
+

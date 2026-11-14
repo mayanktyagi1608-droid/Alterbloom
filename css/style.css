@@ -341,7 +341,7 @@ p { margin: 0 0 var(--space-2); }
 .band-caption {
   position: absolute;
   left: var(--space-2);
-  bottom: var(--space-2);
+  bottom: calc(var(--space-2) + var(--bar-h));   /* clear of the mobile bar */
   max-width: 80%;
   padding: var(--space-1) var(--space-2);
   background: var(--surface);
@@ -440,6 +440,7 @@ textarea { resize: vertical; }
 @media (min-width: 861px) {
   body { padding-bottom: 0; }
   .thumb-bar { display: none; }
+  .band-caption { bottom: var(--space-2); }
 
   .container { padding: 0 var(--space-4); }
   .section { padding: var(--space-7) 0; }

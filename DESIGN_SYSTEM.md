@@ -111,9 +111,12 @@ in `css/tokens.css`) — do not add a Google Fonts link.
   1. Italic is for one emphasised word, not whole lines.
 - **`--font-body` (Work Sans, 400–700)** — body copy, buttons, labels, nav
   on desktop, forms.
-- **`--font-hand` (Caveat, 600)** — margin notes, signatures, and nothing
-  else. Never below `--fs-hand` (1.75rem), never for anything a visitor
-  must read to complete a task, and at most a few per page.
+- **`--font-hand` (Caveat, 600)** — margin notes, signatures, and the
+  answers a visitor types into the RSVP card. Never below `--fs-hand`
+  (1.75rem) as authored, never for instructions, labels or anything a
+  visitor must read to complete a task, and at most a few notes per page.
+  (The envelope hint is authored at 2.25rem inside a canvas that is scaled
+  down on phones; it is decorative and hidden from screen readers.)
 
 Type scale (tokens in `css/tokens.css`): `--fs-display`, `--fs-h1`,
 `--fs-h2`, `--fs-h3`, `--fs-body-lg`, `--fs-body`, `--fs-small`,
@@ -180,6 +183,15 @@ motif stays consistent everywhere it appears:
   surface-panel remap above. `.paper` adds the paper shadow; `.tilt-a` /
   `.tilt-b` add the tilt.
 - **Notes** (`.note`) — the handwriting accent, in `--accent`.
+- **Invitation** (`.invite`, `js/invite.js`) — the opening envelope on the
+  home page. Scroll position drives CSS variables; with no JavaScript or with
+  reduced motion the opened card is shown as plain content. The `<h1>` is
+  always real text in the HTML.
+- **RSVP card** (`.rsvp`) — paper with a dashed hairline inner border;
+  underline-style fields sit directly on the paper (an allowed exception to
+  "inputs sit on `--bg`"), answers typed in the handwriting face.
+- **Plate** (`.plate`) — the place-setting illustration above the menu card,
+  drawn with the motif and token colours only.
 - **Photo bands** (`.band`) — full-bleed, one screen tall (`100svh`),
   photograph covers the band, focal point set per image via `--focus`.
   A `.band-caption` is a tilted paper slip.

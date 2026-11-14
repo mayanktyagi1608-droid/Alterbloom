@@ -1,4 +1,5 @@
 {%- set pageTitle = seo_title or (title + " — Alterbloom") -%}
+{%- set enquireUrl = "#enquire" if page.url == "/" else navigation.enquire_url -%}
 {%- set pageDescription = meta_description or excerpt or site.default_description -%}
 <!DOCTYPE html>
 <html lang="en-GB">
@@ -7,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>{{ pageTitle }}</title>
 <meta name="description" content="{{ pageDescription }}">
+{% if noindex %}<meta name="robots" content="noindex">{% endif %}
 {% if site.url %}<link rel="canonical" href="{{ site.url }}{{ page.url }}">{% endif %}
 <meta name="theme-color" content="#123138">
 
@@ -23,6 +25,8 @@
 <link rel="preload" href="/css/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/tokens.css">
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/sections.css">
+<script>document.documentElement.className+=" js"</script>
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
   if (window.netlifyIdentity) {
@@ -49,7 +53,7 @@
         {%- for item in navigation.main %}
         <li><a href="{{ item.url }}" {% if page.url == item.url or (item.url != "/" and item.url in page.url) %}aria-current="page"{% endif %}>{{ item.label }}</a></li>
         {%- endfor %}
-        <li class="nav-cta"><a href="{{ navigation.enquire_url }}">{{ navigation.enquire_label }}</a></li>
+        <li class="nav-cta"><a href="{{ enquireUrl }}">{{ navigation.enquire_label }}</a></li>
       </ul>
     </nav>
   </div>
@@ -101,12 +105,13 @@
 </footer>
 
 <div class="thumb-bar">
-  <a class="btn btn-primary" href="{{ navigation.enquire_url }}">{{ navigation.enquire_label }}</a>
+  <a class="btn btn-primary" href="{{ enquireUrl }}">{{ navigation.enquire_label }}</a>
   {%- if site.whatsapp_number %}
   <a class="btn" href="https://wa.me/{{ site.whatsapp_number }}?text={{ site.whatsapp_message | urlencode }}">WhatsApp</a>
   {%- endif %}
 </div>
 
 <script src="/js/main.js"></script>
+<script src="/js/invite.js" defer></script>
 </body>
 </html>

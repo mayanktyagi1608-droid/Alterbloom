@@ -15,23 +15,163 @@ collections:
         fields:
           - { label: "SEO — Page title (search results). Leave blank to use the default.", name: "seo_title", widget: "string", required: false, hint: "About 50 to 60 characters. Say what you do and where." }
           - { label: "SEO — Description (search results)", name: "meta_description", widget: "text", required: false, hint: "About 150 characters. A plain sentence that makes someone want to click." }
-          - { label: "Hero — Eyebrow", name: "hero_eyebrow", widget: "string" }
-          - { label: "Hero — Lead paragraph", name: "hero_lead", widget: "text" }
-          - { label: "Hero — Image", name: "hero_image", widget: "image", required: false, hint: "Leave blank to keep the placeholder graphic." }
-          - { label: "Hero — Image alt text", name: "hero_image_alt", widget: "string", required: false }
-          - label: "What We Do — 3 service cards"
-            name: "services"
-            widget: "list"
-            summary: "{{fields.title}}"
+          - label: "1. Invitation (the opening envelope)"
+            name: "invitation"
+            widget: "object"
+            collapsed: true
             fields:
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Description", name: "body", widget: "text" }
-          - { label: "About teaser — Heading", name: "about_heading", widget: "string" }
-          - { label: "About teaser — Body", name: "about_body", widget: "text" }
-          - { label: "About teaser — Image", name: "about_image", widget: "image", required: false }
-          - { label: "About teaser — Image alt text", name: "about_image_alt", widget: "string", required: false }
-          - { label: "Closing banner — Heading", name: "cta_heading", widget: "string" }
-          - { label: "Closing banner — Body", name: "cta_body", widget: "text" }
+              - { label: "Small heading line (say what you do and where)", name: "eyebrow", widget: "string", hint: "This is the page's main heading for search engines. Keep London and the South East in it." }
+              - { label: "Big heading", name: "title", widget: "string" }
+              - { label: "Big heading: emphasised word", name: "title_accent", widget: "string" }
+              - { label: "One-line promise", name: "lead", widget: "text" }
+              - { label: "Handwritten note", name: "note", widget: "string" }
+              - { label: "Button label", name: "open_label", widget: "string" }
+              - { label: "Scroll hint under the envelope", name: "scroll_hint", widget: "string" }
+          - label: "2. Opening photo"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Photo", name: "image", widget: "image", required: false, hint: "Leave blank to show the placeholder." }
+              - { label: "Photo description (what is in the picture; read by screen readers and search)", name: "alt", widget: "string", required: false }
+              - { label: "Caption on the photo (optional)", name: "caption", widget: "string", required: false }
+              - { label: "Focus: across (0 = left edge, 100 = right edge)", name: "focus_x", widget: "number", value_type: "int", min: 0, max: 100, default: 50, required: false, hint: "Phones show a narrow slice of wide photos. Set this to the part that matters." }
+              - { label: "Focus: down (0 = top, 100 = bottom)", name: "focus_y", widget: "number", value_type: "int", min: 0, max: 100, default: 50, required: false }
+          - label: "3. Services (Pull up a chair)"
+            name: "services"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Small heading", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Menu card label", name: "menu_label", widget: "string" }
+              - { label: "Handwritten note", name: "note", widget: "string" }
+              - label: "Services (4)"
+                name: "items"
+                widget: "list"
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "body", widget: "text" }
+                  - { label: "Link label", name: "link_label", widget: "string" }
+                  - { label: "Link to its page", name: "url", widget: "string", required: false, hint: "e.g. /weddings/. Leave blank until the page exists." }
+                  - { label: "Photo", name: "image", widget: "image", required: false }
+                  - { label: "Photo description", name: "alt", widget: "string", required: false }
+          - label: "4. The show (two photos)"
+            name: "show"
+            widget: "object"
+            collapsed: true
+            fields:
+              - label: "Photos (2)"
+                name: "photos"
+                widget: "list"
+                summary: "{{fields.caption}}"
+                fields:
+                  - { label: "Photo", name: "image", widget: "image", required: false, hint: "Leave blank to show the placeholder." }
+                  - { label: "Photo description (what is in the picture; read by screen readers and search)", name: "alt", widget: "string", required: false }
+                  - { label: "Caption on the photo (optional)", name: "caption", widget: "string", required: false }
+                  - { label: "Focus: across (0 = left edge, 100 = right edge)", name: "focus_x", widget: "number", value_type: "int", min: 0, max: 100, default: 50, required: false, hint: "Phones show a narrow slice of wide photos. Set this to the part that matters." }
+                  - { label: "Focus: down (0 = top, 100 = bottom)", name: "focus_y", widget: "number", value_type: "int", min: 0, max: 100, default: 50, required: false }
+          - label: "5. Why couples choose us"
+            name: "proof"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Small heading", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Your story (handwritten note)", name: "story", widget: "text" }
+              - { label: "Signature", name: "signature", widget: "string" }
+              - { label: "Reviews label", name: "review_label", widget: "string" }
+              - { label: "Reviews headline (e.g. 5.0 stars on Google)", name: "review_headline", widget: "string", hint: "Use the real figure. No made-up ratings." }
+              - { label: "Reviews note", name: "review_note", widget: "string", required: false }
+              - { label: "Client quote", name: "quote", widget: "text" }
+              - { label: "Quote attribution", name: "quote_by", widget: "string" }
+              - { label: "Directories label", name: "directories_label", widget: "string", required: false }
+              - label: "Directories you are listed on"
+                name: "directories"
+                widget: "list"
+                field: { label: "Name", name: "name", widget: "string" }
+          - label: "6. Poppies photo"
+            name: "poppies"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Photo", name: "image", widget: "image", required: false, hint: "Leave blank to show the placeholder." }
+              - { label: "Photo description (what is in the picture; read by screen readers and search)", name: "alt", widget: "string", required: false }
+              - { label: "Caption on the photo (optional)", name: "caption", widget: "string", required: false }
+              - { label: "Focus: across (0 = left edge, 100 = right edge)", name: "focus_x", widget: "number", value_type: "int", min: 0, max: 100, default: 50, required: false, hint: "Phones show a narrow slice of wide photos. Set this to the part that matters." }
+              - { label: "Focus: down (0 = top, 100 = bottom)", name: "focus_y", widget: "number", value_type: "int", min: 0, max: 100, default: 50, required: false }
+          - label: "7. How it works"
+            name: "how"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Intro", name: "intro", widget: "string" }
+              - label: "Steps (3)"
+                name: "steps"
+                widget: "list"
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "body", widget: "text" }
+          - label: "8. Big line over a photo"
+            name: "statement"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Photo", name: "image", widget: "image", required: false, hint: "Leave blank to show the placeholder." }
+              - { label: "Photo description (what is in the picture; read by screen readers and search)", name: "alt", widget: "string", required: false }
+              - { label: "Focus: across (0 = left edge, 100 = right edge)", name: "focus_x", widget: "number", value_type: "int", min: 0, max: 100, default: 50, required: false, hint: "Phones show a narrow slice of wide photos. Set this to the part that matters." }
+              - { label: "Focus: down (0 = top, 100 = bottom)", name: "focus_y", widget: "number", value_type: "int", min: 0, max: 100, default: 50, required: false }
+              - { label: "Line", name: "text", widget: "string" }
+              - { label: "Emphasised last word", name: "accent", widget: "string" }
+          - label: "9. Photo gallery (swipe)"
+            name: "gallery"
+            widget: "object"
+            collapsed: true
+            fields:
+              - label: "Photos"
+                name: "photos"
+                widget: "list"
+                summary: "{{fields.caption}}"
+                fields:
+                  - { label: "Photo", name: "image", widget: "image", required: false, hint: "Leave blank to show the placeholder." }
+                  - { label: "Photo description (what is in the picture; read by screen readers and search)", name: "alt", widget: "string", required: false }
+                  - { label: "Caption on the photo (optional)", name: "caption", widget: "string", required: false }
+                  - { label: "Focus: across (0 = left edge, 100 = right edge)", name: "focus_x", widget: "number", value_type: "int", min: 0, max: 100, default: 50, required: false, hint: "Phones show a narrow slice of wide photos. Set this to the part that matters." }
+                  - { label: "Focus: down (0 = top, 100 = bottom)", name: "focus_y", widget: "number", value_type: "int", min: 0, max: 100, default: 50, required: false }
+          - label: "10. FAQ"
+            name: "faq"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Intro", name: "intro", widget: "string" }
+              - label: "Questions"
+                name: "items"
+                widget: "list"
+                summary: "{{fields.question}}"
+                fields:
+                  - { label: "Question", name: "question", widget: "string" }
+                  - { label: "Answer (plain sentences; search and AI tools quote these)", name: "answer", widget: "text" }
+          - label: "11. Journal heading (posts appear automatically)"
+            name: "journal"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Link label", name: "link_label", widget: "string" }
+          - label: "12. Enquiry card"
+            name: "enquiry"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Small heading", name: "kicker", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Intro", name: "intro", widget: "text" }
+              - { label: "Button label", name: "button", widget: "string" }
+              - { label: "Privacy line", name: "privacy_note", widget: "string" }
 
       - name: "about"
         label: "About Page"

@@ -13,6 +13,7 @@
 
   CMS.registerPreviewStyle("/css/tokens.css");
   CMS.registerPreviewStyle("/css/style.css");
+  CMS.registerPreviewStyle("/css/sections.css");
 
   function wordmark() {
     return h("span", { className: "logo wordmark" }, "Alterbloom", h("span", { className: "dot" }, "."));
@@ -68,92 +69,178 @@
     return h("div", { className: className }, h("span", null, label));
   }
 
+  function bandImage(p, getAsset, label) {
+    p = p || {};
+    var focus = (typeof p.focus_x === "number" ? p.focus_x : 50) + "% " + (typeof p.focus_y === "number" ? p.focus_y : 50) + "%";
+    if (p.image) {
+      return h("img", { src: getAsset(p.image), alt: p.alt || "", style: { "--focus": focus } });
+    }
+    return h("div", { className: "band-placeholder" }, h("span", null, label));
+  }
+
+  function photoBand(p, getAsset, label, extraClass, key) {
+    p = p || {};
+    return h(
+      "section",
+      { className: "band " + (extraClass || ""), key: key },
+      bandImage(p, getAsset, label),
+      p.caption ? h("div", { className: "band-caption note" }, p.caption) : null
+    );
+  }
+
   var HomePreview = window.createClass({
     render: function () {
       var d = this.props.entry.getIn(["data"]).toJS();
       var getAsset = this.props.getAsset;
+      var inv = d.invitation || {};
+      var svc = d.services || {};
+      var proof = d.proof || {};
+      var how = d.how || {};
+      var faq = d.faq || {};
+      var enq = d.enquiry || {};
       return siteChrome([
+        // The scroll-open envelope can't run in a preview, so the editor sees the opened card.
         h(
           "section",
-          { className: "hero", key: "hero" },
+          { className: "invite", key: "invite" },
           h(
             "div",
-            { className: "container hero-grid" },
+            { className: "invite-stage" },
             h(
               "div",
-              null,
-              h("span", { className: "eyebrow" }, d.hero_eyebrow),
-              h("h1", { className: "wordmark" }, "Alterbloom", h("span", { className: "dot" }, ".")),
-              h("p", { className: "lead" }, d.hero_lead),
+              { className: "env" },
               h(
                 "div",
-                { className: "btn-row" },
-                h("span", { className: "btn btn-primary" }, "Get a Quote"),
-                h("span", { className: "btn" }, "About Us")
+                { className: "env-card" },
+                h(
+                  "h1",
+                  null,
+                  h("span", { className: "env-eyebrow" }, inv.eyebrow),
+                  h("span", { className: "env-title" }, inv.title + " ", h("em", null, inv.title_accent))
+                ),
+                h("p", { className: "env-lead" }, inv.lead),
+                h("div", { className: "note env-note" }, inv.note),
+                h("div", { className: "env-actions" }, h("span", { className: "btn btn-primary" }, inv.open_label))
               )
-            ),
-            imageOrPlaceholder(d.hero_image, getAsset, "img-placeholder hero", "Hero Image — 1200×900")
+            )
+          )
+        ),
+        photoBand(d.hero, getAsset, "Opening photo", "band-hero", "hero"),
+        h(
+          "section",
+          { className: "section services", key: "services" },
+          h(
+            "div",
+            { className: "container" },
+            h("div", { className: "section-head center" }, h("span", { className: "eyebrow" }, svc.eyebrow), h("h2", null, svc.heading)),
+            h(
+              "div",
+              { className: "paper menu-card" },
+              h("div", { className: "menu-label" }, svc.menu_label),
+              h(
+                "ul",
+                { className: "svc-list" },
+                (svc.items || []).map(function (it, i) {
+                  return h(
+                    "li",
+                    { key: i },
+                    h(
+                      "div",
+                      { className: "svc" },
+                      it.image
+                        ? h("img", { className: "svc-thumb", src: getAsset(it.image), alt: "" })
+                        : h("span", { className: "svc-thumb svc-thumb-empty" }, "Photo soon"),
+                      h(
+                        "span",
+                        { className: "svc-text" },
+                        h("span", { className: "svc-title" }, it.title),
+                        h("span", { className: "svc-body" }, it.body)
+                      )
+                    )
+                  );
+                })
+              ),
+              h("div", { className: "note menu-note" }, svc.note)
+            )
           )
         ),
         h(
           "section",
-          { className: "section", key: "services" },
+          { className: "duo", key: "show" },
+          ((d.show || {}).photos || []).map(function (p, i) {
+            return h("div", { className: "band", key: i }, bandImage(p, getAsset, "Entertainment photo"), p.caption ? h("div", { className: "band-caption note" }, p.caption) : null);
+          })
+        ),
+        h(
+          "section",
+          { className: "section proof", key: "proof" },
           h(
             "div",
             { className: "container" },
+            h("div", { className: "section-head" }, h("span", { className: "eyebrow" }, proof.eyebrow), h("h2", null, proof.heading)),
             h(
               "div",
-              { className: "section-head center" },
-              h("span", { className: "eyebrow" }, "What We Do"),
-              h("h2", null, "Planning & decor, start to finish")
-            ),
+              { className: "proof-grid" },
+              h("div", { className: "letter tilt-a" }, h("p", { className: "letter-text note" }, proof.story), h("p", { className: "letter-sign note" }, proof.signature)),
+              h(
+                "div",
+                { className: "proof-side" },
+                h("div", { className: "paper review-card" }, h("div", { className: "menu-label" }, proof.review_label), h("div", { className: "review-headline" }, proof.review_headline), h("p", { className: "review-note" }, proof.review_note)),
+                h("figure", { className: "paper quote-card" }, h("blockquote", null, "“" + (proof.quote || "") + "”"), h("figcaption", null, proof.quote_by))
+              )
+            )
+          )
+        ),
+        photoBand(d.poppies, getAsset, "Poppies photo", "", "poppies"),
+        h(
+          "section",
+          { className: "section", key: "how" },
+          h(
+            "div",
+            { className: "container" },
+            h("div", { className: "section-head" }, h("h2", null, how.heading), h("p", null, how.intro)),
             h(
-              "div",
-              { className: "grid grid-3" },
-              (d.services || []).map(function (s, i) {
-                return h(
-                  "div",
-                  { className: "card", key: i },
-                  h("span", { className: "num" }, i + 1),
-                  h("h3", null, s.title),
-                  h("p", null, s.body)
-                );
+              "ol",
+              { className: "steps" },
+              (how.steps || []).map(function (s, i) {
+                return h("li", { className: "paper step", key: i }, h("span", { className: "note step-num" }, i + 1), h("h3", null, s.title), h("p", null, s.body));
               })
             )
           )
         ),
         h(
           "section",
-          { className: "section", key: "about" },
+          { className: "band band-statement", key: "statement" },
+          bandImage(d.statement, getAsset, "Statement photo"),
+          h("div", { className: "band-dim" }),
+          h("p", { className: "statement" }, ((d.statement || {}).text || "") + " ", h("em", null, (d.statement || {}).accent))
+        ),
+        h(
+          "section",
+          { className: "section", key: "faq" },
           h(
             "div",
             { className: "container" },
+            h("div", { className: "section-head" }, h("h2", null, faq.heading), h("p", null, faq.intro)),
             h(
               "div",
-              { className: "grid grid-2", style: { alignItems: "center" } },
-              imageOrPlaceholder(d.about_image, getAsset, "img-placeholder tall", "Studio / Team Photo"),
-              h(
-                "div",
-                null,
-                h("span", { className: "eyebrow" }, "About Alterbloom"),
-                h("h2", null, d.about_heading),
-                h("p", null, d.about_body)
-              )
+              { className: "faq" },
+              (faq.items || []).map(function (f, i) {
+                return h("details", { className: "faq-item", key: i, open: true }, h("summary", null, h("span", null, f.question)), h("p", null, f.answer));
+              })
             )
           )
         ),
         h(
           "section",
-          { className: "section", key: "cta" },
+          { className: "section", key: "enquiry" },
           h(
             "div",
             { className: "container" },
             h(
               "div",
-              { className: "cta-banner" },
-              h("h2", null, d.cta_heading),
-              h("p", null, d.cta_body),
-              h("span", { className: "btn btn-primary" }, "Start a Conversation")
+              { className: "paper rsvp" },
+              h("div", { className: "rsvp-inner" }, h("div", { className: "menu-label center" }, enq.kicker), h("h2", null, enq.heading), h("p", { className: "rsvp-intro" }, enq.intro), h("span", { className: "btn btn-primary rsvp-send" }, enq.button))
             )
           )
         ),
