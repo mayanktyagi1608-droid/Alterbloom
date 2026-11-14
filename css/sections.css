@@ -95,7 +95,7 @@
   html.js .invite-skip {
     display: inline-block;
     position: absolute;
-    left: var(--space-3);
+    right: var(--edge);
     top: var(--space-1);
     z-index: 5;
     font-weight: 600;
@@ -209,15 +209,15 @@
 
 .band-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 45%; background: linear-gradient(transparent, var(--bg-deep)); opacity: 0.85; }
 .band-dim { position: absolute; inset: 0; background: var(--bg-deep); opacity: 0.5; }
-.band-foot { position: absolute; left: 0; right: 0; bottom: 0; padding: var(--space-5) var(--space-3) calc(var(--space-3) + var(--bar-h)); }
+.band-foot { position: absolute; left: 0; right: 0; bottom: 0; padding: var(--space-5) var(--gutter) calc(var(--space-3) + var(--bar-h)); }
 .band-foot .note { margin: 0 0 var(--space-2); color: var(--text); }
 .band-caption { box-shadow: var(--shadow-note); font-size: 1.45rem; }
-.band-caption-top { left: auto; right: var(--space-2); top: 84px; bottom: auto; transform: rotate(var(--tilt-b)); }
+.band-caption-top { left: auto; right: var(--gutter); top: 84px; bottom: auto; transform: rotate(var(--tilt-b)); }
 
 .statement {
   position: absolute;
-  left: var(--space-3);
-  right: var(--space-3);
+  left: var(--edge);
+  right: var(--edge);
   bottom: calc(var(--space-4) + var(--bar-h));
   margin: 0;
   font-family: var(--font-display);
@@ -242,7 +242,7 @@
   background: var(--bg-deep);
 }
 .gallery .band { flex: 0 0 86%; scroll-snap-align: center; }
-.gallery-swipe { position: absolute; right: var(--space-2); top: 84px; font-size: 1.6rem; color: var(--text); }
+.gallery-swipe { position: absolute; right: var(--gutter); top: 84px; font-size: 1.6rem; color: var(--text); }
 
 /* ==========================================================================
    3. Services: the plate and the menu card
@@ -378,8 +378,11 @@
 }
 .rsvp-field input { font-family: var(--font-hand); font-weight: 600; font-size: var(--fs-hand); }
 .rsvp-field select,
-.rsvp-field input[type="date"] { font-family: var(--font-body); font-size: 1.05rem; font-weight: 400; }
+.rsvp-field input[type="date"],
+.rsvp-field .date-text,
+.rsvp-field .combo-input { font-family: var(--font-body); font-size: 1.05rem; font-weight: 400; }
 .rsvp-field input[type="date"] { color-scheme: light; text-align: left; }   /* dark calendar icon on paper */
+.rsvp-field .date-native { color-scheme: light; }
 .rsvp-field select:invalid { color: var(--text-muted); }                    /* "Choose a place" looks like a prompt */
 .rsvp-hint { font-size: 0.8rem; color: var(--text-muted); }
 .rsvp-send { margin-top: 6px; min-height: 56px; }
@@ -398,12 +401,12 @@
 
   .gallery { overflow: visible; }
   .gallery .band { flex: 1 1 0; min-height: 80vh; }
-  .band-foot { max-width: 1760px; margin: 0 auto; padding: var(--space-5) var(--space-5) var(--space-4); }
+  .band-foot { max-width: 1760px; margin: 0 auto; padding: var(--space-5) var(--gutter) var(--space-4); }
   .plate { max-width: 760px; }
   .menu-card { max-width: 760px; }
   .rsvp { max-width: 780px; }
   .band-caption { font-size: 1.75rem; }
-  .statement { left: var(--space-7); right: var(--space-7); bottom: var(--space-6); max-width: 14em; }
+  .statement { bottom: var(--space-6); max-width: 14em; }
   .band-caption-top { top: var(--space-4); }
   .gallery-swipe { display: none; }
 
@@ -416,6 +419,3 @@
   .rsvp-inner { padding: var(--space-4); }
 }
 
-@media (min-width: 1200px) {
-  .band-foot { padding-left: var(--space-6); padding-right: var(--space-6); }
-}

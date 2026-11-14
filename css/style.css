@@ -52,7 +52,7 @@ img { max-width: 100%; }
   width: 100%;
   max-width: 1760px;   /* fluid: only very wide monitors get side margins */
   margin: 0 auto;
-  padding: 0 var(--space-3);
+  padding: 0 var(--gutter);
 }
 
 h1, h2, h3, h4 {
@@ -348,7 +348,7 @@ p { margin: 0 0 var(--space-2); }
 }
 .band-caption {
   position: absolute;
-  left: var(--space-2);
+  left: var(--gutter);
   bottom: calc(var(--space-2) + var(--bar-h));   /* clear of the mobile bar */
   max-width: 80%;
   padding: var(--space-1) var(--space-2);
@@ -397,6 +397,74 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   outline-offset: 1px;
 }
 textarea { resize: vertical; }
+
+/* Native date fields (no-JavaScript fallback): keep the chosen date left-aligned like every other field. */
+input[type="date"] { text-align: left; min-width: 0; }
+input[type="date"]::-webkit-date-and-time-value { text-align: left; }
+
+/* Date field: type it or pick it. The calendar button is the real date input, invisible, laid over the icon. */
+.date-field, .combo { position: relative; display: block; }
+.date-field .date-text, .combo .combo-input { width: 100%; padding-right: 48px; }
+.date-pick {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 48px;
+  display: grid;
+  place-items: center;
+  color: var(--text);
+}
+.date-pick svg { pointer-events: none; }
+.date-native {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  min-height: 0;
+  opacity: 0;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+}
+.date-native::-webkit-calendar-picker-indicator { position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; }
+
+/* Place field: type to filter, pick from the list. The list is a paper panel, so it remaps the text colours. */
+.combo-caret { position: absolute; top: 0; right: 0; bottom: 0; width: 48px; display: grid; place-items: center; color: var(--text); pointer-events: none; }
+.combo-list {
+  position: absolute;
+  z-index: 30;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  max-height: min(18rem, 45vh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--surface);
+  color: var(--text-on-surface);
+  --text: var(--text-on-surface);
+  --text-muted: var(--text-on-surface-muted);
+  --border: var(--border-on-surface);
+  --cta-bg: var(--cta-bg-on-surface);
+  --cta-text: var(--cta-text-on-surface);
+  --accent: var(--accent-on-surface);
+  border: var(--border-width) solid var(--text);
+  box-shadow: var(--shadow-note);
+}
+.combo-list[hidden] { display: none; }
+.combo-group {
+  padding: 10px 14px 4px;
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.combo-option { padding: 12px 14px; min-height: var(--tap); display: flex; align-items: center; cursor: pointer; font-size: 1rem; }
+.combo-option[aria-selected="true"], .combo-option:hover { background: var(--text); color: var(--surface); }
+.combo-none { padding: 14px; color: var(--text-muted); font-size: 0.95rem; }
 
 .contact-info-list { list-style: none; padding: 0; margin: 0; }
 .contact-info-list li {
@@ -450,7 +518,6 @@ textarea { resize: vertical; }
   .thumb-bar { display: none; }
   .band-caption { bottom: var(--space-2); }
 
-  .container { padding: 0 var(--space-5); }
   .section { padding: var(--space-7) 0; }
   .hero { padding: var(--space-7) 0; }
   .page-hero { padding: var(--space-6) 0; }
@@ -496,6 +563,3 @@ textarea { resize: vertical; }
   .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
 }
 
-@media (min-width: 1200px) {
-  .container { padding: 0 var(--space-6); }
-}

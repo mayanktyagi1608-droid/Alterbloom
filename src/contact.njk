@@ -49,7 +49,7 @@ eleventyComputed:
           </div>
           <div class="form-field full">
             <label for="place">{{ home.enquiry.place_label }}</label>
-            <select id="place" name="place" required>
+            <select id="place" name="place" required data-places>
               <option value="" disabled selected>{{ home.enquiry.place_prompt }}</option>
               {%- for g in home.enquiry.place_groups %}
               <optgroup label="{{ g.label }}">

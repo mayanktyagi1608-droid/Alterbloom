@@ -245,7 +245,7 @@ eleventyComputed:
           </div>
           <div class="rsvp-field"><label for="fDate">{{ home.enquiry.date_label }}</label><input id="fDate" name="event-date" type="date" data-min-today><span class="rsvp-hint">{{ home.enquiry.date_hint }}</span></div>
           <div class="rsvp-field"><label for="fPlace">{{ home.enquiry.place_label }}</label>
-            <select id="fPlace" name="place" required>
+            <select id="fPlace" name="place" required data-places>
               <option value="" disabled selected>{{ home.enquiry.place_prompt }}</option>
               {%- for g in home.enquiry.place_groups %}
               <optgroup label="{{ g.label }}">

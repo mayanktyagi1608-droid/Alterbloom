@@ -124,6 +124,8 @@
 
   /* ---- Touch ---- */
   --tap:48px;              /* minimum touch-target height */
+  --gutter:var(--space-3);   /* page side margin; widens on bigger screens (see below) */
+  --edge:max(var(--gutter), calc((100% - 1760px) / 2 + var(--gutter)));   /* same margin for full-width positioned pieces */
   --header-h:65px;         /* fixed header height */
   --bar-h:calc(69px + env(safe-area-inset-bottom, 0px));            /* mobile Enquire / WhatsApp bar, plus the home-indicator area */
 
@@ -131,6 +133,9 @@
   --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   --grain-opacity:.14;
 }
+
+@media (min-width: 861px)  { :root { --gutter:var(--space-5); } }
+@media (min-width: 1200px) { :root { --gutter:var(--space-6); } }
 
 /*
  * Any component whose background is var(--surface) MUST locally redefine
