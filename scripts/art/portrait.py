@@ -125,7 +125,8 @@ def groom(kind):
                 (49, -30), (42, -50), (24, -62), (0, -58), (-22, -50), (-38, -54), (-46, -36), (-48, -14)]
         h += '<path d="%s" fill="%s"/>' % (smooth(hair), HAIR)
         h += '<path d="M-36 -62C-24 -86 2 -98 30 -92M-22 -58C-8 -76 14 -84 40 -76M-44 -44C-42 -58 -38 -66 -32 -72" fill="none" stroke="%s" stroke-width="3" stroke-linecap="round"/>' % HAIR_L
-        h += '<path d="M-10 39Q0 43 11 38" fill="none" stroke="%s" stroke-width="4.5" stroke-linecap="round"/>' % lip
+        # an open, happy smile
+        h += '<path d="M-16 35Q0 53 16 35Q0 40 -16 35Z" fill="%s" stroke="%s" stroke-width="2" stroke-linejoin="round"/>' % (LINEN, lip)
         h += '<path d="M-35 -24Q-23 -32 -9 -26M9 -26Q23 -32 35 -24" fill="none" stroke="%s" stroke-width="6.5" stroke-linecap="round"/>' % HAIR
         h += '<ellipse cx="-21" cy="-10" rx="4.6" ry="5" fill="%s"/><ellipse cx="21" cy="-10" rx="4.6" ry="5" fill="%s"/>' % (HAIR, HAIR)
         h += '<circle cx="-19.5" cy="-11.5" r="1.4" fill="%s"/><circle cx="22.5" cy="-11.5" r="1.4" fill="%s"/>' % (HI, HI)
