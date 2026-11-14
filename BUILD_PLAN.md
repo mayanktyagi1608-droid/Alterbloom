@@ -223,6 +223,10 @@ Originals live in `~/Downloads/Reception Photos` (1,220 untouched files). Web co
 | `performer-closeup.jpg` | `IMG_1266.JPG` | Entertainment pair, and the show service card |
 | `groom-garland.jpg` | `IMG_1961.JPG` | Gallery |
 | `performer-pink-skirt.jpg` | `IMG_0908.JPG` | Entertainment pair |
+| `hero-grooms-poppies.jpg` | `IMG_1890.JPG` | Hero photograph |
+| `grooms-behind-cake.jpg` | `IMG_1679.JPG` | Gallery, weddings service card |
+| `poppy-table.jpg` | `IMG_1407.JPG` | Full-bleed band: guests under paper poppies |
+| `grooms-dancing.jpg` | `IMG_1594.JPG` | Gallery |
+| `cake-with-poppy.jpg` | `IMG_1680.JPG` | Gallery |
 
-Still to import (board F photos not yet matched to an original): the hero (grooms and the performer in the red hat), grooms behind the cake, the poppy table, the two grooms dancing, and the cake.
 Photo rights and consent: confirm everyone recognisable in these photos is happy for them to appear on the public site.
