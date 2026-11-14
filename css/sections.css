@@ -323,7 +323,7 @@
 /* ==========================================================================
    10. FAQ
    ========================================================================== */
-.faq { max-width: 760px; display: flex; flex-direction: column; }
+.faq { max-width: none; display: flex; flex-direction: column; }
 .faq-item { border-top: var(--border-width) solid var(--border); padding: 6px 0; }
 .faq-item:last-child { border-bottom: var(--border-width) solid var(--border); }
 .faq-item summary {
@@ -398,7 +398,10 @@
 
   .gallery { overflow: visible; }
   .gallery .band { flex: 1 1 0; min-height: 80vh; }
-  .band-foot { max-width: 1100px; margin: 0 auto; padding: var(--space-5) var(--space-4) var(--space-4); }
+  .band-foot { max-width: 1760px; margin: 0 auto; padding: var(--space-5) var(--space-5) var(--space-4); }
+  .plate { max-width: 760px; }
+  .menu-card { max-width: 760px; }
+  .rsvp { max-width: 780px; }
   .band-caption { font-size: 1.75rem; }
   .statement { left: var(--space-7); right: var(--space-7); bottom: var(--space-6); max-width: 14em; }
   .band-caption-top { top: var(--space-4); }
@@ -411,4 +414,8 @@
   .jcards .jcard { flex: 1 1 0; }
   .rsvp { padding: var(--space-2); }
   .rsvp-inner { padding: var(--space-4); }
+}
+
+@media (min-width: 1200px) {
+  .band-foot { padding-left: var(--space-6); padding-right: var(--space-6); }
 }
