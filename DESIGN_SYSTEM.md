@@ -13,7 +13,9 @@ display face, a handwriting accent, and a paper shadow and tilt.
 > outside of what's listed here — reuse an existing token. If a real design
 > need isn't covered by the current system, that's a conversation to have
 > with the client first, not a value to invent inline. See `CLAUDE.md` for
-> the enforcement rule.
+> the enforcement rule. The "Realism exceptions" collection near the end of
+> this document is a closed, approved one-off for the lifelike objects and
+> the illustration; it is under the same rule, not outside it.
 
 ## Direction
 
@@ -201,7 +203,87 @@ motif stays consistent everywhere it appears:
   display face. From 861px, links sit right in tracked caps with the current
   page underlined in `--accent` and an **Enquire** button last.
 
+## Realism exceptions
+
+A closed collection, approved by the client as a **one-off for one use
+case**: the lifelike objects and the illustration. It is not a second
+palette and it does not loosen anything above. The change-control rule is
+the same here as everywhere else — no invented values. Nothing is added to
+this collection, and nothing outside it is used, without the client's
+explicit go-ahead in conversation.
+
+### Where it applies (and nowhere else)
+
+1. The invitation **envelope and wax seal**.
+2. The **table setting**: cloth, plate, cutlery, napkin, glass.
+3. The **Alterbloom poppy** illustration (cut-paper, crepe-line style),
+   wherever it appears: on its own, on the envelope liner, on the table.
+4. The **About portrait**, drawn in the same illustration style.
+
+Never use a `--real-*` token for UI: text, buttons, links, borders, tags,
+section backgrounds, forms or navigation. Those keep to the core tokens.
+Text that sits on one of these objects (the menu card, the invitation card)
+is still ordinary paper and uses the on-surface tokens.
+
+### Colours
+
+All in `css/tokens.css` under `--real-*`. Prefer a core token where one
+already fits; these exist only for what the core palette cannot draw.
+
+| Family | Tokens | Used for |
+|---|---|---|
+| Petals, coral | `--real-petal-coral-deep` `#C9502F`, `--real-petal-coral` `#E9744F`, `-light` `#F6A583`, `-edge` `#FBC3A6` | The lead poppy; napkin and drink shading |
+| Petals, peach | `--real-petal-peach-deep` `#E8875F`, `--real-petal-peach` `#F6B091`, `-light` `#FBD0B8`, `-edge` `#FDE6D8` | The pale poppy |
+| Petals, red | `--real-petal-red-deep` `#B8331C`, `--real-petal-red` `#DD4B2A`, `-light` `#EE7450`, `-edge` `#F59B7C` | The small red poppy |
+| Petal shadow | `--real-petal-shadow` `#7A2A10` | Folds and overlaps; the dark side of the wax seal |
+| Stem | `--real-stem-shade` `#56704A`, `--real-stem` `#7A9461`, `--real-stem-light` `#9DB583` | Stems and buds |
+| Stamen and pod | `--real-stamen-shade` `#DB8F22`, `--real-stamen` `#F2B33D`, `--real-stamen-light` `#F8CF68`, `--real-pod` `#F3DE94` | Flower centres |
+| Brass | `--real-brass-dark` `#5E4718`, `-shade` `#8C6C2A`, `-deep` `#BF9A49`, `--real-brass` `#D8B766`, `-light` `#E7CB86`, `-shine` `#F8EBC0` | Cutlery, the plate's rim, jewellery, garland marigolds |
+| Cream | `--real-cream` `#F6F2EA`, `--real-cream-shade` `#E4DDD0`, `--real-cream-deep` `#B9B0A0` | Porcelain, paper in shadow, shirts, pearls, tape |
+| Light and shadow | `--real-highlight` `#FFFFFF`, `--real-shadow` `#04100F`, `--real-shadow-warm` `#3A2A18` | Glints; cast shadows on teal; cast shadows on paper |
+| Portrait | `--real-skin-a` `#E6B998`, `-shade` `#D29C7F`, `--real-lip-a` `#B9685B`, `--real-skin-b` `#B98360`, `-shade` `#A06C4B`, `--real-lip-b` `#8E4A3E`, `--real-hair` `#1F1917`, `--real-hair-light` `#4A3F3A` | Skin, lips, hair and beard |
+
+Core tokens do the rest: the wax seal is Bloom (`--swatch-bloom`, lit with
+`--accent`), the cloth and envelope liner are the teals, the paper is Linen.
+
+`--real-highlight` is the one place pure white is allowed, and only as a
+glint or as the light colour inside a lighting filter — never as the fill of
+a whole shape. "No true black" still holds: shadows use `--real-shadow` or
+`--real-shadow-warm`.
+
+### Material treatments
+
+Allowed on these pieces only, in addition to the colours:
+
+- **Gradients** whose stops are all tokens (core or `--real-*`).
+- **SVG lighting and texture filters**: `feDiffuseLighting` /
+  `feSpecularLighting` for wax and metal, `feTurbulence` for paper tooth,
+  linen weave, brushed metal and the hand-cut wobble on illustration edges.
+- **Cast shadows on objects** (a fork on a napkin, a card on a plate) in the
+  two shadow tokens. `--shadow-paper` / `--shadow-note` remain the only
+  shadows for cards and notes, and buttons, inputs and text still get none.
+- **Round and curved shapes** for the objects themselves (plate, seal,
+  glass, spoon). `--radius: 0` still applies to every UI element.
+- One light source, from the top left, across every piece.
+
+### In practice
+
+- Inline SVG in a template references the custom property
+  (`fill="var(--real-brass)"`), so `scripts/check-design-tokens.sh` stays
+  clean.
+- A standalone image file (`.svg`, `.webp`, `.png`) cannot read CSS
+  variables. It uses the same hex values from the table above, and only
+  those.
+- The poppy illustration does not replace the single-stroke motif. The motif
+  is still the small line mark (dividers, watermarks); the poppy is artwork.
+- The portrait tones (`--real-skin-*`, `--real-lip-*`, `--real-hair*`) were
+  set from the first mock. If a later likeness pass needs different values,
+  that is a change to this collection and goes to the client first.
+
 ## Reference
+
+The realism and illustration mocks are boards G to J on the "Realism and
+illustration" page of the same artifact, with the collection shown on board K.
 
 The living visual reference for the direction is board F ("Mobile first") in
 the published "Alterbloom Homepage Directions" artifact. Consult it for what

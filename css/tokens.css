@@ -132,6 +132,67 @@
   /* ---- Grain: a tiny tiled noise, drawn once, multiplied over the page ---- */
   --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   --grain-opacity:.14;
+
+  /* ==== REALISM EXCEPTIONS — a closed collection, approved as a one-off ====
+     For the lifelike objects and the illustration ONLY: the invitation
+     envelope and wax seal, the table setting, the Alterbloom poppy, and the
+     About portrait. Never for UI (text, buttons, borders, section
+     backgrounds, forms, nav). The change-control rule is unchanged: nothing
+     is added to this list, and no value is used that is not on it, without
+     the client's explicit go-ahead. See DESIGN_SYSTEM.md → "Realism
+     exceptions". */
+
+  /* Paper poppy petals: three blooms, four steps each (centre to rim) */
+  --real-petal-coral-deep:#C9502F;
+  --real-petal-coral:#E9744F;
+  --real-petal-coral-light:#F6A583;
+  --real-petal-coral-edge:#FBC3A6;
+  --real-petal-peach-deep:#E8875F;
+  --real-petal-peach:#F6B091;
+  --real-petal-peach-light:#FBD0B8;
+  --real-petal-peach-edge:#FDE6D8;
+  --real-petal-red-deep:#B8331C;
+  --real-petal-red:#DD4B2A;
+  --real-petal-red-light:#EE7450;
+  --real-petal-red-edge:#F59B7C;
+  --real-petal-shadow:#7A2A10;      /* folds and overlaps between petals; the dark side of the wax seal */
+
+  /* Stems, stamens and the seed pod */
+  --real-stem-shade:#56704A;
+  --real-stem:#7A9461;
+  --real-stem-light:#9DB583;
+  --real-stamen-shade:#DB8F22;
+  --real-stamen:#F2B33D;
+  --real-stamen-light:#F8CF68;
+  --real-pod:#F3DE94;
+
+  /* Brushed brass: cutlery, the plate's rim, jewellery, garland marigolds */
+  --real-brass-dark:#5E4718;
+  --real-brass-shade:#8C6C2A;
+  --real-brass-deep:#BF9A49;
+  --real-brass:#D8B766;
+  --real-brass-light:#E7CB86;
+  --real-brass-shine:#F8EBC0;
+
+  /* Cream: porcelain, paper in shadow, shirts, pearls, tape */
+  --real-cream:#F6F2EA;
+  --real-cream-shade:#E4DDD0;
+  --real-cream-deep:#B9B0A0;
+
+  /* Light and shadow on objects */
+  --real-highlight:#FFFFFF;         /* glints and filter light only — never the fill of a whole shape */
+  --real-shadow:#04100F;            /* cast shadows on the teal ground */
+  --real-shadow-warm:#3A2A18;       /* cast shadows on paper and porcelain */
+
+  /* Portrait */
+  --real-skin-a:#E6B998;
+  --real-skin-a-shade:#D29C7F;
+  --real-lip-a:#B9685B;
+  --real-skin-b:#B98360;
+  --real-skin-b-shade:#A06C4B;
+  --real-lip-b:#8E4A3E;
+  --real-hair:#1F1917;
+  --real-hair-light:#4A3F3A;
 }
 
 @media (min-width: 861px)  { :root { --gutter:var(--space-5); } }

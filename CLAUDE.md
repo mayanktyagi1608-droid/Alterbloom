@@ -93,6 +93,12 @@ What this means in practice:
   `DESIGN_SYSTEM.md`. This is the one rule that's easy to silently violate.
 - Reuse the existing botanical-motif SVG path data verbatim (in
   `DESIGN_SYSTEM.md`) rather than drawing a new illustration.
+- The `--real-*` tokens ("Realism exceptions" in `DESIGN_SYSTEM.md`) are a
+  closed one-off collection the user approved for four things only: the
+  envelope and wax seal, the table setting, the poppy illustration, and the
+  About portrait. Never use them for UI, and never add to them or use a
+  value outside them without asking first — the hard rule above applies to
+  this collection exactly as it does to the rest.
 - Before committing a UI change, run `scripts/check-design-tokens.sh` — it
   flags raw hex colors and stray `font-family` declarations outside
   `css/tokens.css`.
