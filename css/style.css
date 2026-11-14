@@ -26,13 +26,15 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   overflow-x: clip;   /* clip doesn't make body a scroll container, which iOS Safari mishandles with its collapsing toolbars */
+  position: relative;
+  padding-top: var(--header-h);   /* room for the fixed header */
   padding-bottom: var(--bar-h); /* room for the mobile bar */
 }
 
 /* Paper grain: one tiny tile, painted once, never interactive. */
 body::before {
   content: "";
-  position: fixed;
+  position: absolute;   /* not fixed: a see-through full-screen fixed layer stops iOS Safari colouring its bars */
   inset: 0;
   z-index: 100;
   pointer-events: none;
@@ -108,9 +110,10 @@ p { margin: 0 0 var(--space-2); }
 /* ---- Header / nav (mobile first: menu button, full-screen-width list) ---- */
 .site-header {
   border-bottom: var(--border-width) solid var(--border);
-  position: sticky;
+  position: fixed;   /* fixed, not sticky: iOS Safari 26 extends a fixed bar's colour behind its status bar */
   top: 0;
-  padding-top: env(safe-area-inset-top, 0px);   /* the page runs under the phone's status bar; the header fills it */
+  left: 0;
+  right: 0;
   background: var(--bg-deep);
   z-index: 20;
 }

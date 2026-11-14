@@ -124,7 +124,7 @@
 
   /* ---- Touch ---- */
   --tap:48px;              /* minimum touch-target height */
-  --header-h:calc(65px + env(safe-area-inset-top, 0px));         /* sticky header height, plus the status-bar area on phones */
+  --header-h:65px;         /* fixed header height */
   --bar-h:calc(69px + env(safe-area-inset-bottom, 0px));            /* mobile Enquire / WhatsApp bar, plus the home-indicator area */
 
   /* ---- Grain: a tiny tiled noise, drawn once, multiplied over the page ---- */
