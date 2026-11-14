@@ -119,8 +119,7 @@
                   h("span", { className: "env-title" }, inv.title + " ", h("em", null, inv.title_accent))
                 ),
                 h("p", { className: "env-lead" }, inv.lead),
-                h("div", { className: "note env-note" }, inv.note),
-                h("div", { className: "env-actions" }, h("span", { className: "btn btn-primary" }, inv.open_label))
+                h("div", { className: "note env-note" }, inv.note)
               )
             )
           )

@@ -192,7 +192,9 @@ motif stays consistent everywhere it appears:
   (see "Realism exceptions"): the pocket, both sides of the flap and the wax
   are pictures in `img/`, cut to shape with `clip-path` so each shows as
   flat paper until its picture loads. The flap's lining is printed with the
-  poppy. The card inside stays ordinary paper with live text.
+  poppy. The letter inside stays ordinary paper with live text. It comes
+  partway out of the envelope and stays there, showing the small heading,
+  the big heading and the handwritten note; it carries no buttons.
 - **RSVP card** (`.rsvp`) — paper with a dashed hairline inner border;
   underline-style fields sit directly on the paper (an allowed exception to
   "inputs sit on `--bg`"), answers typed in the handwriting face.

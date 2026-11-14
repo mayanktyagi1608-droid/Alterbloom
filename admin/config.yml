@@ -23,9 +23,8 @@ collections:
               - { label: "Small heading line (say what you do and where)", name: "eyebrow", widget: "string", hint: "This is the page's main heading for search engines. Keep London and the South East in it." }
               - { label: "Big heading", name: "title", widget: "string" }
               - { label: "Big heading: emphasised word", name: "title_accent", widget: "string" }
-              - { label: "One-line promise", name: "lead", widget: "text" }
+              - { label: "One-line promise", name: "lead", widget: "text", hint: "Shown only when the envelope animation is off (visitors who ask their device for reduced motion). The letter in the envelope shows the headings and the handwritten note." }
               - { label: "Handwritten note", name: "note", widget: "string" }
-              - { label: "Button label", name: "open_label", widget: "string" }
           - label: "2. Opening photo"
             name: "hero"
             widget: "object"

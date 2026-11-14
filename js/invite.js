@@ -24,16 +24,21 @@
     var bar = tb ? tb.offsetHeight : 0;
     var room = vh - bar;                                                  // height actually visible above the mobile bar
     range = w < 600 ? 2.2 : 3;
-    // Fit the 560px-wide envelope to the screen, then size the opened card to ~540px or the screen width.
+    // Fit the 560 x 440 envelope, with its flap open above it, to the screen.
     var ss = Math.min(1, room / 960, (w - 24) / 560);
-    var cs = Math.min(1.3, Math.min(540, w - 36) / (420 * ss));
-    // The opened card grows from its bottom edge. Cap how far it rises so its top stays 24px below the header
-    // (the stage starts just under the header): card top = envTop + ss * (430 - lift - 396 * cs).
-    var envTop = room * 0.42;
-    var lift = Math.min(340, 430 - 396 * cs - (24 - envTop) / ss);
+    // The letter comes partway out: its top ends 177px above the envelope's top edge, as on the
+    // design board. If the wording is long it comes out a little further, just enough for each
+    // line's lower corners to clear the pocket's edge (which runs down at 0.75 to the middle).
+    var lift = 187;
+    var lines = root.querySelectorAll(".env-eyebrow, .env-title, .env-note");
+    for (var i = 0; i < lines.length; i++) {
+      var bottom = lines[i].offsetTop + lines[i].offsetHeight;        // from the letter's top edge
+      var edge = 0.7516 * (280 - lines[i].offsetWidth / 2) - 16;       // how low this line may sit
+      lift = Math.max(lift, 10 + bottom - edge);
+    }
+    lift = Math.min(lift, 215);                                        // the letter's foot stays in the pocket
     root.style.setProperty("--lift", (-lift).toFixed(1));
     root.style.setProperty("--ss", ss.toFixed(3));
-    root.style.setProperty("--cs", cs.toFixed(3));
     root.style.setProperty("--rng", range);
     update();
   }
@@ -55,7 +60,6 @@
     root.classList.toggle("is-opening", p > 0.02);
     root.classList.toggle("is-flap-over", flap > 0.5);                    // past upright: show the lined inside
     root.classList.toggle("is-rising", rise > 0.02);
-    root.classList.toggle("is-open", rise > 0.9);
   }
 
   function queue() {
