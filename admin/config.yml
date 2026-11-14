@@ -186,44 +186,52 @@ collections:
               - { label: "Privacy line", name: "privacy_note", widget: "string" }
 
       - name: "about"
-        label: "About Page"
+        label: "Our Story Page"
         file: "src/_data/about_page.json"
         fields:
           - { label: "SEO — Page title (search results). Leave blank to use the default.", name: "seo_title", widget: "string", required: false, hint: "About 50 to 60 characters. Say what you do and where." }
           - { label: "SEO — Description (search results)", name: "meta_description", widget: "text", required: false, hint: "About 150 characters. A plain sentence that makes someone want to click." }
-          - { label: "Hero — Eyebrow", name: "hero_eyebrow", widget: "string" }
-          - { label: "Hero — Heading", name: "hero_heading", widget: "string" }
-          - { label: "Hero — Body", name: "hero_body", widget: "text" }
-          - { label: "Our Story — Heading", name: "story_heading", widget: "string" }
-          - { label: "Our Story — Paragraph 1", name: "story_body_1", widget: "text" }
-          - { label: "Our Story — Paragraph 2", name: "story_body_2", widget: "text" }
-          - { label: "Our Story — Image", name: "story_image", widget: "image", required: false }
-          - { label: "Our Story — Image alt text", name: "story_image_alt", widget: "string", required: false }
-          - label: "Our Values — 3 cards"
+          - { label: "1. Small heading line", name: "hero_eyebrow", widget: "string" }
+          - { label: "1. Big heading", name: "hero_heading", widget: "string", hint: "This is the page's main heading for search engines." }
+          - { label: "1. Story: paragraph 1", name: "story_body_1", widget: "text" }
+          - { label: "1. Story: paragraph 2", name: "story_body_2", widget: "text" }
+          - { label: "1. Story: paragraph 3 (optional)", name: "story_body_3", widget: "text", required: false }
+          - { label: "1. Handwritten signature", name: "signature", widget: "string" }
+          - { label: "1. Portrait: what the illustration shows (for screen readers)", name: "portrait_alt", widget: "string" }
+          - { label: "1. Portrait: use a photo instead (optional)", name: "story_image", widget: "image", required: false, hint: "Leave empty to show the illustrated portrait of the two of you." }
+          - { label: "1. Portrait photo: what it shows (for screen readers)", name: "story_image_alt", widget: "string", required: false }
+          - label: "2. Full-width photo"
+            name: "band"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Photo", name: "image", widget: "image", required: false }
+              - { label: "What the photo shows (for screen readers)", name: "alt", widget: "string", required: false }
+              - { label: "Handwritten caption (optional)", name: "caption", widget: "string", required: false }
+              - { label: "Focus point across (0 left, 100 right)", name: "focus_x", widget: "number", value_type: "int", min: 0, max: 100, default: 50 }
+              - { label: "Focus point down (0 top, 100 bottom)", name: "focus_y", widget: "number", value_type: "int", min: 0, max: 100, default: 50 }
+          - { label: "3. What we believe: small heading line", name: "values_eyebrow", widget: "string" }
+          - { label: "3. What we believe: heading", name: "values_heading", widget: "string" }
+          - label: "3. What we believe: 3 cards"
             name: "values"
             widget: "list"
             summary: "{{fields.title}}"
             fields:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Description", name: "body", widget: "text" }
-          - label: "Meet the Team — 4 people"
+          - { label: "4. The two of you: small heading line", name: "team_eyebrow", widget: "string" }
+          - { label: "4. The two of you: heading", name: "team_heading", widget: "string" }
+          - label: "4. The two of you"
             name: "team"
             widget: "list"
             summary: "{{fields.name}}"
             fields:
               - { label: "Name", name: "name", widget: "string" }
-              - { label: "Role", name: "role", widget: "string" }
-              - { label: "Photo", name: "photo", widget: "image", required: false }
-              - { label: "Photo alt text", name: "photo_alt", widget: "string", required: false }
-          - label: "Stats row — 4 numbers"
-            name: "stats"
-            widget: "list"
-            summary: "{{fields.number}} — {{fields.label}}"
-            fields:
-              - { label: "Number", name: "number", widget: "string" }
-              - { label: "Label", name: "label", widget: "string" }
-          - { label: "Closing banner — Heading", name: "cta_heading", widget: "string" }
-          - { label: "Closing banner — Body", name: "cta_body", widget: "text" }
+              - { label: "What you look after", name: "role", widget: "text" }
+              - { label: "Photo (optional)", name: "photo", widget: "image", required: false }
+              - { label: "What the photo shows (for screen readers)", name: "photo_alt", widget: "string", required: false }
+          - { label: "5. Closing banner: heading", name: "cta_heading", widget: "string" }
+          - { label: "5. Closing banner: body", name: "cta_body", widget: "text" }
 
       - name: "contact"
         label: "Contact Page"

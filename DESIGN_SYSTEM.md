@@ -207,6 +207,11 @@ motif stays consistent everywhere it appears:
   label, the service titles and the handwritten note, hidden from screen
   readers) and opens to the full card as the page scrolls. Without the
   script, or with reduced motion, it is simply the full card.
+- **Portrait print** (`.portrait`) — on the Our story page: a paper print,
+  taped up at a tilt, holding the illustrated portrait of the two founders
+  (see "Realism exceptions"; `img/portrait-*.webp`, drawn by
+  `scripts/art/portrait.py`). The white border, tape, tilt and shadow are
+  ordinary paper styles. A photo set in the CMS replaces the illustration.
 - **Photo bands** (`.band`) — full-bleed, one screen tall (`100svh`),
   photograph covers the band, focal point set per image via `--focus`.
   A `.band-caption` is a tilted paper slip.

@@ -379,6 +379,19 @@
 .menu-note { margin-top: var(--space-2); text-align: right; transform: rotate(var(--tilt-a)); }
 
 /* ==========================================================================
+   Our story page: the portrait print beside the story
+   ========================================================================== */
+.story-open { padding: var(--space-5) 0 var(--space-6); border-bottom: var(--border-width) solid var(--border); }
+.story-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+.story-head h1 { margin: 0; }
+/* A paper print: the paper is the white border, taped up at a slight tilt. */
+.portrait { position: relative; width: 86%; max-width: 480px; margin: var(--space-1) auto 0; padding: var(--space-2); }
+.portrait img { display: block; width: 100%; height: auto; }
+.story-words { max-width: 34em; font-size: var(--fs-body-lg); }
+.story-sign { margin: var(--space-3) 0 0; }
+.person-photo { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; margin-bottom: var(--space-2); }
+
+/* ==========================================================================
    5. Proof
    ========================================================================== */
 .proof-grid { display: grid; gap: var(--space-4); grid-template-columns: 1fr; }
@@ -501,6 +514,17 @@
   .gallery-swipe { display: none; }
 
   .proof-grid { grid-template-columns: 1fr 1fr; align-items: start; }
+  .story-open { padding: var(--space-6) 0 var(--space-7); }
+  .story-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    grid-template-areas: "pic head" "pic words";
+    grid-template-rows: 1fr 1fr;
+    column-gap: var(--space-6);
+    row-gap: var(--space-3);
+  }
+  .story-head { grid-area: head; align-self: end; }
+  .portrait { grid-area: pic; align-self: center; width: 100%; margin: 0 auto; }
+  .story-words { grid-area: words; align-self: start; }
   .steps { flex-direction: row; }
   .steps .step { flex: 1 1 0; }
   .jcards { flex-direction: row; }

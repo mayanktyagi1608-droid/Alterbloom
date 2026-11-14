@@ -251,41 +251,39 @@
     render: function () {
       var d = this.props.entry.getIn(["data"]).toJS();
       var getAsset = this.props.getAsset;
+      var pic = d.story_image ? getAsset(d.story_image).toString() : "/img/portrait-640.webp";
       return siteChrome([
-        pageHero(d.hero_eyebrow, d.hero_heading, d.hero_body),
         h(
           "section",
-          { className: "section", key: "story" },
+          { className: "story-open", key: "story" },
           h(
             "div",
-            { className: "container" },
+            { className: "container story-grid" },
+            h("div", { className: "story-head" }, h("span", { className: "eyebrow" }, d.hero_eyebrow), h("h1", null, d.hero_heading)),
+            h(
+              "figure",
+              { className: "paper portrait tilt-a" },
+              h("span", { className: "tape" }),
+              h("img", { src: pic, alt: "" })
+            ),
             h(
               "div",
-              { className: "grid grid-2", style: { alignItems: "center" } },
-              h(
-                "div",
-                null,
-                h("span", { className: "eyebrow" }, "Our Story"),
-                h("h2", null, d.story_heading),
-                h("p", null, d.story_body_1),
-                h("p", null, d.story_body_2)
-              ),
-              imageOrPlaceholder(d.story_image, getAsset, "img-placeholder tall", "Founder / Origin Photo")
+              { className: "story-words" },
+              h("p", null, d.story_body_1),
+              h("p", null, d.story_body_2),
+              d.story_body_3 ? h("p", null, d.story_body_3) : null,
+              h("p", { className: "note story-sign" }, d.signature)
             )
           )
         ),
+        photoBand(d.band, getAsset, "Photo from the wedding", "", "band"),
         h(
           "section",
           { className: "section", key: "values" },
           h(
             "div",
             { className: "container" },
-            h(
-              "div",
-              { className: "section-head center" },
-              h("span", { className: "eyebrow" }, "What Drives Us"),
-              h("h2", null, "Our Values")
-            ),
+            h("div", { className: "section-head" }, h("span", { className: "eyebrow" }, d.values_eyebrow), h("h2", null, d.values_heading)),
             h(
               "div",
               { className: "grid grid-3" },
@@ -301,38 +299,18 @@
           h(
             "div",
             { className: "container" },
+            h("div", { className: "section-head" }, h("span", { className: "eyebrow" }, d.team_eyebrow), h("h2", null, d.team_heading)),
             h(
               "div",
-              { className: "section-head center" },
-              h("span", { className: "eyebrow" }, "Meet the Team"),
-              h("h2", null, "The people you'll work with")
-            ),
-            h(
-              "div",
-              { className: "grid grid-4" },
+              { className: "grid grid-2" },
               (d.team || []).map(function (m, i) {
                 return h(
                   "div",
-                  { key: i },
-                  imageOrPlaceholder(m.photo, getAsset, "img-placeholder square", "Photo"),
-                  h("h3", { style: { marginTop: "16px" } }, m.name),
+                  { className: "card person", key: i },
+                  m.photo ? h("img", { className: "person-photo", src: getAsset(m.photo).toString(), alt: "" }) : null,
+                  h("h3", null, m.name),
                   h("p", null, m.role)
                 );
-              })
-            )
-          )
-        ),
-        h(
-          "section",
-          { className: "section", key: "stats" },
-          h(
-            "div",
-            { className: "container" },
-            h(
-              "div",
-              { className: "stats-row" },
-              (d.stats || []).map(function (s, i) {
-                return h("div", { className: "stat", key: i }, h("strong", null, s.number), h("span", null, s.label));
               })
             )
           )
@@ -348,7 +326,7 @@
               { className: "cta-banner" },
               h("h2", null, d.cta_heading),
               h("p", null, d.cta_body),
-              h("span", { className: "btn btn-primary" }, "Contact Alterbloom")
+              h("span", { className: "btn btn-primary" }, "Enquire")
             )
           )
         ),

@@ -1,92 +1,96 @@
 ---
 layout: base.njk
-title: About
+title: Our story
 permalink: /about/
 eleventyComputed:
   seo_title: "{{ about_page.seo_title | safe }}"
   meta_description: "{{ about_page.meta_description | safe }}"
 ---
-<section class="page-hero">
-  <div class="container">
-    <span class="eyebrow">{{ about_page.hero_eyebrow }}</span>
-    <h1>{{ about_page.hero_heading }}</h1>
-    <p>{{ about_page.hero_body }}</p>
-  </div>
-</section>
+{% from "macros.njk" import photo %}
 
-<section class="section">
-  <div class="container">
-    <div class="grid grid-2" style="align-items:center;">
-      <div>
-        <span class="eyebrow">Our Story</span>
-        <h2>{{ about_page.story_heading }}</h2>
-        <p>{{ about_page.story_body_1 }}</p>
-        <p>{{ about_page.story_body_2 }}</p>
-      </div>
-      {% if about_page.story_image %}
-        <img class="img-placeholder tall" src="{{ about_page.story_image }}" alt="{{ about_page.story_image_alt }}" style="object-fit:cover;">
-      {% else %}
-        <div class="img-placeholder tall"><span>Founder / Origin Photo</span></div>
-      {% endif %}
+{# 1. The two of us: the portrait, and the story in our own words #}
+<section class="story-open" aria-labelledby="storyH">
+  <div class="container story-grid">
+    <div class="story-head">
+      <span class="eyebrow">{{ about_page.hero_eyebrow }}</span>
+      <h1 id="storyH">{{ about_page.hero_heading }}</h1>
+    </div>
+
+    <figure class="paper portrait tilt-a">
+      <span class="tape" aria-hidden="true"></span>
+      {%- if about_page.story_image %}
+      <img src="{{ about_page.story_image }}" alt="{{ about_page.story_image_alt }}" decoding="async">
+      {%- else %}
+      {# The illustrated portrait, drawn by scripts/art/portrait.py. A photo set in the CMS replaces it. #}
+      <img src="/img/portrait-640.webp"
+           srcset="/img/portrait-640.webp 640w, /img/portrait-968.webp 968w"
+           sizes="(min-width: 861px) 480px, 86vw"
+           width="484" height="624" fetchpriority="high"
+           alt="{{ about_page.portrait_alt }}">
+      {%- endif %}
+    </figure>
+
+    <div class="story-words">
+      <p>{{ about_page.story_body_1 }}</p>
+      <p>{{ about_page.story_body_2 }}</p>
+      {%- if about_page.story_body_3 %}<p>{{ about_page.story_body_3 }}</p>{% endif %}
+      <p class="note story-sign">{{ about_page.signature }}</p>
     </div>
   </div>
 </section>
 
-<section class="section">
+{# 2. A photograph from the day it started #}
+<section class="band" aria-label="Photograph">
+  {{ photo(about_page.band, false, "Photo from the wedding") }}
+  {%- if about_page.band.caption %}<div class="band-caption note">{{ about_page.band.caption }}</div>{% endif %}
+</section>
+
+{# 3. What we believe #}
+<section class="section" aria-labelledby="valuesH">
   <div class="container">
-    <div class="section-head center">
-      <span class="eyebrow">What Drives Us</span>
-      <h2>Our Values</h2>
+    <div class="section-head">
+      <span class="eyebrow">{{ about_page.values_eyebrow }}</span>
+      <h2 id="valuesH">{{ about_page.values_heading }}</h2>
     </div>
     <div class="grid grid-3">
-      {% for value in about_page.values %}
+      {%- for value in about_page.values %}
       <div class="card">
         <h3>{{ value.title }}</h3>
         <p>{{ value.body }}</p>
       </div>
-      {% endfor %}
+      {%- endfor %}
     </div>
   </div>
 </section>
 
-<section class="section">
+{# 4. Who you'll be talking to #}
+{%- if about_page.team and about_page.team.length %}
+<section class="section" aria-labelledby="teamH">
   <div class="container">
-    <div class="section-head center">
-      <span class="eyebrow">Meet the Team</span>
-      <h2>The people you'll work with</h2>
+    <div class="section-head">
+      <span class="eyebrow">{{ about_page.team_eyebrow }}</span>
+      <h2 id="teamH">{{ about_page.team_heading }}</h2>
     </div>
-    <div class="grid grid-4">
-      {% for member in about_page.team %}
-      <div>
-        {% if member.photo %}
-          <img class="img-placeholder square" src="{{ member.photo }}" alt="{{ member.photo_alt }}" style="object-fit:cover;">
-        {% else %}
-          <div class="img-placeholder square"><span>Photo</span></div>
-        {% endif %}
-        <h3 style="margin-top:16px;">{{ member.name }}</h3>
+    <div class="grid grid-2">
+      {%- for member in about_page.team %}
+      <div class="card person">
+        {%- if member.photo %}<img class="person-photo" src="{{ member.photo }}" alt="{{ member.photo_alt }}" loading="lazy" decoding="async">{% endif %}
+        <h3>{{ member.name }}</h3>
         <p>{{ member.role }}</p>
       </div>
-      {% endfor %}
+      {%- endfor %}
     </div>
   </div>
 </section>
+{%- endif %}
 
-<section class="section">
-  <div class="container">
-    <div class="stats-row">
-      {% for stat in about_page.stats %}
-      <div class="stat"><strong>{{ stat.number }}</strong><span>{{ stat.label }}</span></div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
+{# 5. Over to you #}
 <section class="section">
   <div class="container">
     <div class="cta-banner">
       <h2>{{ about_page.cta_heading }}</h2>
       <p>{{ about_page.cta_body }}</p>
-      <a href="/contact/" class="btn btn-primary">Contact Alterbloom</a>
+      <a href="{{ navigation.enquire_url }}" class="btn btn-primary">{{ navigation.enquire_label }}</a>
     </div>
   </div>
 </section>

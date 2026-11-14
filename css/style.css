@@ -359,20 +359,6 @@ p { margin: 0 0 var(--space-2); }
   --accent: var(--accent-on-surface);
 }
 
-/* ---- Testimonial-style stat row (About) ---- */
-.stats-row {
-  display: flex;
-  justify-content: flex-start;
-  text-align: center;
-  border-top: var(--border-width) solid var(--border);
-  border-bottom: var(--border-width) solid var(--border);
-  padding: var(--space-4) 0;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-}
-.stats-row .stat strong { display: block; font-size: 2rem; font-family: var(--font-display); font-weight: 400; color: var(--text); }
-.stats-row .stat span { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
-
 /* ---- Forms (inputs sit on --bg, not --surface — see DESIGN_SYSTEM.md) ---- */
 .form-grid {
   display: grid;
@@ -557,7 +543,6 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
   .grid-4 { grid-template-columns: repeat(4, 1fr); }
 
   .form-grid { grid-template-columns: 1fr 1fr; }
-  .stats-row { justify-content: space-between; }
   .cta-banner { padding: var(--space-5); }
 
   .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
