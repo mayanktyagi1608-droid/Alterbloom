@@ -20,7 +20,8 @@
   function measure() {
     var w = window.innerWidth;
     vh = stage.offsetHeight || window.innerHeight;                       // scroll distance unit
-    var bar = parseFloat(getComputedStyle(root).getPropertyValue("--invite-bar")) || 0;
+    var tb = document.querySelector(".thumb-bar");                        // the fixed mobile bar (hidden on desktop, so 0)
+    var bar = tb ? tb.offsetHeight : 0;
     var room = vh - bar;                                                  // height actually visible above the mobile bar
     range = w < 600 ? 2.2 : 3;
     // Fit the 560px-wide envelope to the screen, then size the opened card to ~540px or the screen width.
