@@ -26,7 +26,6 @@ collections:
               - { label: "One-line promise", name: "lead", widget: "text" }
               - { label: "Handwritten note", name: "note", widget: "string" }
               - { label: "Button label", name: "open_label", widget: "string" }
-              - { label: "Scroll hint under the envelope", name: "scroll_hint", widget: "string" }
           - label: "2. Opening photo"
             name: "hero"
             widget: "object"

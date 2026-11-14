@@ -26,6 +26,11 @@
     // Fit the 560px-wide envelope to the screen, then size the opened card to ~540px or the screen width.
     var ss = Math.min(1, room / 960, (w - 24) / 560);
     var cs = Math.min(1.3, Math.min(540, w - 36) / (420 * ss));
+    // The opened card grows from its bottom edge. Cap how far it rises so its top stays 24px below the header
+    // (the stage starts just under the header): card top = envTop + ss * (430 - lift - 396 * cs).
+    var envTop = room * 0.42;
+    var lift = Math.min(340, 430 - 396 * cs - (24 - envTop) / ss);
+    root.style.setProperty("--lift", (-lift).toFixed(1));
     root.style.setProperty("--ss", ss.toFixed(3));
     root.style.setProperty("--cs", cs.toFixed(3));
     root.style.setProperty("--rng", range);
