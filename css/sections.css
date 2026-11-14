@@ -245,17 +245,26 @@
 .gallery-swipe { position: absolute; right: var(--gutter); top: 84px; font-size: 1.6rem; color: var(--text); }
 
 /* ==========================================================================
-   3. Services: the plate and the menu card
+   3. Services: the table setting and the menu card
    ========================================================================== */
-.plate { display: block; width: 100%; max-width: 600px; height: auto; margin: 0 auto var(--space-3); }
-.plate-napkin { fill: var(--surface); stroke: var(--border-on-surface); }
-.plate-metal { color: var(--text-muted); }
-.plate-rim { fill: var(--surface); stroke: var(--border-on-surface); }
-.plate-well { fill: var(--bg-alt); stroke: none; opacity: 0.18; }
-.plate-motif { color: var(--accent); }
-.plate-word { font-family: var(--font-logo); font-weight: 600; font-size: 17px; fill: var(--text-on-surface); }
-
-.menu-card { max-width: 520px; margin: 0 auto; padding: var(--space-3) var(--space-3) var(--space-2); }
+/* The table setting is rendered artwork on a transparent ground (the page's teal
+   is the cloth). On a phone it runs edge to edge. The menu card is pulled up so
+   it rests on the plate's lower third; the overlap is a share of the picture's
+   width, so it holds at every size. */
+.setting { --setting-bleed: var(--gutter); max-width: 600px; margin: 0 auto; }
+.setting-scene {
+  display: block;
+  width: calc(100% + 2 * var(--setting-bleed));
+  max-width: none;
+  height: auto;
+  margin: 0 calc(-1 * var(--setting-bleed));
+}
+.menu-card {
+  position: relative;
+  max-width: 520px;
+  margin: calc(-0.25 * (100% + 2 * var(--setting-bleed))) auto 0;
+  padding: var(--space-3) var(--space-3) var(--space-2);
+}
 .menu-card .menu-label { text-align: center; }
 .svc-list { list-style: none; margin: 0; padding: 0; }
 .svc-list li { border-top: var(--border-width) solid var(--border); }
@@ -402,7 +411,7 @@
   .gallery { overflow: visible; }
   .gallery .band { flex: 1 1 0; min-height: 80vh; }
   .band-foot { max-width: 1760px; margin: 0 auto; padding: var(--space-5) var(--gutter) var(--space-4); }
-  .plate { max-width: 760px; }
+  .setting { --setting-bleed: 0px; max-width: 760px; }
   .menu-card { max-width: 760px; }
   .rsvp { max-width: 780px; }
   .band-caption { font-size: 1.75rem; }

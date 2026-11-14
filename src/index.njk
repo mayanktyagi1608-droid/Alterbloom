@@ -59,24 +59,12 @@ eleventyComputed:
       <h2 id="svcH">{{ home.services.heading }}</h2>
     </div>
 
-    <svg class="plate" viewBox="0 0 600 420" aria-hidden="true" focusable="false">
-      <rect class="plate-napkin" x="20" y="96" width="100" height="250" transform="rotate(-4 70 220)"/>
-      <svg x="122" y="90" width="34" height="260" viewBox="0 0 30 260" class="plate-metal" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 8V58Q6 78 15 84Q24 78 24 58V8M15 8V84" stroke-width="3"/><path d="M15 84V250" stroke-width="8"/></svg>
-      <circle class="plate-rim" cx="356" cy="210" r="180"/>
-      <circle class="plate-well" cx="356" cy="210" r="118"/>
-      <svg x="325" y="140" width="62" height="78" viewBox="0 0 120 150" class="plate-motif" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path d="M60 140 C 58 100, 66 80, 60 55"/>
-        <path d="M60 90 C 45 84, 38 92, 34 84"/>
-        <path d="M62 100 C 76 96, 80 106, 88 100"/>
-        <ellipse cx="60" cy="40" rx="10" ry="16" transform="rotate(-18 60 40)"/>
-        <ellipse cx="60" cy="40" rx="10" ry="16" transform="rotate(18 60 40)"/>
-        <ellipse cx="60" cy="34" rx="10" ry="16"/>
-        <ellipse cx="60" cy="42" rx="9" ry="15" transform="rotate(-42 60 42)"/>
-        <ellipse cx="60" cy="42" rx="9" ry="15" transform="rotate(42 60 42)"/>
-      </svg>
-      <text class="plate-word" x="356" y="258" text-anchor="middle">Alterbloom.</text>
-      <svg x="548" y="90" width="34" height="260" viewBox="0 0 30 260" class="plate-metal" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M8 10Q24 40 24 120H8Z" fill="currentColor" stroke-width="2"/><path d="M12 120V250" stroke-width="8"/></svg>
-    </svg>
+    <div class="setting">
+      {# Decorative artwork, drawn by scripts/art/table_setting.py. The menu card below rests on the plate. #}
+      <img class="setting-scene" src="/img/table-setting-800.webp"
+           srcset="/img/table-setting-800.webp 800w, /img/table-setting-1600.webp 1600w"
+           sizes="(min-width: 861px) 760px, 100vw"
+           width="800" height="710" alt="" loading="lazy" decoding="async">
 
     <div class="paper menu-card">
       <div class="menu-label">{{ home.services.menu_label }}</div>
@@ -95,6 +83,7 @@ eleventyComputed:
         {%- endfor %}
       </ul>
       <div class="note menu-note">{{ home.services.note }}</div>
+    </div>
     </div>
   </div>
 </section>

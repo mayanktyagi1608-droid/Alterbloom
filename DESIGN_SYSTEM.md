@@ -192,8 +192,11 @@ motif stays consistent everywhere it appears:
 - **RSVP card** (`.rsvp`) — paper with a dashed hairline inner border;
   underline-style fields sit directly on the paper (an allowed exception to
   "inputs sit on `--bg`"), answers typed in the handwriting face.
-- **Plate** (`.plate`) — the place-setting illustration above the menu card,
-  drawn with the motif and token colours only.
+- **Table setting** (`.setting`) — the place setting above the menu card on
+  the home page: a realistic, top-down picture (see "Realism exceptions")
+  on a transparent ground, so the page's teal is the cloth. It is rendered
+  artwork (`img/table-setting-*.webp`, drawn by `scripts/art/`), decorative,
+  with empty alt text. The menu card is pulled up to rest on the plate.
 - **Photo bands** (`.band`) — full-bleed, one screen tall (`100svh`),
   photograph covers the band, focal point set per image via `--focus`.
   A `.band-caption` is a tilted paper slip.
@@ -274,6 +277,11 @@ Allowed on these pieces only, in addition to the colours:
 - A standalone image file (`.svg`, `.webp`, `.png`) cannot read CSS
   variables. It uses the same hex values from the table above, and only
   those.
+- The artwork is drawn by the scripts in `scripts/art/`, which read every
+  colour from `css/tokens.css` by token name and contain no colour values
+  of their own. `scripts/art/render.sh <piece>` renders a piece into `img/`.
+  The rendered images are committed; the site build does not run the
+  scripts.
 - The poppy illustration does not replace the single-stroke motif. The motif
   is still the small line mark (dividers, watermarks); the poppy is artwork.
 - The portrait tones (`--real-skin-*`, `--real-lip-*`, `--real-hair*`) were

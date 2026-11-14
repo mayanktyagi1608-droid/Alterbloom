@@ -115,6 +115,11 @@ What this means in practice:
 - `src/posts/*.md` — blog posts (Eleventy collection, tag `posts`).
 - `src/_data/` — editable page content (see CMS architecture above) plus
   `site.json` (global contact/social info).
+- `img/` — rendered artwork (the table setting, etc.), passthrough-copied.
+  It is drawn by `scripts/art/*.py`, which take every colour from
+  `css/tokens.css`; re-render with `scripts/art/render.sh <piece>` (needs
+  Chrome and Pillow) and commit the images. Photos do not go here — they go
+  through the CMS into `src/uploads/`.
 - `css/tokens.css`, `css/style.css`, `js/main.js` — still root-level,
   passthrough-copied into the Eleventy build. Same design-token rules as
   above apply regardless of the templating layer.

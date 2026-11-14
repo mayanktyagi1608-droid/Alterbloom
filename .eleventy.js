@@ -3,6 +3,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("js");
   eleventyConfig.addPassthroughCopy("admin");
+  // Rendered artwork (see scripts/art/). Photos still go through the CMS into src/uploads.
+  eleventyConfig.addPassthroughCopy("img");
 
   // Images uploaded through the CMS land in src/uploads and are served from /uploads.
   eleventyConfig.addPassthroughCopy({ "src/uploads": "uploads" });
