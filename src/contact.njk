@@ -36,7 +36,7 @@ eleventyComputed:
           </div>
           <div class="form-field">
             <label for="event-date">Event Date</label>
-            <input type="date" id="event-date" name="event-date">
+            <input type="date" id="event-date" name="event-date" data-min-today>
           </div>
           <div class="form-field full">
             <label for="event-type">Event Type</label>
@@ -45,6 +45,19 @@ eleventyComputed:
               <option>Corporate Event</option>
               <option>Birthday / Private Celebration</option>
               <option>Other</option>
+            </select>
+          </div>
+          <div class="form-field full">
+            <label for="place">{{ home.enquiry.place_label }}</label>
+            <select id="place" name="place" required>
+              <option value="" disabled selected>{{ home.enquiry.place_prompt }}</option>
+              {%- for g in home.enquiry.place_groups %}
+              <optgroup label="{{ g.label }}">
+                {%- for place in g.places %}
+                <option>{{ place }}</option>
+                {%- endfor %}
+              </optgroup>
+              {%- endfor %}
             </select>
           </div>
           <div class="form-field full">
