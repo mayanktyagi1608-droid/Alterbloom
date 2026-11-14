@@ -169,6 +169,20 @@ collections:
               - { label: "Small heading", name: "kicker", widget: "string" }
               - { label: "Heading", name: "heading", widget: "string" }
               - { label: "Intro", name: "intro", widget: "text" }
+              - { label: "Date label", name: "date_label", widget: "string" }
+              - { label: "Date helper text", name: "date_hint", widget: "string", required: false }
+              - { label: "Place label", name: "place_label", widget: "string" }
+              - { label: "Place prompt (first option in the dropdown)", name: "place_prompt", widget: "string" }
+              - label: "Places in the dropdown (grouped)"
+                name: "place_groups"
+                widget: "list"
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: "Group name (e.g. London)", name: "label", widget: "string" }
+                  - label: "Places"
+                    name: "places"
+                    widget: "list"
+                    field: { label: "Place", name: "place", widget: "string" }
               - { label: "Button label", name: "button", widget: "string" }
               - { label: "Privacy line", name: "privacy_note", widget: "string" }
 
