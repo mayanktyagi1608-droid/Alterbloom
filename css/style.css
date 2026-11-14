@@ -25,6 +25,7 @@ body {
   background: var(--bg);
   line-height: 1.6;
   overflow-x: hidden;
+  overflow-x: clip;   /* clip doesn't make body a scroll container, which iOS Safari mishandles with its collapsing toolbars */
   padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom, 0px)); /* room for the mobile bar */
 }
 
