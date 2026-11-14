@@ -53,6 +53,7 @@
     s.setProperty("--hint-o", (1 - clamp(p / 0.08)).toFixed(2));
     s.setProperty("--skip-o", (1 - clamp((p - 0.5) / 0.3)).toFixed(2));
     root.classList.toggle("is-opening", p > 0.02);
+    root.classList.toggle("is-flap-over", flap > 0.5);                    // past upright: show the lined inside
     root.classList.toggle("is-rising", rise > 0.02);
     root.classList.toggle("is-open", rise > 0.9);
   }

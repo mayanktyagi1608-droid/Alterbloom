@@ -188,7 +188,11 @@ motif stays consistent everywhere it appears:
 - **Invitation** (`.invite`, `js/invite.js`) — the opening envelope on the
   home page. Scroll position drives CSS variables; with no JavaScript or with
   reduced motion the opened card is shown as plain content. The `<h1>` is
-  always real text in the HTML.
+  always real text in the HTML. The envelope and seal are realistic artwork
+  (see "Realism exceptions"): the pocket, both sides of the flap and the wax
+  are pictures in `img/`, cut to shape with `clip-path` so each shows as
+  flat paper until its picture loads. The flap's lining is printed with the
+  poppy. The card inside stays ordinary paper with live text.
 - **RSVP card** (`.rsvp`) — paper with a dashed hairline inner border;
   underline-style fields sit directly on the paper (an allowed exception to
   "inputs sit on `--bg`"), answers typed in the handwriting face.

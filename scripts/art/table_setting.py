@@ -8,6 +8,7 @@ own teal ground is the tablecloth.
 Run through scripts/art/render.sh table_setting. Colours come from
 css/tokens.css via T(); see "Realism exceptions" in DESIGN_SYSTEM.md.
 """
+import os
 import sys
 from illo import T, f, poppy, stem, paint_filter, page
 
@@ -213,6 +214,6 @@ b += '<path d="M%d %dA48 48 0 0 1 %d %d" fill="none" stroke="%s" stroke-width="5
 for (bx, by, br) in [(12, 9, 2.0), (20, -5, 1.5), (-5, 21, 1.6), (27, 20, 1.3), (4, -12, 1.2)]:
     b += '<circle cx="%d" cy="%d" r="%s" fill="%s" fill-opacity=".55"/>' % (gx + bx, gy + by, f(br), HI)
 
-out = sys.argv[1] if len(sys.argv) > 1 else "table_setting.html"
-open(out, "w").write(page("%d %d %d %d" % (X0, Y0, W, H), W, H, b, defs))
-print(W, H, "table-setting")
+out_dir = sys.argv[1] if len(sys.argv) > 1 else "."
+open(os.path.join(out_dir, "table-setting.html"), "w").write(page("%d %d %d %d" % (X0, Y0, W, H), W, H, b, defs))
+print("table-setting.html", W, H, "table-setting", "1600,800", "rgba", 84)

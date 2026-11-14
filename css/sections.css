@@ -42,7 +42,7 @@
 .invite-stage { position: relative; padding: var(--space-5) var(--space-2); }
 .env { width: 100%; max-width: 440px; margin: 0 auto; }
 .env-inner { position: relative; }
-.env-back, .env-front, .env-flap, .env-seal, .env-hint, .invite-skip { display: none; }
+.env-back, .env-front, .env-flap, .env-shade, .env-seal, .env-hint, .invite-skip { display: none; }
 
 .env-card {
   padding: var(--space-4) var(--space-3);
@@ -121,22 +121,58 @@
   }
   html.js .env-inner { height: 440px; perspective: 1600px; }
 
+  /* The envelope is paper artwork (img/envelope-*.webp, drawn by scripts/art/envelope.py).
+     Each piece is cut to shape here with clip-path, so it shows as flat paper until its
+     picture arrives. The points match POCKET and FLAP in that script. */
   html.js .env-back,
   html.js .env-front,
-  html.js .env-flap { display: block; position: absolute; left: 0; width: 100%; background: var(--surface); }
+  html.js .env-flap { display: block; position: absolute; left: 0; top: 0; width: 100%; }
 
-  html.js .env-back { top: 0; height: 100%; z-index: 1; filter: brightness(0.86); box-shadow: var(--shadow-paper); }
-  html.js .env-front { top: 0; height: 100%; z-index: 3; filter: brightness(0.97); clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%); }
-  html.js .env-flap {
-    top: 0;
-    height: 54%;
+  html.js .env-back { height: 100%; z-index: 1; background: linear-gradient(var(--swatch-teal-deep), var(--swatch-teal)); box-shadow: var(--shadow-paper); }
+  html.js .env-front {
+    height: 100%;
     z-index: 4;
-    filter: brightness(0.9);
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background: var(--surface) url("../img/envelope-front-840.webp") 0 0 / 100% 100% no-repeat;
+    clip-path: polygon(0 0, 46% 44%, 48% 45.9%, 50% 46.5%, 52% 45.9%, 54% 44%, 100% 0, 100% 100%, 0 100%);
+  }
+  html.js .env-flap {
+    height: 54%;
+    z-index: 6;
     transform-origin: 50% 0;
     transform: rotateX(calc(var(--flap, 0) * 1deg));
   }
+  html.js .env-flap-out,
+  html.js .env-flap-in { position: absolute; inset: 0; background: var(--surface) 0 0 / 100% 100% no-repeat; }
+  html.js .env-flap-out {
+    background-image: url("../img/envelope-flap-out-840.webp");
+    clip-path: polygon(0 0, 100% 0, 53.5% 87.8%, 51.75% 96.95%, 50% 100%, 48.25% 96.95%, 46.5% 87.8%);
+  }
+  /* The lined inside is drawn point-up, as it is seen once the flap is open, so it is turned over here. */
+  html.js .env-flap-in {
+    visibility: hidden;
+    transform: scaleY(-1);
+    background-image: url("../img/envelope-flap-in-840.webp");
+    clip-path: polygon(0 100%, 100% 100%, 53.5% 12.2%, 51.75% 3.05%, 50% 0, 48.25% 3.05%, 46.5% 12.2%);
+  }
+  html.js .invite.is-flap-over .env-flap-out { visibility: hidden; }
+  html.js .invite.is-flap-over .env-flap-in { visibility: visible; }
   html.js .invite.is-rising .env-flap { z-index: 1; }
+
+  /* Cast shadows: the pocket's edge on the card, and the closed flap on the pocket. */
+  html.js .env-shade {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    fill: var(--real-shadow-warm);
+    filter: blur(6px);
+  }
+  html.js .env-shade-pocket { z-index: 3; opacity: 0.45; transform: translateY(-6px); }
+  html.js .env-shade-flap { z-index: 5; opacity: calc(0.4 - var(--flap, 0) * 0.01); transform: translateY(5px); }
 
   html.js .env-card {
     position: absolute;
@@ -162,7 +198,7 @@
     height: 96px;
     border: 0;
     border-radius: 50%;           /* the one round thing on the site: a wax seal */
-    z-index: 6;
+    z-index: 7;
     cursor: pointer;
     background: var(--cta-bg);
     color: var(--cta-text);
@@ -173,6 +209,13 @@
     opacity: var(--seal-o, 1);
     transform: translate(-50%, -50%) scale(var(--seal-s, 1)) rotate(calc(var(--seal-r, 0) * 1deg));
     animation: alter-beat 1.8s ease-in-out infinite;
+  }
+  /* The wax itself: a picture laid over the round button, wider than it because wax spreads unevenly. */
+  html.js .env-seal::after {
+    content: "";
+    position: absolute;
+    inset: -26px;
+    background: url("../img/wax-seal-408.webp") center / 100% 100% no-repeat;
   }
   html.js .invite.is-opening .env-seal { animation: none; pointer-events: none; }
 
