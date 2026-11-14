@@ -209,3 +209,20 @@ Phases 2, 3 and 4 can run in parallel once Phase 1 is done. The slowest dependen
 1. The section 0.4 facts (even partial)
 2. Go-ahead to add the image dependency in Phase 6
 3. Go-ahead to start Phase 1 on a branch (design docs and tokens first)
+
+---
+
+## 7. Photo sources and how to replace them
+
+Originals live in `~/Downloads/Reception Photos` (1,220 untouched files). Web copies go in `src/uploads/` (long edge 2000px, or 1600px for portraits, JPEG quality 80, GPS and camera data stripped). The home page reads photos from CMS image fields, so any photo can be swapped later in `/admin/` without touching code. The files below are just the starting set.
+
+| Web file | Original | Used for (board F) |
+|---|---|---|
+| `bhangra-crowd.jpg` | `IMG_1836.JPG` | Full-bleed band: "The lights dim..." |
+| `necklaces-detail.jpg` | `IMG_0922.JPG` | Gallery |
+| `performer-closeup.jpg` | `IMG_1266.JPG` | Entertainment pair, and the show service card |
+| `groom-garland.jpg` | `IMG_1961.JPG` | Gallery |
+| `performer-pink-skirt.jpg` | `IMG_0908.JPG` | Entertainment pair |
+
+Still to import (board F photos not yet matched to an original): the hero (grooms and the performer in the red hat), grooms behind the cake, the poppy table, the two grooms dancing, and the cake.
+Photo rights and consent: confirm everyone recognisable in these photos is happy for them to appear on the public site.
