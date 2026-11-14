@@ -110,6 +110,18 @@ p { margin: 0 0 var(--space-2); }
   z-index: 20;
 }
 
+/* Browsers with translucent toolbars (iOS Safari) can show page content in a strip above the sticky
+   header. Paint the header colour upward so nothing ever shows through. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 100vh;
+  background: var(--bg-deep);
+}
+
 .nav-row {
   display: flex;
   align-items: center;
@@ -205,6 +217,17 @@ p { margin: 0 0 var(--space-2); }
 }
 .thumb-bar .btn { flex: 1 1 0; padding: 0 var(--space-1); }
 .thumb-bar .btn:first-child { flex-grow: 1.3; }
+
+/* Same idea below the bar: paint its colour down into the gap above the browser's bottom toolbar. */
+.thumb-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 100vh;
+  background: var(--bg-deep);
+}
 
 /* ---- Image placeholder (stand-in until real photography) ---- */
 .img-placeholder {
