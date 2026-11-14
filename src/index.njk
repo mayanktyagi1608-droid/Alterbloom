@@ -68,23 +68,38 @@ eleventyComputed:
            sizes="(min-width: 861px) 760px, 100vw"
            width="800" height="710" alt="" loading="lazy" decoding="async">
 
-    <div class="paper menu-card">
-      <div class="menu-label">{{ home.services.menu_label }}</div>
-      <ul class="svc-list">
-        {%- for item in home.services.items %}
-        <li>
-          {%- if item.url %}<a class="svc" href="{{ item.url }}">{% else %}<div class="svc">{% endif %}
-            {{ thumb(item) }}
-            <span class="svc-text">
-              <span class="svc-title">{{ item.title }}</span>
-              <span class="svc-body">{{ item.body }}</span>
-              {%- if item.url %}<span class="svc-more">{{ item.link_label }}</span>{% endif %}
-            </span>
-          {%- if item.url %}</a>{% else %}</div>{% endif %}
-        </li>
-        {%- endfor %}
-      </ul>
-      <div class="note menu-note">{{ home.services.note }}</div>
+    {# The menu card. With js/menu.js it starts small on the plate, showing only the cover
+       below, and opens to full size as the page scrolls. Without it, it is simply the card. #}
+    <div class="menu-card" data-menu>
+      <div class="paper menu-sheet">
+        <div class="menu-cover" aria-hidden="true">
+          <div class="menu-cover-in">
+            <div class="menu-label">{{ home.services.menu_label }}</div>
+            {%- for item in home.services.items %}{% if loop.index <= 5 %}
+            <div class="menu-cover-title">{{ item.title }}</div>
+            {%- endif %}{% endfor %}
+            <div class="note menu-cover-note">{{ home.services.note }}</div>
+          </div>
+        </div>
+        <div class="menu-body">
+          <div class="menu-label">{{ home.services.menu_label }}</div>
+          <ul class="svc-list">
+            {%- for item in home.services.items %}
+            <li>
+              {%- if item.url %}<a class="svc" href="{{ item.url }}">{% else %}<div class="svc">{% endif %}
+                {{ thumb(item) }}
+                <span class="svc-text">
+                  <span class="svc-title">{{ item.title }}</span>
+                  <span class="svc-body">{{ item.body }}</span>
+                  {%- if item.url %}<span class="svc-more">{{ item.link_label }}</span>{% endif %}
+                </span>
+              {%- if item.url %}</a>{% else %}</div>{% endif %}
+            </li>
+            {%- endfor %}
+          </ul>
+          <div class="note menu-note">{{ home.services.note }}</div>
+        </div>
+      </div>
     </div>
     </div>
   </div>

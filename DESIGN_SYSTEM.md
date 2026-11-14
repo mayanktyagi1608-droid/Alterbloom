@@ -201,6 +201,10 @@ motif stays consistent everywhere it appears:
   on a transparent ground, so the page's teal is the cloth. It is rendered
   artwork (`img/table-setting-*.webp`, drawn by `scripts/art/`), decorative,
   with empty alt text. The menu card is pulled up to rest on the plate.
+  With `js/menu.js` the card starts as a small cover on the plate (the
+  label, the service titles and the handwritten note, hidden from screen
+  readers) and opens to the full card as the page scrolls. Without the
+  script, or with reduced motion, it is simply the full card.
 - **Photo bands** (`.band`) — full-bleed, one screen tall (`100svh`),
   photograph covers the band, focal point set per image via `--focus`.
   A `.band-caption` is a tilted paper slip.

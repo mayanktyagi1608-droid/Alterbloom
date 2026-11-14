@@ -306,8 +306,56 @@
   position: relative;
   max-width: 520px;
   margin: calc(-0.25 * (100% + 2 * var(--setting-bleed))) auto 0;
-  padding: var(--space-3) var(--space-3) var(--space-2);
 }
+.menu-sheet { padding: var(--space-3) var(--space-3) var(--space-2); }
+.menu-cover { display: none; }
+
+/* Live (js/menu.js, motion allowed): the card starts as a small cover on the plate and
+   opens to full size as the page scrolls. The script sets the --menu-* variables; the
+   card keeps its full height in the layout throughout, so nothing below it moves. */
+.menu-card.is-live {
+  height: var(--menu-h);
+  transform-origin: 50% 0;
+  transform: translateY(calc(var(--menu-y, 0) * 1px)) rotate(calc(var(--menu-r, 0) * 1deg)) scale(var(--menu-k, 1));
+}
+.menu-card.is-live .menu-sheet { position: relative; height: calc(var(--menu-sheet-h) * 1px); overflow: hidden; }
+.menu-card.is-live .menu-body { opacity: var(--menu-body-o, 1); }
+.menu-card.is-live:not(.is-opened) .menu-body { pointer-events: none; }
+/* The cover is laid out on a fixed 252 x 350 canvas and scaled to the sheet's width. */
+.menu-card.is-live .menu-cover {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 252px;
+  height: 350px;
+  padding: 10px;
+  background: var(--surface);
+  transform-origin: 0 0;
+  transform: scale(var(--menu-cover-s, 1));
+  opacity: var(--menu-cover-o, 0);
+  pointer-events: none;
+}
+.menu-cover-in {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+  border: var(--border-width) solid var(--border);
+}
+.menu-cover .menu-label { margin-bottom: var(--space-2); }
+.menu-cover-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.22;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+.menu-cover-note { margin-top: var(--space-2); }
 .menu-card .menu-label { text-align: center; }
 .svc-list { list-style: none; margin: 0; padding: 0; }
 .svc-list li { border-top: var(--border-width) solid var(--border); }
