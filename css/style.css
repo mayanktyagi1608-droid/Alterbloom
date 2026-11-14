@@ -9,6 +9,9 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
+  /* The canvas shows wherever the page doesn't reach: under iOS Safari's collapsing toolbars and in overscroll.
+     Match the header, bar and footer so those strips look like part of them, not a gap. */
+  background: var(--bg-deep);
   -webkit-text-size-adjust: 100%;
   scroll-padding-top: 80px;      /* anchors land below the sticky header */
 }
