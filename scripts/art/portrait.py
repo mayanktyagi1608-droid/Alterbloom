@@ -66,7 +66,8 @@ def scaled(pts, sx, sy):
 FACE = [(0, -66), (30, -60), (48, -36), (51, -5), (47, 28), (34, 54), (14, 67), (0, 69), (-14, 67), (-34, 54), (-47, 28), (-51, -5), (-48, -36), (-30, -60)]
 
 
-def groom(kind):
+def groom(kind, garlands=True):
+    """One of the two of us: "L" is Christophe, "R" is Mayank. garlands=False for a picture away from the wedding."""
     left = kind == "L"
     if left:
         skin, shade, lip = T("real-skin-a"), T("real-skin-a-shade"), T("real-lip-a")
@@ -106,7 +107,8 @@ def groom(kind):
         g += '<path d="M-25 108Q0 200 25 108" fill="none" stroke="%s" stroke-width="2.4"/>' % BRASS_D
         g += '<path d="M0 148C12 150 16 162 12 172C8 182 4 186 0 192C-4 186 -8 182 -12 172C-16 162 -12 150 0 148Z" fill="%s" stroke="%s" stroke-width="1.4"/>' % (BRASS, BRASS_D)
         g += '<circle cx="0" cy="166" r="4.2" fill="%s"/><circle cx="0" cy="196" r="3" fill="%s"/>' % (T("real-petal-coral-deep"), BRASS_L)
-    g += garland(-1) + garland(1)
+    if garlands:
+        g += garland(-1) + garland(1)
 
     # ---------- head, tilted a little towards the other
     h = '<g transform="rotate(%d 0 62)">' % (5 if left else -7)
@@ -154,22 +156,28 @@ def groom(kind):
 
 
 # ------------------------------------------------------------------ the picture
-art = '<rect width="%d" height="%d" fill="%s"/>' % (W, H, LINEN)
-art += '<path d="M12 %d V222 A230 230 0 0 1 472 222 V%d Z" fill="%s" fill-opacity=".55"/>' % (H, H, T("swatch-sky"))
-da, pa = poppy(R=165, seed=41, palette="coral", petals=6, rot=0.4)
-db, pb = poppy(R=185, seed=52, palette="peach", petals=6, rot=1.2)
-dc, pc = poppy(R=84, seed=63, palette="red", petals=5, rot=0.2)
-defs += da + db + dc
-art += stem([(122, 192), (92, 352), (122, 512), (82, 672)], w=17)
-art += stem([(372, 162), (422, 332), (392, 512), (442, 672)], w=19)
-art += stem([(247, 68), (234, 172), (252, 302)], w=11)
-art += '<g transform="translate(94 140)">%s</g>' % pa
-art += '<g transform="translate(390 114)">%s</g>' % pb
-art += '<g transform="translate(244 46)">%s</g>' % pc
-art += '<g filter="url(#figsh)"><g transform="translate(144 322) scale(1.02)">%s</g></g>' % groom("L")
-art += '<g filter="url(#figsh)"><g transform="translate(324 310) scale(1.02)">%s</g></g>' % groom("R")
+def main():
+    global defs
+    art = '<rect width="%d" height="%d" fill="%s"/>' % (W, H, LINEN)
+    art += '<path d="M12 %d V222 A230 230 0 0 1 472 222 V%d Z" fill="%s" fill-opacity=".55"/>' % (H, H, T("swatch-sky"))
+    da, pa = poppy(R=165, seed=41, palette="coral", petals=6, rot=0.4)
+    db, pb = poppy(R=185, seed=52, palette="peach", petals=6, rot=1.2)
+    dc, pc = poppy(R=84, seed=63, palette="red", petals=5, rot=0.2)
+    defs += da + db + dc
+    art += stem([(122, 192), (92, 352), (122, 512), (82, 672)], w=17)
+    art += stem([(372, 162), (422, 332), (392, 512), (442, 672)], w=19)
+    art += stem([(247, 68), (234, 172), (252, 302)], w=11)
+    art += '<g transform="translate(94 140)">%s</g>' % pa
+    art += '<g transform="translate(390 114)">%s</g>' % pb
+    art += '<g transform="translate(244 46)">%s</g>' % pc
+    art += '<g filter="url(#figsh)"><g transform="translate(144 322) scale(1.02)">%s</g></g>' % groom("L")
+    art += '<g filter="url(#figsh)"><g transform="translate(324 310) scale(1.02)">%s</g></g>' % groom("R")
 
-body = '<g filter="url(#paint)">%s</g>' % art
-out_dir = sys.argv[1] if len(sys.argv) > 1 else "."
-open(os.path.join(out_dir, "portrait.html"), "w").write(page("0 0 %d %d" % (W, H), W, H, body, defs, bg=LINEN))
-print("portrait.html", W, H, "portrait", "968,640", "rgb", 82)
+    body = '<g filter="url(#paint)">%s</g>' % art
+    out_dir = sys.argv[1] if len(sys.argv) > 1 else "."
+    open(os.path.join(out_dir, "portrait.html"), "w").write(page("0 0 %d %d" % (W, H), W, H, body, defs, bg=LINEN))
+    print("portrait.html", W, H, "portrait", "968,640", "rgb", 82)
+
+
+if __name__ == "__main__":
+    main()

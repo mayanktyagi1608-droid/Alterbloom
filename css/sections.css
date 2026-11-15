@@ -498,11 +498,72 @@
    All paper: the same surface, shadow, tilt and tape as the home page.
    ========================================================================== */
 
-/* Journal list: the home page's journal card, with the cover, excerpt and date added. */
-.jgrid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+/* Journal cards: the home page's journal card, with the cover, excerpt and date added. */
 .jcard-cover { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; margin-bottom: var(--space-2); }
 .jcard-excerpt { display: block; margin-top: var(--space-1); color: var(--text-muted); }
 .jcard-date { display: block; margin-top: var(--space-2); font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+
+/* Christophe's desk (the Journal page). The drawing sits on the left and, on wide screens,
+   stays pinned while the posts scroll. The typed page is a second picture laid over the
+   drawing from the roller down; js/desk.js sets how much of it shows (--pour) and how far
+   the typing has travelled (--run). Without the script it is simply shown poured out.
+   The left, top and width figures place the page on the drawing: scripts/art/writer.py. */
+.desk-section { padding-top: var(--space-5); }
+.desk { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+.desk-art { position: relative; overflow: hidden; padding-bottom: var(--space-6); }
+.desk-scene { position: relative; width: 62%; max-width: 300px; margin: 0 auto; }
+.desk-scene img { display: block; width: 100%; height: auto; }
+.desk-page {
+  position: absolute;
+  top: 50.38%;
+  left: 26.19%;
+  width: 47.62%;
+  height: 300vh;
+  background: url("/img/writer-page-400.webp") repeat-y center top / 100% auto;
+}
+.desk-art.is-live .desk-page { height: var(--pour, 0px); background-position: center var(--run, 0px); }
+
+/* The latest long read, leading the posts. */
+.lead-post { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3); margin-bottom: var(--space-5); text-decoration: none; }
+.lead-post .print { margin: var(--space-1) 0 0; max-width: none; }
+.lead-post h2 { margin: var(--space-1) 0; }
+.lead-post p { color: var(--text-muted); }
+.lead-post .jcard-date { margin: 0; }
+.lead-flag { color: var(--accent); }
+
+/* Filters: one kind of post at a time. They need the script, so they stay hidden without it. */
+.filters { display: none; flex-wrap: wrap; gap: var(--space-1); margin-bottom: var(--space-4); }
+html.js .filters { display: flex; }
+.filter {
+  min-height: var(--tap);
+  padding: 0 var(--space-2);
+  border: var(--border-width) solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.filter[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: var(--bg); }
+
+/* The wall: every other post as a small paper card, in columns. */
+.wall { columns: 2; column-gap: var(--space-2); }
+.wall > * { display: block; break-inside: avoid; margin: 0 0 var(--space-2); }
+.wall > [hidden] { display: none; }
+.wall .jcard { padding: var(--space-2); border-top-width: var(--space-1); }
+.wall .jcard-title { font-size: var(--fs-body-lg); }
+.wall .jcard-excerpt { font-size: var(--fs-small); }
+.kind { display: inline-block; margin-right: 6px; padding: 2px 6px; border: var(--border-width) solid var(--border); color: var(--text-muted); letter-spacing: 0.14em; }
+.jnote { padding: var(--space-2) var(--space-2) var(--space-3); }
+.jnote-text { margin: var(--space-1) 0; font-size: var(--fs-small); }
+.wall .jcard-date { letter-spacing: 0.06em; }
+.jnote-text p { margin: 0 0 var(--space-1); }
+.jinsta { padding: var(--space-1) var(--space-1) var(--space-2); text-decoration: none; }
+.jinsta img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; margin-bottom: var(--space-1); }
+.jinsta-caption { display: block; margin-top: 6px; font-size: var(--fs-small); line-height: 1.4; color: var(--text-muted); }
 
 /* A print: a photograph on paper, taped up at a tilt (the portrait on Our story is one too). */
 .print { position: relative; max-width: 760px; margin: var(--space-1) auto var(--space-5); padding: var(--space-2); }
@@ -568,7 +629,14 @@
   .steps .step { flex: 1 1 0; }
   .jcards { flex-direction: row; }
   .jcards .jcard { flex: 1 1 0; }
-  .jgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .desk { grid-template-columns: 300px minmax(0, 1fr); gap: var(--space-5); align-items: start; }
+  .desk-art { position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h)); padding-bottom: 0; }
+  .desk-scene { width: 100%; max-width: none; margin-top: var(--space-2); }
+  .lead-post { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--space-4); align-items: center; }
+  .wall { column-gap: var(--space-4); }
+  .wall > * { margin-bottom: var(--space-4); }
+  .wall .jcard-title { font-size: 1.3rem; }
+  .jnote-text { font-size: var(--fs-body); }
   .sheet { padding: var(--space-6); }
   .enquire-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--space-6); }
   .reach { margin: var(--space-3) 0 0; }
@@ -576,3 +644,7 @@
   .rsvp-inner { padding: var(--space-4); }
 }
 
+/* Wide desktop: the wall goes to three columns. */
+@media (min-width: 1200px) {
+  .wall { columns: 3; }
+}

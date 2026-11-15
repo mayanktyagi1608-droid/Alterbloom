@@ -29,10 +29,16 @@ fence. This is why editable content lives in plain data files instead:
   category, excerpt, cover_image) + a markdown body. This one's safe to
   point Decap at directly because the front matter + markdown body *is*
   the entire editable content — there's no template code in the file
-  itself (that lives in `_includes/post.njk`). `src/posts/posts.json` is an
+  itself (that lives in `_includes/post.njk`). `src/posts/posts.11tydata.js` is an
   Eleventy directory-data file (sets `layout`/`permalink`/`tags` for every
-  post) — it is not a post; the CMS blog collection is restricted to
+  post) — it is not a post; the CMS collections are restricted to
   `extension: "md"` specifically so it never shows up as one.
+  A post has a `kind`: `long` (the default; gets its own page), `short` or
+  `instagram` (both appear on the Journal page only, `permalink: false`).
+  The CMS shows each kind as its own list ("Journal: Long reads", "Short
+  notes", "Instagram posts"), all saving into `src/posts/`, each filtered on
+  `kind` with a hidden `kind` field. An Instagram post is a picture, a
+  caption and a pasted link; nothing is fetched from Instagram.
 - `src/privacy.md`, `src/terms.md` — same safe pattern: front matter +
   markdown body, layout lives separately in `_includes/legal.njk`.
 
@@ -101,9 +107,9 @@ What this means in practice:
 - Reuse the existing botanical-motif SVG path data verbatim (in
   `DESIGN_SYSTEM.md`) rather than drawing a new illustration.
 - The `--real-*` tokens ("Realism exceptions" in `DESIGN_SYSTEM.md`) are a
-  closed one-off collection the user approved for four things only: the
-  envelope and wax seal, the table setting, the poppy illustration, and the
-  About portrait. Never use them for UI, and never add to them or use a
+  closed one-off collection the user approved for five things only: the
+  envelope and wax seal, the table setting, the poppy illustration, the
+  About portrait, and the Journal's typewriter picture. Never use them for UI, and never add to them or use a
   value outside them without asking first — the hard rule above applies to
   this collection exactly as it does to the rest.
 - Before committing a UI change, run `scripts/check-design-tokens.sh` — it
@@ -122,7 +128,8 @@ What this means in practice:
   Contact page *is* the Enquire page, at `/contact/`). The blog is called
   the Journal everywhere a visitor sees it; its URL stays `/blog/`.
   Privacy/Terms live in the footer only.
-- `src/posts/*.md` — blog posts (Eleventy collection, tag `posts`).
+- `src/posts/*.md` — journal posts (tag `posts`; collections `journal`,
+  `longReads`, `shortNotes`, `instagramPosts` in `.eleventy.js`).
 - `src/_data/` — editable page content (see CMS architecture above) plus
   `site.json` (global contact/social info).
 - `img/` — rendered artwork (the table setting, etc.), passthrough-copied.

@@ -222,10 +222,27 @@ motif stays consistent everywhere it appears:
   the CMS inside it is styled by `.prose` (subheadings, lists, links, pull
   quotes, pictures), all from the existing type and spacing tokens.
 - **Journal cards** (`.jcard`) — paper with a thick top band, tilted
-  alternately. On the home page: category and title. On the Journal page
-  (`.jgrid`): the cover photo when there is one, then category, title,
-  excerpt and date. A post with no cover photo is simply a text card; there
-  is no placeholder box.
+  alternately. On the home page: category and title of the latest long
+  reads.
+- **Christophe's desk** (`.desk`, `js/desk.js`) — the Journal page. Left:
+  the typewriter picture (see "Realism exceptions"; `img/writer-*.webp`,
+  drawn by `scripts/art/writer.py`). The typed page is a second, repeating
+  picture laid over it from the roller down; as the visitor scrolls it pours
+  out and keeps running. From 861px the picture is pinned beside the posts;
+  on phones it sits on top and scrolls away. Without the script, or with
+  reduced motion, the page is simply shown poured out. Right: the latest
+  long read as a print with its title (`.lead-post`), then the filters, then
+  the wall.
+- **Filters** (`.filter`) — tag-style buttons, at least `--tap` tall, that
+  show one kind of post at a time. The chosen one is filled (`--text` on
+  `--bg`). Hidden when the script is not running.
+- **The wall** (`.wall`) — every other post as a small paper card in
+  columns (2, then 3 from 1200px). Three kinds, each marked with a small
+  outlined label (`.kind`): a **long read** (`.jcard`: cover, category,
+  title, excerpt, date and reading time; links to its page), a **short
+  note** (`.jnote`: the whole note, signed in the handwriting face; no page
+  of its own) and an **Instagram post** (`.jinsta`: a square picture and
+  caption; links out to Instagram).
 - **Reach note** (`.reach`) — on the Enquire page: the email, phone,
   WhatsApp and Instagram links on a taped paper note beside the plain form,
   ending in a handwritten line.
@@ -254,6 +271,10 @@ explicit go-ahead in conversation.
 3. The **Alterbloom poppy** illustration (cut-paper, crepe-line style),
    wherever it appears: on its own, on the envelope liner, on the table.
 4. The **About portrait**, drawn in the same illustration style.
+5. The **Journal's typewriter picture** ("Christophe's desk"): Christophe at
+   his typewriter with the page pouring out, in the same illustration style.
+   Approved by the client on 15 November 2026 as a fifth use; it adds no
+   colours.
 
 Never use a `--real-*` token for UI: text, buttons, links, borders, tags,
 section backgrounds, forms or navigation. Those keep to the core tokens.

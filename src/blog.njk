@@ -6,6 +6,11 @@ eleventyComputed:
   seo_title: "{{ blog_page.seo_title | safe }}"
   meta_description: "{{ blog_page.meta_description | safe }}"
 ---
+{# Christophe's desk. On the left, Christophe at his typewriter; the page pours out of it as
+   the visitor scrolls (js/desk.js). On the right, the latest long read, then every other
+   post as a small paper card: long reads, short notes and Instagram posts. #}
+{%- set lead = collections.longReads | first -%}
+
 <section class="page-hero">
   <div class="container">
     <span class="eyebrow">{{ blog_page.hero_eyebrow }}</span>
@@ -14,22 +19,82 @@ eleventyComputed:
   </div>
 </section>
 
-{# Every post, newest first, as a paper card: the same card the home page uses, with the
-   cover photo (when there is one), the excerpt and the date added. #}
-<section class="section" aria-label="Posts">
-  <div class="container">
-    <div class="jgrid">
-      {%- for post in collections.posts | reverse %}
-      <a class="paper jcard {{ 'tilt-a' if loop.index is odd else 'tilt-b' }}" href="{{ post.url }}">
-        {%- if post.data.cover_image %}
-        <img class="jcard-cover" src="{{ post.data.cover_image }}" alt="{{ post.data.cover_image_alt }}" loading="lazy" decoding="async">
-        {%- endif %}
-        <span class="jcard-cat">{{ post.data.category }}</span>
-        <span class="jcard-title">{{ post.data.title }}</span>
-        {%- if post.data.excerpt %}<span class="jcard-excerpt">{{ post.data.excerpt }}</span>{% endif %}
-        <span class="jcard-date">{{ post.date | postDate }}</span>
-      </a>
-      {%- endfor %}
+<section class="section desk-section" aria-label="Posts">
+  <div class="container desk">
+
+    {# The drawing: scripts/art/writer.py. The falling page is a second picture, laid over it. #}
+    <div class="desk-art" data-desk>
+      <div class="desk-scene">
+        <img src="/img/writer-560.webp"
+             srcset="/img/writer-560.webp 560w, /img/writer-840.webp 840w"
+             sizes="(min-width: 861px) 300px, 62vw"
+             width="420" height="520" fetchpriority="high"
+             alt="Christophe at his typewriter, with giant paper poppies behind him and the page pouring out of the machine.">
+        <div class="desk-page" aria-hidden="true"></div>
+      </div>
     </div>
+
+    <div class="desk-posts">
+      {%- if lead %}
+      <a class="lead-post" href="{{ lead.url }}">
+        {%- if lead.data.cover_image %}
+        <figure class="paper print tilt-b">
+          <span class="tape" aria-hidden="true"></span>
+          <img src="{{ lead.data.cover_image }}" alt="{{ lead.data.cover_image_alt }}" decoding="async">
+        </figure>
+        {%- endif %}
+        <div class="lead-post-text">
+          <span class="jcard-date"><span class="lead-flag">Latest</span> · {{ lead.data.category }} · {{ lead.date | postDate }}</span>
+          <h2>{{ lead.data.title }}</h2>
+          {%- if lead.data.excerpt %}<p>{{ lead.data.excerpt }}</p>{% endif %}
+          <span class="link-more">Read it</span>
+        </div>
+      </a>
+      {%- endif %}
+
+      {# Filters by kind of post. They need JavaScript, so they only show when it is running,
+         and only for the kinds that exist. #}
+      {%- if collections.shortNotes.length or collections.instagramPosts.length %}
+      <div class="filters" data-filters role="group" aria-label="Show">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter" type="button" data-filter="long" aria-pressed="false">Long reads</button>
+        {%- if collections.shortNotes.length %}<button class="filter" type="button" data-filter="short" aria-pressed="false">Short notes</button>{% endif %}
+        {%- if collections.instagramPosts.length %}<button class="filter" type="button" data-filter="instagram" aria-pressed="false">Instagram</button>{% endif %}
+      </div>
+      {%- endif %}
+
+      <div class="wall">
+        {%- for post in collections.journal %}
+        {%- if not lead or post.inputPath != lead.inputPath %}
+        {%- set kind = post.data.kind or "long" %}
+        {%- set tilt = ["tilt-a", "", "tilt-b", ""][loop.index0 % 4] %}
+        {%- if kind == "instagram" %}
+        <a class="paper jinsta {{ tilt }}" data-kind="instagram" {% if post.data.instagram_url %}href="{{ post.data.instagram_url }}" target="_blank" rel="noopener"{% endif %}>
+          {%- if post.data.image %}<img src="{{ post.data.image }}" alt="{{ post.data.image_alt }}" loading="lazy" decoding="async">{% endif %}
+          <span class="jcard-cat"><span class="kind">Instagram</span>{{ post.date | shortDate }}</span>
+          {%- if post.data.caption %}<span class="jinsta-caption">{{ post.data.caption }}</span>{% endif %}
+        </a>
+        {%- elif kind == "short" %}
+        <div class="paper jnote {{ tilt }}" data-kind="short">
+          <span class="jcard-cat"><span class="kind">Short</span>{{ post.date | shortDate }}</span>
+          <div class="jnote-text">{{ post.templateContent | safe }}</div>
+          {%- if blog_page.signature %}<span class="note">{{ blog_page.signature }}</span>{% endif %}
+        </div>
+        {%- else %}
+        <a class="paper jcard {{ tilt }}" data-kind="long" href="{{ post.url }}">
+          {%- if post.data.cover_image %}
+          <img class="jcard-cover" src="{{ post.data.cover_image }}" alt="{{ post.data.cover_image_alt }}" loading="lazy" decoding="async">
+          {%- endif %}
+          <span class="jcard-cat"><span class="kind">Long read</span>{{ post.data.category }}</span>
+          <span class="jcard-title">{{ post.data.title }}</span>
+          {%- if post.data.excerpt %}<span class="jcard-excerpt">{{ post.data.excerpt }}</span>{% endif %}
+          <span class="jcard-date">{{ post.date | postDate }} · {{ post.templateContent | readingTime }} min</span>
+        </a>
+        {%- endif %}
+        {%- endif %}
+        {%- endfor %}
+      </div>
+    </div>
+
   </div>
 </section>

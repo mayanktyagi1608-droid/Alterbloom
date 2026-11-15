@@ -1,4 +1,5 @@
 ---
+kind: long
 title: 5 Decor Trends for This Wedding Season
 date: 2026-08-20
 category: Wedding

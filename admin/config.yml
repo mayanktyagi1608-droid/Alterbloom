@@ -272,6 +272,7 @@ collections:
           - { label: "Hero — Eyebrow", name: "hero_eyebrow", widget: "string" }
           - { label: "Hero — Heading", name: "hero_heading", widget: "string" }
           - { label: "Hero — Body", name: "hero_body", widget: "text" }
+          - { label: "Signature under short notes (optional)", name: "signature", widget: "string", required: false }
           - { label: "Under every post — Banner heading", name: "post_cta_heading", widget: "string" }
           - { label: "Under every post — Banner body", name: "post_cta_body", widget: "text" }
 
@@ -310,13 +311,19 @@ collections:
           - { label: "WhatsApp opening message", name: "whatsapp_message", widget: "string", required: false }
           - { label: "Instagram URL", name: "instagram", widget: "string" }
 
+  # The journal ("Christophe's desk"). Three kinds of post, all saved in src/posts.
+  # Each kind is its own list here, so the editor only sees the fields that kind uses.
   - name: "blog"
-    label: "Journal Posts"
+    label: "Journal: Long reads"
+    label_singular: "Long read"
+    description: "A full piece with its own page."
     folder: "src/posts"
     create: true
     slug: "{{slug}}"
     extension: "md"
+    filter: { field: "kind", value: "long" }
     fields:
+      - { label: "Kind", name: "kind", widget: "hidden", default: "long" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish date", name: "date", widget: "datetime" }
       - label: "Category"
@@ -329,3 +336,36 @@ collections:
       - { label: "Cover image", name: "cover_image", widget: "image", required: false }
       - { label: "Cover image alt text", name: "cover_image_alt", widget: "string", required: false }
       - { label: "Post body", name: "body", widget: "markdown" }
+
+  - name: "notes"
+    label: "Journal: Short notes"
+    label_singular: "Short note"
+    description: "A few sentences, shown in full on the Journal page. No page of its own."
+    folder: "src/posts"
+    create: true
+    slug: "note-{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "md"
+    filter: { field: "kind", value: "short" }
+    fields:
+      - { label: "Kind", name: "kind", widget: "hidden", default: "short" }
+      - { label: "Name (for your own list here; not shown on the site)", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "The note", name: "body", widget: "markdown", hint: "Keep it to a few sentences." }
+
+  - name: "instagram"
+    label: "Journal: Instagram posts"
+    label_singular: "Instagram post"
+    description: "A picture card that links to the post on Instagram. No page of its own."
+    folder: "src/posts"
+    create: true
+    slug: "instagram-{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "md"
+    filter: { field: "kind", value: "instagram" }
+    fields:
+      - { label: "Kind", name: "kind", widget: "hidden", default: "instagram" }
+      - { label: "Name (for your own list here; not shown on the site)", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Link to the Instagram post", name: "instagram_url", widget: "string", hint: "Open the post on Instagram, copy its link and paste it here." }
+      - { label: "The picture", name: "image", widget: "image", hint: "Upload the same picture you posted. It is shown square." }
+      - { label: "What the picture shows (for screen readers)", name: "image_alt", widget: "string" }
+      - { label: "Caption", name: "caption", widget: "text", required: false }

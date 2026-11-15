@@ -214,7 +214,7 @@ eleventyComputed:
       <a class="link-more" href="/blog/">{{ home.journal.link_label }}</a>
     </div>
     <div class="jcards">
-      {%- for post in collections.posts | reverse %}
+      {%- for post in collections.longReads %}
       {%- if loop.index <= 3 %}
       <a class="paper jcard {{ 'tilt-a' if loop.index is odd else 'tilt-b' }}" href="{{ post.url }}">
         <span class="jcard-cat">{{ post.data.category }}</span>

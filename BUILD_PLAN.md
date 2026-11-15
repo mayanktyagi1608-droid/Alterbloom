@@ -241,3 +241,10 @@ Photo rights and consent: confirm everyone recognisable in these photos is happy
 - **Enquiry form**: one form, shown as the RSVP card on the home page and in a plain style on the Contact page (`enquiry_form` macro in `src/_includes/macros.njk`, wording in `src/_data/enquiry_form.json`). Both post to Netlify Forms under the single name `enquiry`, with a hidden `source` field saying which page it came from; it uses Netlify's default confirmation page until a thank-you page is added (Phase 4). Netlify only detects the form after the branch is deployed once.
 - The opening envelope needs a check on a real iPhone and a mid-range Android before launch.
 
+## 9. The Journal ("Christophe's desk")
+
+- The Journal is Christophe's: the page is titled "Christophe's desk", with the typewriter picture pinned on the left on desktop and the page pouring out as the visitor scrolls.
+- Three kinds of post, each its own list in the CMS: long reads (own page), short notes and Instagram posts (Journal page only).
+- **Instagram is by hand for now**: Christophe uploads the picture, pastes the post's link and the caption. Pulling posts in automatically would need a business or creator Instagram account, a Meta developer app and an access key that is renewed regularly; to be checked before promising it.
+- The wall is laid out in columns, so posts read down each column in date order, not across.
+
