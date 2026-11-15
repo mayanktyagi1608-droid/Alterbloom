@@ -197,7 +197,10 @@ motif stays consistent everywhere it appears:
   the big heading and the handwritten note; it carries no buttons.
 - **RSVP card** (`.rsvp`) — paper with a dashed hairline inner border;
   underline-style fields sit directly on the paper (an allowed exception to
-  "inputs sit on `--bg`"), answers typed in the handwriting face.
+  "inputs sit on `--bg`"), answers typed in the handwriting face. It holds
+  the same enquiry form as the Contact page, which shows it in the plain
+  form style (`.enquiry-form`, bordered fields on `--bg`); the two differ
+  in looks only.
 - **Table setting** (`.setting`) — the place setting above the menu card on
   the home page: a realistic, top-down picture (see "Realism exceptions")
   on a transparent ground, so the page's teal is the cloth. It is rendered

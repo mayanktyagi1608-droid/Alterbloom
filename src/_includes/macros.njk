@@ -32,3 +32,48 @@
 <span class="svc-thumb svc-thumb-empty">Photo soon</span>
 {%- endif -%}
 {%- endmacro %}
+
+{#- The enquiry form. There is one form, shown in two places: as the RSVP card on the home
+    page and, plainer (plain = true), on the Contact page. Both ask the same questions and
+    both post to the same Netlify form, "enquiry"; the hidden "source" field records which
+    page it was sent from. Wording comes from src/_data/enquiry_form.json.
+    f = enquiry_form data, site = site data, source = "Home page" / "Contact page",
+    button = the send button's label. -#}
+{% macro enquiry_form(f, site, source, button, plain=false) -%}
+{%- set field = "form-field" if plain else "rsvp-field" -%}
+{%- set wide = " full" if plain else "" -%}
+<form class="{{ 'enquiry-form' if plain else 'rsvp-form' }}" name="enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="enquiry">
+  <input type="hidden" name="source" value="{{ source }}">
+  <p class="hp"><label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+  {% if plain %}<div class="form-grid">{% endif %}
+  <div class="{{ field }}"><label for="enq-names">{{ f.names_label }}</label><input id="enq-names" name="names" type="text" autocomplete="name" required></div>
+  <div class="{{ field }}"><label for="enq-contact">{{ f.contact_label }}</label><input id="enq-contact" name="contact" type="text" autocomplete="email" required></div>
+  <div class="{{ field }}"><label for="enq-occasion">{{ f.occasion_label }}</label>
+    <select id="enq-occasion" name="occasion">
+      {%- for o in f.occasions %}
+      <option>{{ o }}</option>
+      {%- endfor %}
+    </select>
+  </div>
+  <div class="{{ field }}"><label for="enq-date">{{ f.date_label }}</label><input id="enq-date" name="event-date" type="date" data-min-today>{% if f.date_hint %}<span class="field-hint">{{ f.date_hint }}</span>{% endif %}</div>
+  <div class="{{ field }}{{ wide }}"><label for="enq-place">{{ f.place_label }}</label>
+    <select id="enq-place" name="place" required data-places>
+      <option value="" disabled selected>{{ f.place_prompt }}</option>
+      {%- for g in f.place_groups %}
+      <optgroup label="{{ g.label }}">
+        {%- for place in g.places %}
+        <option>{{ place }}</option>
+        {%- endfor %}
+      </optgroup>
+      {%- endfor %}
+    </select>
+  </div>
+  <div class="{{ field }}{{ wide }}"><label for="enq-thing">{{ f.one_thing_label }}</label><input id="enq-thing" name="one-thing" type="text"></div>
+  <div class="{{ field }}{{ wide }}"><label for="enq-message">{{ f.message_label }}</label><textarea id="enq-message" name="message" rows="{{ 5 if plain else 3 }}"></textarea>{% if f.message_hint %}<span class="field-hint">{{ f.message_hint }}</span>{% endif %}</div>
+  {% if plain %}</div>{% endif %}
+  <button class="btn btn-primary{{ '' if plain else ' rsvp-send' }}" type="submit">{{ button }}</button>
+  <p class="{{ 'field-hint' if plain else 'rsvp-small' }}">{{ f.privacy_note }} <a href="/privacy/">Privacy</a>.
+    {%- if site.whatsapp_number %} Prefer to chat? <a href="https://wa.me/{{ site.whatsapp_number }}?text={{ site.whatsapp_message | urlencode }}">Message us on WhatsApp</a>.{% endif %}</p>
+</form>
+{%- endmacro %}

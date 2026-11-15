@@ -238,6 +238,6 @@ Photo rights and consent: confirm everyone recognisable in these photos is happy
 - All home content lives in `src/_data/home.json`, grouped in the CMS under numbered sections that follow the page top to bottom. Every photo has a description and two focus sliders, so wide photos can be re-aimed for phones.
 - **Placeholders still on the page** (need your real facts): review rating, review count, one client quote and attribution, directory names, travel policy, price guidance, lead time, "how it works" timeframe, reply time. A build warning for leftover `[brackets]` is planned before launch.
 - **Services links are blank** until the service pages exist (Phase 3). Cards render as plain rows until a link is set.
-- **Enquiry form** posts to Netlify Forms under the name `home-enquiry`; it uses Netlify's default confirmation page until a thank-you page is added (Phase 4). Netlify only detects the form after the branch is deployed once.
+- **Enquiry form**: one form, shown as the RSVP card on the home page and in a plain style on the Contact page (`enquiry_form` macro in `src/_includes/macros.njk`, wording in `src/_data/enquiry_form.json`). Both post to Netlify Forms under the single name `enquiry`, with a hidden `source` field saying which page it came from; it uses Netlify's default confirmation page until a thank-you page is added (Phase 4). Netlify only detects the form after the branch is deployed once.
 - The opening envelope needs a check on a real iPhone and a mid-range Android before launch.
 

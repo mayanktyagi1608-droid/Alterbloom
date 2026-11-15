@@ -383,6 +383,10 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   outline-offset: 1px;
 }
 textarea { resize: vertical; }
+.field-hint { margin: 0; font-size: 0.8rem; color: var(--text-muted); }   /* small print under a field or a form */
+/* The plain enquiry form (Contact page): the same form as the home page's RSVP card. */
+.enquiry-form { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+.enquiry-form .form-grid { align-self: stretch; }
 
 /* Native date fields (no-JavaScript fallback): keep the chosen date left-aligned like every other field. */
 input[type="date"] { text-align: left; min-width: 0; }

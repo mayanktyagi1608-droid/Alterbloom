@@ -6,7 +6,7 @@ eleventyComputed:
   seo_title: "{{ home.seo_title | safe }}"
   meta_description: "{{ home.meta_description | safe }}"
 ---
-{% from "macros.njk" import photo, thumb %}
+{% from "macros.njk" import photo, thumb, enquiry_form as enquiry_form_macro %}
 
 {# 1. THE INVITATION. The <h1> is real text inside the letter. With no JavaScript, or with
    reduced motion, the envelope is skipped and the letter is simply shown, with the
@@ -234,37 +234,7 @@ eleventyComputed:
         <div class="menu-label center">{{ home.enquiry.kicker }}</div>
         <h2 id="enqH">{{ home.enquiry.heading }}</h2>
         <p class="rsvp-intro">{{ home.enquiry.intro }}</p>
-        <form class="rsvp-form" name="home-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="home-enquiry">
-          <p class="hp"><label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-          <div class="rsvp-field"><label for="fNames">Your names</label><input id="fNames" name="names" type="text" autocomplete="name" required></div>
-          <div class="rsvp-field"><label for="fContact">Email or phone</label><input id="fContact" name="contact" type="text" autocomplete="email" required></div>
-          <div class="rsvp-field"><label for="fType">What's the occasion?</label>
-            <select id="fType" name="occasion">
-              <option>Wedding</option>
-              <option>Corporate event</option>
-              <option>Birthday or celebration</option>
-              <option>Something else</option>
-            </select>
-          </div>
-          <div class="rsvp-field"><label for="fDate">{{ home.enquiry.date_label }}</label><input id="fDate" name="event-date" type="date" data-min-today><span class="rsvp-hint">{{ home.enquiry.date_hint }}</span></div>
-          <div class="rsvp-field"><label for="fPlace">{{ home.enquiry.place_label }}</label>
-            <select id="fPlace" name="place" required data-places>
-              <option value="" disabled selected>{{ home.enquiry.place_prompt }}</option>
-              {%- for g in home.enquiry.place_groups %}
-              <optgroup label="{{ g.label }}">
-                {%- for place in g.places %}
-                <option>{{ place }}</option>
-                {%- endfor %}
-              </optgroup>
-              {%- endfor %}
-            </select>
-          </div>
-          <div class="rsvp-field"><label for="fThing">The one thing guests must remember</label><input id="fThing" name="one-thing" type="text"></div>
-          <button class="btn btn-primary rsvp-send" type="submit">{{ home.enquiry.button }}</button>
-          <p class="rsvp-small">{{ home.enquiry.privacy_note }} <a href="/privacy/">Privacy</a>.
-            {%- if site.whatsapp_number %} Prefer to chat? <a href="https://wa.me/{{ site.whatsapp_number }}?text={{ site.whatsapp_message | urlencode }}">Message us on WhatsApp</a>.{% endif %}</p>
-        </form>
+        {{ enquiry_form_macro(enquiry_form, site, "Home page", home.enquiry.button) }}
       </div>
     </div>
   </div>

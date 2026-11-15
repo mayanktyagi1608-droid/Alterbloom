@@ -164,26 +164,12 @@ collections:
             name: "enquiry"
             widget: "object"
             collapsed: true
+            hint: "The questions themselves are shared with the Contact page. Edit them under Pages > Enquiry Form."
             fields:
               - { label: "Small heading", name: "kicker", widget: "string" }
               - { label: "Heading", name: "heading", widget: "string" }
               - { label: "Intro", name: "intro", widget: "text" }
-              - { label: "Date label", name: "date_label", widget: "string" }
-              - { label: "Date helper text", name: "date_hint", widget: "string", required: false }
-              - { label: "Place label", name: "place_label", widget: "string" }
-              - { label: "Place prompt (first option in the dropdown)", name: "place_prompt", widget: "string" }
-              - label: "Places in the dropdown (grouped)"
-                name: "place_groups"
-                widget: "list"
-                summary: "{{fields.label}}"
-                fields:
-                  - { label: "Group name (e.g. London)", name: "label", widget: "string" }
-                  - label: "Places"
-                    name: "places"
-                    widget: "list"
-                    field: { label: "Place", name: "place", widget: "string" }
               - { label: "Button label", name: "button", widget: "string" }
-              - { label: "Privacy line", name: "privacy_note", widget: "string" }
 
       - name: "about"
         label: "Our Story Page"
@@ -242,6 +228,37 @@ collections:
           - { label: "Hero — Eyebrow", name: "hero_eyebrow", widget: "string" }
           - { label: "Hero — Heading", name: "hero_heading", widget: "string" }
           - { label: "Hero — Body", name: "hero_body", widget: "text" }
+          - { label: "Form — Button label", name: "form_button", widget: "string", hint: "The questions themselves are shared with the home page. Edit them under Pages > Enquiry Form." }
+
+      - name: "enquiry_form"
+        label: "Enquiry Form (the questions on Home and Contact)"
+        file: "src/_data/enquiry_form.json"
+        fields:
+          - { label: "Names — label", name: "names_label", widget: "string" }
+          - { label: "Email or phone — label", name: "contact_label", widget: "string" }
+          - { label: "Occasion — label", name: "occasion_label", widget: "string" }
+          - label: "Occasion — choices in the dropdown"
+            name: "occasions"
+            widget: "list"
+            field: { label: "Occasion", name: "occasion", widget: "string" }
+          - { label: "Date — label", name: "date_label", widget: "string" }
+          - { label: "Date — helper text", name: "date_hint", widget: "string", required: false }
+          - { label: "Place — label", name: "place_label", widget: "string" }
+          - { label: "Place — prompt (first option in the dropdown)", name: "place_prompt", widget: "string" }
+          - label: "Place — places in the dropdown (grouped)"
+            name: "place_groups"
+            widget: "list"
+            summary: "{{fields.label}}"
+            fields:
+              - { label: "Group name (e.g. London)", name: "label", widget: "string" }
+              - label: "Places"
+                name: "places"
+                widget: "list"
+                field: { label: "Place", name: "place", widget: "string" }
+          - { label: "One thing — label", name: "one_thing_label", widget: "string" }
+          - { label: "Message — label", name: "message_label", widget: "string" }
+          - { label: "Message — helper text", name: "message_hint", widget: "string", required: false }
+          - { label: "Privacy line (under the button)", name: "privacy_note", widget: "string" }
 
       - name: "blog_intro"
         label: "Blog Page Intro"

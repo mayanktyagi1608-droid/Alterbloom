@@ -19,7 +19,7 @@ in the CMS would delete all the Nunjucks/HTML markup below the front-matter
 fence. This is why editable content lives in plain data files instead:
 
 - `src/_data/home.json`, `about_page.json`, `contact_page.json`,
-  `blog_page.json`, `site.json` — pure JSON, no markup. Templates
+  `blog_page.json`, `enquiry_form.json`, `site.json` — pure JSON, no markup. Templates
   (`src/index.njk`, `about.njk`, `contact.njk`, `blog.njk`, `_includes/
   base.njk`) read from these as global data (e.g. `{{ home.hero_lead }}`,
   `{{ about_page.story_heading }}`, `{{ site.email }}`). `site.json` is
@@ -48,6 +48,13 @@ Images: CMS image fields upload into `src/uploads/`, served from `/uploads/`
 (passthrough copy in `.eleventy.js`). Templates check `{% if
 home.hero_image %}` and fall back to the on-brand placeholder graphic when
 empty, so the site looks right before any real photos are uploaded.
+
+Enquiry form: there is one form, the `enquiry_form` macro in
+`src/_includes/macros.njk`, shown as the RSVP card on the home page and in a
+plain style on the Contact page. Its questions live in
+`src/_data/enquiry_form.json` and both post to the single Netlify form
+`enquiry` (a hidden `source` field says which page). Change the questions in
+the macro and the data file, never in one page only.
 
 ## Local development
 

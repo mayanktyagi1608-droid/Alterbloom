@@ -1,0 +1,82 @@
+{
+  "names_label": "Your names",
+  "contact_label": "Email or phone",
+  "occasion_label": "What's the occasion?",
+  "occasions": [
+    "Wedding",
+    "Corporate event",
+    "Birthday or celebration",
+    "Something else"
+  ],
+  "date_label": "Event date",
+  "date_hint": "Not sure yet? Leave it blank.",
+  "place_label": "Where is it?",
+  "place_prompt": "Choose a place",
+  "place_groups": [
+    {
+      "label": "London",
+      "places": [
+        "Barking and Dagenham",
+        "Barnet",
+        "Bexley",
+        "Brent",
+        "Bromley",
+        "Camden",
+        "City of London",
+        "Croydon",
+        "Ealing",
+        "Enfield",
+        "Greenwich",
+        "Hackney",
+        "Hammersmith and Fulham",
+        "Haringey",
+        "Harrow",
+        "Havering",
+        "Hillingdon",
+        "Hounslow",
+        "Islington",
+        "Kensington and Chelsea",
+        "Kingston upon Thames",
+        "Lambeth",
+        "Lewisham",
+        "Merton",
+        "Newham",
+        "Redbridge",
+        "Richmond upon Thames",
+        "Southwark",
+        "Sutton",
+        "Tower Hamlets",
+        "Waltham Forest",
+        "Wandsworth",
+        "Westminster"
+      ]
+    },
+    {
+      "label": "South East",
+      "places": [
+        "Berkshire",
+        "Buckinghamshire",
+        "East Sussex",
+        "Essex",
+        "Hampshire",
+        "Hertfordshire",
+        "Isle of Wight",
+        "Kent",
+        "Oxfordshire",
+        "Surrey",
+        "West Sussex"
+      ]
+    },
+    {
+      "label": "Further afield",
+      "places": [
+        "Elsewhere in the UK",
+        "Outside the UK"
+      ]
+    }
+  ],
+  "one_thing_label": "The one thing guests must remember",
+  "message_label": "Tell us about your event",
+  "message_hint": "Optional. Venue, guest numbers, style, anything you already know.",
+  "privacy_note": "We only use your details to reply."
+}

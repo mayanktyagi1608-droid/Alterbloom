@@ -6,6 +6,9 @@ eleventyComputed:
   seo_title: "{{ contact_page.seo_title | safe }}"
   meta_description: "{{ contact_page.meta_description | safe }}"
 ---
+{% from "macros.njk" import enquiry_form as enquiry_form_macro %}
+
+{# The same enquiry form as the home page (see macros.njk), in its plain style. #}
 <section class="page-hero">
   <div class="container">
     <span class="eyebrow">{{ contact_page.hero_eyebrow }}</span>
@@ -18,57 +21,7 @@ eleventyComputed:
   <div class="container">
     <div class="grid grid-2" style="align-items:start;">
 
-      <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="contact">
-        <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
-        <div class="form-grid">
-          <div class="form-field">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div class="form-field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="form-field">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone">
-          </div>
-          <div class="form-field">
-            <label for="event-date">Event Date</label>
-            <input type="date" id="event-date" name="event-date" data-min-today>
-          </div>
-          <div class="form-field full">
-            <label for="event-type">Event Type</label>
-            <select id="event-type" name="event-type">
-              <option>Wedding</option>
-              <option>Corporate Event</option>
-              <option>Birthday / Private Celebration</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-field full">
-            <label for="place">{{ home.enquiry.place_label }}</label>
-            <select id="place" name="place" required data-places>
-              <option value="" disabled selected>{{ home.enquiry.place_prompt }}</option>
-              {%- for g in home.enquiry.place_groups %}
-              <optgroup label="{{ g.label }}">
-                {%- for place in g.places %}
-                <option>{{ place }}</option>
-                {%- endfor %}
-              </optgroup>
-              {%- endfor %}
-            </select>
-          </div>
-          <div class="form-field full">
-            <label for="message">Tell us about your event</label>
-            <textarea id="message" name="message" rows="5" placeholder="Venue, guest count, style, budget range..."></textarea>
-          </div>
-        </div>
-        <div style="margin-top:24px;">
-          <button type="submit" class="btn btn-primary">Send Enquiry</button>
-        </div>
-      </form>
+      {{ enquiry_form_macro(enquiry_form, site, "Contact page", contact_page.form_button, true) }}
 
       <div>
         <ul class="contact-info-list">
