@@ -348,7 +348,7 @@
         h(
           "section",
           { className: "section", key: "body" },
-          h("div", { className: "container" }, h("div", { style: { maxWidth: "70ch", margin: "0 auto" } }, this.props.widgetFor("body")))
+          h("div", { className: "container" }, h("div", { className: "paper sheet prose" }, this.props.widgetFor("body")))
         ),
       ]);
     },
@@ -375,8 +375,10 @@
           h(
             "div",
             { className: "container" },
-            imageOrPlaceholder(d.cover_image, this.props.getAsset, "img-placeholder hero", "Post Cover Image"),
-            h("div", { style: { maxWidth: "70ch", margin: "24px auto 0" } }, this.props.widgetFor("body"))
+            d.cover_image
+              ? h("figure", { className: "paper print tilt-b" }, h("span", { className: "tape" }), h("img", { src: this.props.getAsset(d.cover_image).toString(), alt: d.cover_image_alt || "" }))
+              : null,
+            h("div", { className: "paper sheet prose" }, this.props.widgetFor("body"))
           )
         ),
       ]);

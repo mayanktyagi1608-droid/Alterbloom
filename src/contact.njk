@@ -19,28 +19,36 @@ eleventyComputed:
 
 <section class="section" id="enquire">
   <div class="container">
-    <div class="grid grid-2" style="align-items:start;">
+    <div class="enquire-grid">
 
       {{ enquiry_form_macro(enquiry_form, site, "Contact page", contact_page.form_button, true) }}
 
-      <div>
+      {# The other ways to reach us, as a note taped beside the form. #}
+      <aside class="paper reach tilt-b" aria-label="{{ contact_page.aside_label }}">
+        <span class="tape" aria-hidden="true"></span>
+        <div class="menu-label">{{ contact_page.aside_label }}</div>
         <ul class="contact-info-list">
           <li>
             <span class="label">Email</span>
             <a href="mailto:{{ site.email }}">{{ site.email }}</a>
           </li>
+          {%- if site.whatsapp_number %}
+          <li>
+            <span class="label">WhatsApp</span>
+            <a href="https://wa.me/{{ site.whatsapp_number }}?text={{ site.whatsapp_message | urlencode }}">Message us</a>
+          </li>
+          {%- endif %}
           <li>
             <span class="label">Phone</span>
             <a href="tel:{{ site.phone_link }}">{{ site.phone }}</a>
           </li>
           <li>
-            <span class="label">Follow</span>
-            <a href="{{ site.instagram }}">Instagram</a>
+            <span class="label">Instagram</span>
+            <a href="{{ site.instagram }}">Follow along</a>
           </li>
         </ul>
-
-        <div class="img-placeholder wide" style="margin-top:24px;"><span>Map / Location Placeholder</span></div>
-      </div>
+        {%- if contact_page.aside_note %}<p class="note reach-note">{{ contact_page.aside_note }}</p>{% endif %}
+      </aside>
 
     </div>
   </div>

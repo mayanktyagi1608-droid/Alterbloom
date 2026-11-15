@@ -215,6 +215,20 @@ motif stays consistent everywhere it appears:
   (see "Realism exceptions"; `img/portrait-*.webp`, drawn by
   `scripts/art/portrait.py`). The white border, tape, tilt and shadow are
   ordinary paper styles. A photo set in the CMS replaces the illustration.
+- **Print** (`.print`) — the same taped, tilted paper print as the
+  portrait, for a landscape photograph: a journal post's cover photo.
+- **Sheet** (`.sheet`) — one page of paper holding long writing: journal
+  posts and the legal pages. Never tilted, so it reads easily. Markdown from
+  the CMS inside it is styled by `.prose` (subheadings, lists, links, pull
+  quotes, pictures), all from the existing type and spacing tokens.
+- **Journal cards** (`.jcard`) — paper with a thick top band, tilted
+  alternately. On the home page: category and title. On the Journal page
+  (`.jgrid`): the cover photo when there is one, then category, title,
+  excerpt and date. A post with no cover photo is simply a text card; there
+  is no placeholder box.
+- **Reach note** (`.reach`) — on the Enquire page: the email, phone,
+  WhatsApp and Instagram links on a taped paper note beside the plain form,
+  ending in a handwritten line.
 - **Photo bands** (`.band`) — full-bleed, one screen tall (`100svh`),
   photograph covers the band, focal point set per image via `--focus`.
   A `.band-caption` is a tilted paper slip.

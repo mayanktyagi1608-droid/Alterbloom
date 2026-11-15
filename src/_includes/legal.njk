@@ -5,13 +5,13 @@ layout: base.njk
   <div class="container">
     <span class="eyebrow">Legal</span>
     <h1>{{ title }}</h1>
-    <p>Last updated: {{ updated_date }} — this page is a placeholder and should be reviewed with a legal professional before launch.</p>
+    <p>Last updated: {{ updated_date }}</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div style="max-width:70ch; margin:0 auto;">
+    <div class="paper sheet prose">
       {{ content | safe }}
     </div>
   </div>

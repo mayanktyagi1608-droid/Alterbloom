@@ -229,6 +229,8 @@ collections:
           - { label: "Hero — Heading", name: "hero_heading", widget: "string" }
           - { label: "Hero — Body", name: "hero_body", widget: "text", hint: "The reply-time sentence is added after this automatically. Edit it under Pages > Enquiry Form." }
           - { label: "Form — Button label", name: "form_button", widget: "string", hint: "The questions themselves are shared with the home page. Edit them under Pages > Enquiry Form." }
+          - { label: "Side note — Small heading", name: "aside_label", widget: "string", hint: "Above the email, phone and Instagram links. Those come from Site Settings." }
+          - { label: "Side note — Handwritten line (optional)", name: "aside_note", widget: "string", required: false }
 
       - name: "enquiry_form"
         label: "Enquiry Form (the questions on Home and Contact)"
@@ -262,7 +264,7 @@ collections:
           - { label: "Privacy line (under the button)", name: "privacy_note", widget: "string" }
 
       - name: "blog_intro"
-        label: "Journal Page Intro"
+        label: "Journal Page"
         file: "src/_data/blog_page.json"
         fields:
           - { label: "SEO — Page title (search results). Leave blank to use the default.", name: "seo_title", widget: "string", required: false, hint: "About 50 to 60 characters. Say what you do and where." }
@@ -270,6 +272,8 @@ collections:
           - { label: "Hero — Eyebrow", name: "hero_eyebrow", widget: "string" }
           - { label: "Hero — Heading", name: "hero_heading", widget: "string" }
           - { label: "Hero — Body", name: "hero_body", widget: "text" }
+          - { label: "Under every post — Banner heading", name: "post_cta_heading", widget: "string" }
+          - { label: "Under every post — Banner body", name: "post_cta_body", widget: "text" }
 
       - name: "privacy"
         label: "Privacy Policy"

@@ -14,22 +14,22 @@ eleventyComputed:
   </div>
 </section>
 
-<section class="section">
+{# Every post, newest first, as a paper card: the same card the home page uses, with the
+   cover photo (when there is one), the excerpt and the date added. #}
+<section class="section" aria-label="Posts">
   <div class="container">
-    <div class="grid grid-3">
-      {% for post in collections.posts | reverse %}
-      <div class="card">
-        {% if post.data.cover_image %}
-          <img class="img-placeholder wide" src="{{ post.data.cover_image }}" alt="{{ post.data.cover_image_alt }}" style="object-fit:cover;">
-        {% else %}
-          <div class="img-placeholder wide"><span>Post Image</span></div>
-        {% endif %}
-        <span class="eyebrow" style="margin-top:20px;">{{ post.data.category }}</span>
-        <h3>{{ post.data.title }}</h3>
-        <p>{{ post.data.excerpt }}</p>
-        <a href="{{ post.url }}" class="link-more">Read more →</a>
-      </div>
-      {% endfor %}
+    <div class="jgrid">
+      {%- for post in collections.posts | reverse %}
+      <a class="paper jcard {{ 'tilt-a' if loop.index is odd else 'tilt-b' }}" href="{{ post.url }}">
+        {%- if post.data.cover_image %}
+        <img class="jcard-cover" src="{{ post.data.cover_image }}" alt="{{ post.data.cover_image_alt }}" loading="lazy" decoding="async">
+        {%- endif %}
+        <span class="jcard-cat">{{ post.data.category }}</span>
+        <span class="jcard-title">{{ post.data.title }}</span>
+        {%- if post.data.excerpt %}<span class="jcard-excerpt">{{ post.data.excerpt }}</span>{% endif %}
+        <span class="jcard-date">{{ post.date | postDate }}</span>
+      </a>
+      {%- endfor %}
     </div>
   </div>
 </section>
