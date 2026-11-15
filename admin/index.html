@@ -6,7 +6,29 @@
   <title>Alterbloom — Site Admin</title>
 </head>
 <body>
+  <script>window.CMS_MANUAL_INIT = true;</script>
   <script src="https://unpkg.com/decap-cms@3.17.3/dist/decap-cms.js"></script>
   <script src="/admin/preview-templates.js"></script>
+  <script>
+    // Which branch the CMS saves to depends on the address it is opened from:
+    //   - the live site saves to main;
+    //   - a Netlify branch address listed below (e.g. redesign-foundations--<site>.netlify.app)
+    //     saves to that branch, so work in progress can be edited without touching the live site;
+    //   - any other preview address (a pull request's deploy preview) is read-only, because
+    //     saving from it would write this version's content into main.
+    (function () {
+      var BRANCH_SITES = { "redesign-foundations": "redesign/foundations" };
+      var host = window.location.hostname;
+      var prefix = host.indexOf("--") > -1 ? host.split("--")[0] : "";
+      var branch = prefix ? BRANCH_SITES[prefix] : "main";
+      if (!branch) {
+        var p = document.createElement("p");
+        p.textContent = "This preview address cannot be edited. Open the admin from the live site, or from the branch address you were given.";
+        document.body.appendChild(p);
+        return;
+      }
+      window.CMS.init({ config: { backend: { name: "git-gateway", branch: branch } } });
+    })();
+  </script>
 </body>
 </html>

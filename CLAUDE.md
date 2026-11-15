@@ -62,6 +62,15 @@ plain style on the Contact page. Its questions live in
 `enquiry` (a hidden `source` field says which page). Change the questions in
 the macro and the data file, never in one page only.
 
+CMS and branches: `admin/index.html` starts the CMS by hand and picks the
+branch it saves to from the address it is opened at. The live site saves to
+`main`. A Netlify branch address listed in `BRANCH_SITES` there (currently
+`redesign-foundations--<site>.netlify.app` → `redesign/foundations`) saves
+to that branch, so work in progress can be edited through the CMS without
+touching the live site. Any other preview address is read-only. When a
+branch is merged and finished, remove it from `BRANCH_SITES`; `git pull`
+before working on a branch someone is editing through the CMS.
+
 ## Local development
 
 Node 20 is installed in the user's home folder (not system-wide) at
