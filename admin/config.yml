@@ -168,7 +168,7 @@ collections:
             fields:
               - { label: "Small heading", name: "kicker", widget: "string" }
               - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Intro", name: "intro", widget: "text" }
+              - { label: "Intro", name: "intro", widget: "text", hint: "The reply-time sentence is added after this automatically. Edit it under Pages > Enquiry Form." }
               - { label: "Button label", name: "button", widget: "string" }
 
       - name: "about"
@@ -220,20 +220,21 @@ collections:
           - { label: "5. Closing banner: body", name: "cta_body", widget: "text" }
 
       - name: "contact"
-        label: "Contact Page"
+        label: "Enquire Page (the Contact page)"
         file: "src/_data/contact_page.json"
         fields:
           - { label: "SEO — Page title (search results). Leave blank to use the default.", name: "seo_title", widget: "string", required: false, hint: "About 50 to 60 characters. Say what you do and where." }
           - { label: "SEO — Description (search results)", name: "meta_description", widget: "text", required: false, hint: "About 150 characters. A plain sentence that makes someone want to click." }
           - { label: "Hero — Eyebrow", name: "hero_eyebrow", widget: "string" }
           - { label: "Hero — Heading", name: "hero_heading", widget: "string" }
-          - { label: "Hero — Body", name: "hero_body", widget: "text" }
+          - { label: "Hero — Body", name: "hero_body", widget: "text", hint: "The reply-time sentence is added after this automatically. Edit it under Pages > Enquiry Form." }
           - { label: "Form — Button label", name: "form_button", widget: "string", hint: "The questions themselves are shared with the home page. Edit them under Pages > Enquiry Form." }
 
       - name: "enquiry_form"
         label: "Enquiry Form (the questions on Home and Contact)"
         file: "src/_data/enquiry_form.json"
         fields:
+          - { label: "Reply time (one sentence, shown above the form on both pages)", name: "reply_note", widget: "string", hint: "For example: We reply within one working day." }
           - { label: "Names — label", name: "names_label", widget: "string" }
           - { label: "Email or phone — label", name: "contact_label", widget: "string" }
           - { label: "Occasion — label", name: "occasion_label", widget: "string" }
@@ -261,7 +262,7 @@ collections:
           - { label: "Privacy line (under the button)", name: "privacy_note", widget: "string" }
 
       - name: "blog_intro"
-        label: "Blog Page Intro"
+        label: "Journal Page Intro"
         file: "src/_data/blog_page.json"
         fields:
           - { label: "SEO — Page title (search results). Leave blank to use the default.", name: "seo_title", widget: "string", required: false, hint: "About 50 to 60 characters. Say what you do and where." }
@@ -306,7 +307,7 @@ collections:
           - { label: "Instagram URL", name: "instagram", widget: "string" }
 
   - name: "blog"
-    label: "Blog Posts"
+    label: "Journal Posts"
     folder: "src/posts"
     create: true
     slug: "{{slug}}"
@@ -318,7 +319,7 @@ collections:
         name: "category"
         widget: "select"
         options: ["Wedding", "Corporate", "Planning", "Birthdays", "Florals", "Behind the Scenes"]
-      - { label: "Excerpt (shown on the Blog page)", name: "excerpt", widget: "text" }
+      - { label: "Excerpt (shown on the Journal page)", name: "excerpt", widget: "text" }
       - { label: "SEO — Page title (leave blank to use the post title)", name: "seo_title", widget: "string", required: false }
       - { label: "SEO — Description (leave blank to use the excerpt)", name: "meta_description", widget: "text", required: false }
       - { label: "Cover image", name: "cover_image", widget: "image", required: false }

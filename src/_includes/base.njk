@@ -1,5 +1,6 @@
 {%- set pageTitle = seo_title or (title + " — Alterbloom") -%}
-{%- set enquireUrl = "#enquire" if page.url == "/" else navigation.enquire_url -%}
+{#- On the two pages that hold the enquiry form, Enquire jumps to the form. -#}
+{%- set enquireUrl = "#enquire" if (page.url == "/" or page.url == navigation.enquire_url) else navigation.enquire_url -%}
 {%- set pageDescription = meta_description or excerpt or site.default_description -%}
 <!DOCTYPE html>
 <html lang="en-GB">
@@ -27,6 +28,8 @@
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/sections.css">
 <script>document.documentElement.className+=" js"</script>
+{#- Netlify login for the CMS. Invite and password-reset links land on the home page, so only it loads this. -#}
+{% if page.url == "/" -%}
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
   if (window.netlifyIdentity) {
@@ -39,6 +42,7 @@
     });
   }
 </script>
+{%- endif %}
 </head>
 <body>
 

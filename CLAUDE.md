@@ -117,8 +117,11 @@ What this means in practice:
 
 - `src/index.njk`, `about.njk`, `contact.njk`, `blog.njk` + `src/privacy.md`,
   `terms.md` — page templates/content. `src/_includes/base.njk` (shared
-  header/nav/footer), `post.njk` and `legal.njk` (layouts). Top-nav is Home /
-  About / Blog / Contact; Privacy/Terms live in the footer only.
+  header/nav/footer), `post.njk` and `legal.njk` (layouts). Top-nav is Our
+  story / Journal plus the Enquire button (no separate Contact link; the
+  Contact page *is* the Enquire page, at `/contact/`). The blog is called
+  the Journal everywhere a visitor sees it; its URL stays `/blog/`.
+  Privacy/Terms live in the footer only.
 - `src/posts/*.md` — blog posts (Eleventy collection, tag `posts`).
 - `src/_data/` — editable page content (see CMS architecture above) plus
   `site.json` (global contact/social info).

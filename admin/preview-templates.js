@@ -36,10 +36,9 @@
             h(
               "ul",
               null,
-              h("li", null, h("a", null, "Home")),
-              h("li", null, h("a", null, "About")),
-              h("li", null, h("a", null, "Blog")),
-              h("li", null, h("a", null, "Contact"))
+              h("li", null, h("a", null, "Our story")),
+              h("li", null, h("a", null, "Journal")),
+              h("li", { className: "nav-cta" }, h("a", null, "Enquire"))
             )
           )
         )

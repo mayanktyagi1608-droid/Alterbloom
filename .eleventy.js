@@ -12,7 +12,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addGlobalData("currentYear", () => new Date().getFullYear());
 
   eleventyConfig.addFilter("postDate", function (dateObj) {
-    return new Date(dateObj).toLocaleDateString("en-US", {
+    return new Date(dateObj).toLocaleDateString("en-GB", {
       year: "numeric",
       month: "long",
       day: "numeric",

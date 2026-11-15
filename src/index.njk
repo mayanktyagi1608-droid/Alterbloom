@@ -1,6 +1,6 @@
 ---
 layout: base.njk
-title: Events Planning & Decor
+title: Wedding decor and entertainment
 permalink: /
 eleventyComputed:
   seo_title: "{{ home.seo_title | safe }}"
@@ -233,7 +233,7 @@ eleventyComputed:
       <div class="rsvp-inner">
         <div class="menu-label center">{{ home.enquiry.kicker }}</div>
         <h2 id="enqH">{{ home.enquiry.heading }}</h2>
-        <p class="rsvp-intro">{{ home.enquiry.intro }}</p>
+        <p class="rsvp-intro">{{ home.enquiry.intro }} {{ enquiry_form.reply_note }}</p>
         {{ enquiry_form_macro(enquiry_form, site, "Home page", home.enquiry.button) }}
       </div>
     </div>
